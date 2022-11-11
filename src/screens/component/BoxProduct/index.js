@@ -9,22 +9,22 @@ import styles from './styles';
 const BoxProduct = ({ image, category, name, sale = 'true', price, priceSale }) => {
     return (
         <View style={styles.wrapper}>
-            <Image source={images.HEADPHONE} />
+            <Image style={styles.image} source={images.HEADPHONE} />
 
-            <View>
-                <Text>category</Text>
-                <Text>tai nghe ngon bo de ngon ngon ngon!!!</Text>
+            <View style={styles.content}>
+                <Text style={styles.title}>category</Text>
+                <Text style={styles.text}>tai nghe ngon bo de ngon ngon ngon!!!</Text>
 
-                <View>
+                <View style={styles.boxPrice}>
                     {sale ? (
-                        <View>
-                            <Text>$9999</Text>
-                            <Text>$9999</Text>
+                        <View style={styles.boxPriceSale}>
+                            <Text style={styles.sale}>$9999</Text>
+                            <Text style={styles.price}>$9999</Text>
                         </View>
                     ) : (
-                        <Text>$9999</Text>
+                        <Text style={styles.price}>$9999</Text>
                     )}
-                    <View>
+                    <View style={styles.boxIcon}>
                         <ImageIcon name={icons.SHOPPING_CART} />
                         <ImageIcon name={icons.HEART} margin={[0, 10, 0, 0]} />
                     </View>

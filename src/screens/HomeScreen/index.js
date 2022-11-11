@@ -9,11 +9,14 @@ const HomeScreen = () => {
         <View>
             <Header />
             <TitleSection titleName={'Category'} />
-            <Section direction="row" flexWrap="wrap">
+            <Section>
+                <BoxProduct />
+                <BoxProduct />
+                <BoxProduct />
                 <BoxProduct />
                 <BoxProduct />
             </Section>
-            <Text>Home hello world</Text>
+            {/* <Text>Home hello world</Text> */}
         </View>
     );
 };
