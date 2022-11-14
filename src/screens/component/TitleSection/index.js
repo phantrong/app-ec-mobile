@@ -5,7 +5,7 @@ import Colors from '../../../assets/colors';
 
 const TitleSection = ({ titleName, showAll = 'true' }) => {
     return (
-        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+        <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 15, marginBottom: 5 }}>
             <Text style={{ fontSize: 20, fontWeight: 'bold', color: Colors.CS_TITLE, marginBottom: 10 }}>
                 {titleName}
             </Text>
