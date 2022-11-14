@@ -11,6 +11,7 @@ import NavBar from './NavBar';
 import InputCustomize from './InputCustomize';
 import InputItem from './InputItem';
 import Section from './Section';
+import Avatar from './Avatar';
 
 export {
     Box,
@@ -26,6 +27,7 @@ export {
     InputCustomize,
     InputItem,
     Section,
+    Avatar,
 };
 
 export default {
@@ -42,4 +44,5 @@ export default {
     InputCustomize,
     InputItem,
     Section,
+    Avatar,
 };

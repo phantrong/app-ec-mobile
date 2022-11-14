@@ -4,8 +4,6 @@ import React from 'react';
 import { HeaderBar } from '../../../components';
 import ContentRight from './contentRight';
 const Header = () => {
-    // console.log(images.GOOGLE);
-
     const customizeRight = () => {
         return <ContentRight />;
     };

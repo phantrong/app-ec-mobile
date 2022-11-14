@@ -18,4 +18,7 @@ export default {
     CS_GREEN: '#d3d399',
     CS_BUTTON: '#5E7AA9',
     CS_TITLE: '#7A6A56',
+    CS_TEXT: '#3B3B3B',
+    CS_GRAY2: '#888888',
+    CS_BACK_GROUND_OPACITY: 'rgba(59, 59, 59, 0.7)',
 };

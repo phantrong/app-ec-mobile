@@ -1,8 +1,8 @@
 import { View, StyleSheet } from 'react-native';
 import React from 'react';
 
-const Secction = ({ children }) => {
-    return <View style={styles.wrapper}>{children}</View>;
+const Secction = ({ children, direction }) => {
+    return <View style={[styles.wrapper, { flexDirection: direction }]}>{children}</View>;
 };
 
 const styles = StyleSheet.create({
@@ -10,7 +10,6 @@ const styles = StyleSheet.create({
         flex: 1,
         width: '100%',
         flexWrap: 'wrap',
-        flexDirection: 'row',
         justifyContent: 'space-between',
     },
 });

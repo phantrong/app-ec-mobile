@@ -13,7 +13,7 @@ const BoxProduct = ({ image, category, name, sale = 'true', price, priceSale }) 
 
             <View style={styles.content}>
                 <Text style={styles.title}>category</Text>
-                <Text style={styles.text}>tai nghe ngon bo de ngon ngon ngon!!!</Text>
+                <Text style={styles.text}>tai nghe ngon bo de ngon ngon ngon 111!!!</Text>
 
                 <View style={styles.boxPrice}>
                     {sale ? (
