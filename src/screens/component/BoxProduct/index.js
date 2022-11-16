@@ -1,4 +1,4 @@
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
 import React from 'react';
 
 import images from '../../../assets/images';
@@ -6,9 +6,14 @@ import icons from '../../../assets/icon';
 import { ImageIcon } from '../../../components';
 
 import styles from './styles';
-const BoxProduct = ({ image, category, name, sale = 'true', price, priceSale }) => {
+const BoxProduct = ({ image, category, name, sale = 'true', price, priceSale, navigation }) => {
     return (
-        <View style={styles.wrapper}>
+        <TouchableOpacity
+            style={styles.wrapper}
+            onPress={() => {
+                navigation.navigate('DetailProduct');
+            }}
+        >
             <Image style={styles.image} source={images.HEADPHONE} />
 
             <View style={styles.content}>
@@ -30,7 +35,7 @@ const BoxProduct = ({ image, category, name, sale = 'true', price, priceSale }) 
                     </View>
                 </View>
             </View>
-        </View>
+        </TouchableOpacity>
     );
 };
 

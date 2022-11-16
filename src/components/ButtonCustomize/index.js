@@ -15,6 +15,7 @@ const ButtonCustomize = ({
     leftSizeImage,
     rightSizeImage,
     margin,
+    marginImageLeft,
     background,
     styleLabel,
     LeftItem,
@@ -46,13 +47,13 @@ const ButtonCustomize = ({
             margin={margin}
             onPress={onPress}
         >
-            <Box width={'15%'} justify="center" align="center" />
-            <Box width={'70%'} justify="center" align="center" flexDirection="row">
+            <Box width={LeftItem ? null : '15%'} justify="center" align="center" />
+            <Box justify="center" align="center" flexDirection="row">
                 {LeftItem ? (
                     <ImageIcon
                         name={leftImage}
                         size={leftSizeImage ?? 14}
-                        margin={[0, 15]}
+                        margin={marginImageLeft ?? [0, 5]}
                         style={styleImageLeft}
                         tintColor={tintColorLeft ?? color}
                     />

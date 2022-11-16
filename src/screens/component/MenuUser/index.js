@@ -20,7 +20,7 @@ const MenuUser = () => {
         <View style={styles.wrapper}>
             <View style={styles.menu}>
                 <ImageIcon
-                    name={Icons.ADD}
+                    name={Icons.CLOSE}
                     margin={[10]}
                     size={30}
                     style={{ alignSelf: 'flex-end' }}

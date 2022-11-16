@@ -1,13 +1,14 @@
 import IntroScreen from './IntroScreen/index';
 import LoginScreen from './LoginScreen/index';
 import HomeScreen from './HomeScreen/index';
-import Profile from './screens/Profile';
-import ChatList from './screens/ChatList';
-import CouManagement from './screens/CouManagement';
-import DeliveryAddress from './screens/DeliveryAddress';
-import IntProduct from './screens/IntProduct';
-import OrderHistory from './screens/OrderHistory';
-import Setting from './screens/Setting';
+import Profile from './Profile';
+import ChatList from './ChatList';
+import CouManagement from './CouManagement';
+import DeliveryAddress from './DeliveryAddress';
+import IntProduct from './IntProduct';
+import OrderHistory from './OrderHistory';
+import Setting from './Setting';
+import DetailProduct from './DetailProduct';
 
 export default {
     IntroScreen,
@@ -20,4 +21,5 @@ export default {
     IntProduct,
     OrderHistory,
     Setting,
+    DetailProduct,
 };
