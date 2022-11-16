@@ -7,7 +7,7 @@ import NavBarHome from './NavbarItem';
 import { Images } from '../../assets';
 import styles from '../LoginScreen/styles';
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }) => {
     return (
         <View>
             {/* <MenuUser /> */}
@@ -25,12 +25,12 @@ const HomeScreen = () => {
                 <TitleSection titleName={'Category'} />
 
                 <Section direction={'row'}>
-                    <BoxProduct />
-                    <BoxProduct />
-                    <BoxProduct />
-                    <BoxProduct />
-                    <BoxProduct />
-                    <BoxProduct />
+                    <BoxProduct navigation={navigation} />
+                    <BoxProduct navigation={navigation} />
+                    <BoxProduct navigation={navigation} />
+                    <BoxProduct navigation={navigation} />
+                    <BoxProduct navigation={navigation} />
+                    <BoxProduct navigation={navigation} />
                 </Section>
 
                 <TitleSection titleName={'Category'} />

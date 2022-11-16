@@ -5,4 +5,5 @@ export default {
     HEADPHONE: require('./headphone.png'),
     AVATAR: require('./avatar_test.png'),
     FOOTER: require('./Footer.png'),
+    PRODUCT_TEST: require('./imageProduct_Test.png'),
 };

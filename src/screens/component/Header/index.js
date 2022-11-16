@@ -1,15 +1,19 @@
-import { View, Text } from 'react-native';
+import { Text, TouchableOpacity } from 'react-native';
 import React from 'react';
 
 import { HeaderBar } from '../../../components';
 import ContentRight from './contentRight';
-const Header = () => {
+const Header = ({ navigation }) => {
     const customizeRight = () => {
         return <ContentRight />;
     };
 
     const contentLeft = () => {
-        return <Text style={{ fontSize: 20 }}>Shopping Cart</Text>;
+        return (
+            <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+                <Text style={{ fontSize: 20 }}>Shopping Cart</Text>
+            </TouchableOpacity>
+        );
     };
     return <HeaderBar componentLeft={contentLeft} title={null} componentRight={customizeRight} />;
 };
