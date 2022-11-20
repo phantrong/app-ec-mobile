@@ -5,14 +5,19 @@ import propTypes from 'prop-types';
 import { ImageIcon } from '../../../../components';
 import { Colors } from '../../../../assets';
 
-const Item = ({ icon, title, itemStyle }) => {
+const Item = ({ icon, title, itemStyle, iconColor }) => {
     let colorText;
     if (itemStyle) {
         colorText = Colors.CS_WHITE;
     }
     return (
         <View style={[styles.wrapper, itemStyle]}>
-            <ImageIcon name={icon} size={25} margin={[0, 10, 0, 10]} />
+            <ImageIcon
+                name={icon}
+                size={25}
+                margin={[0, 10, 0, 10]}
+                tintColor={iconColor ? iconColor : Colors.CS_BLACK}
+            />
             <Text style={[styles.title, { color: colorText }]}>{title}</Text>
         </View>
     );

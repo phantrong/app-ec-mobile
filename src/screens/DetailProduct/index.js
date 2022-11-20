@@ -1,5 +1,5 @@
 import { View, Text, ScrollView } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 
 import BoxOrder from './BoxOrder';
 import BoxBuying from './BoxBuying';
@@ -7,7 +7,7 @@ import BoxShopInfo from './BoxShopInfo';
 import BoxProductDes from './BoxProductDes';
 
 import { Section, HeaderBar } from '../../components';
-import { Header, Footer, BoxProduct } from '../component';
+import { Header, Footer, BoxProduct, MenuUser } from '../component';
 
 import { Images, Colors } from '../../assets';
 
@@ -17,9 +17,19 @@ const sizes = ['S', 'M', 'L', 'XL', 'XXL'];
 const colors = ['yellow', 'green', 'blue'];
 
 const DetailProduct = ({ navigation }) => {
+    const [closeMenu, setCloseMenu] = useState(false);
+
+    const handelClose = (close) => {
+        setCloseMenu(close);
+    };
+
+    const handelOpenMenu = (open) => {
+        setCloseMenu(open);
+    };
     return (
         <View>
-            <Header navigation={navigation} />
+            <Header navigation={navigation} handelOpenMenu={handelOpenMenu} />
+            {closeMenu ? <MenuUser handelClose={handelClose} /> : null}
             <BoxBuying />
             <ScrollView>
                 <BoxOrder
@@ -64,6 +74,7 @@ const DetailProduct = ({ navigation }) => {
                     <BoxProduct />
                 </Section>
 
+                <Footer />
                 <Footer />
             </ScrollView>
         </View>

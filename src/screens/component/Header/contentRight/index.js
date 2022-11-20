@@ -5,13 +5,18 @@ import { ImageIcon } from '../../../../components';
 // import MenuUser from '../../MenuUser';
 import icons from '../../../../assets/icon';
 
-const ContentRight = () => {
+const ContentRight = ({ handelOpenMenu, navigation }) => {
     return (
         <View style={styles.wrapper}>
-            <ImageIcon name={icons.SEARCH_NORMAL} pressable />
-            <ImageIcon name={icons.SHOPPING_CART} pressable margin={[0, 20]} />
-            <ImageIcon name={icons.USER} pressable />
             {/* <MenuUser /> */}
+            <ImageIcon name={icons.SEARCH_NORMAL} pressable />
+            <ImageIcon
+                name={icons.SHOPPING_CART}
+                pressable
+                margin={[0, 20]}
+                onPress={() => navigation.navigate('ShoppingCart')}
+            />
+            <ImageIcon name={icons.USER} pressable onPress={() => handelOpenMenu(true)} />
         </View>
     );
 };

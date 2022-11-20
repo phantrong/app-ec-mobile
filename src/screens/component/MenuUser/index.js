@@ -9,8 +9,9 @@ import { Colors, Icons } from '../../../assets';
 import { menuItems } from '../../../assets/Data';
 import colors from '../../../assets/colors';
 
-const MenuUser = () => {
+const MenuUser = ({ handelClose }) => {
     const [item, setItem] = useState(0);
+    // const [close, setClose] = useState(true)
 
     const handelClick = (index, name) => {
         setItem(index);
@@ -25,7 +26,7 @@ const MenuUser = () => {
                     size={30}
                     style={{ alignSelf: 'flex-end' }}
                     pressable={true}
-                    onPress={() => console.log(1)}
+                    onPress={() => handelClose(false)}
                 />
                 {menuItems.map((menuItem, index) => (
                     <TouchableOpacity
@@ -36,12 +37,13 @@ const MenuUser = () => {
                         }}
                         activeOpacity={0.5}
                         onPress={() => handelClick(index, menuItem.title)}
+                        key={index}
                     >
                         <Item
-                            key={index}
                             title={menuItem.title}
                             icon={menuItem.icon}
                             itemStyle={item === index && styles.itemStyle}
+                            iconColor={item === index && Colors.CS_WHITE}
                         />
                     </TouchableOpacity>
                 ))}
@@ -57,7 +59,6 @@ const styles = StyleSheet.create({
         bottom: 0,
         right: 0,
         left: 0,
-
         backgroundColor: Colors.CS_BACK_GROUND_OPACITY,
         zIndex: 100,
     },
