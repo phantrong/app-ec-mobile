@@ -19,4 +19,5 @@ export default {
     CALENDAR_EDIT: require('./calendar-edit.png'),
     CALL: require('./call.png'),
     CLOCK: require('./clock.png'),
+    TRASHCAN: require('./trashCan.png'),
 };

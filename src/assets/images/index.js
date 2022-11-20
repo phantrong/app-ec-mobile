@@ -6,4 +6,5 @@ export default {
     AVATAR: require('./avatar_test.png'),
     FOOTER: require('./Footer.png'),
     PRODUCT_TEST: require('./imageProduct_Test.png'),
+    PRODUCT_TEST2: require('./son_test.png'),
 };

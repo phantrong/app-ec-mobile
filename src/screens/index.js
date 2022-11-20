@@ -9,6 +9,7 @@ import IntProduct from './IntProduct';
 import OrderHistory from './OrderHistory';
 import Setting from './Setting';
 import DetailProduct from './DetailProduct';
+import ShoppingCart from './ShoppingCart';
 
 export default {
     IntroScreen,
@@ -22,4 +23,5 @@ export default {
     OrderHistory,
     Setting,
     DetailProduct,
+    ShoppingCart,
 };

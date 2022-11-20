@@ -2,10 +2,12 @@ import { Text, TouchableOpacity } from 'react-native';
 import React from 'react';
 
 import { HeaderBar } from '../../../components';
+// import MenuUser from '../MenuUser';
+
 import ContentRight from './contentRight';
-const Header = ({ navigation }) => {
+const Header = ({ navigation, handelOpenMenu }) => {
     const customizeRight = () => {
-        return <ContentRight />;
+        return <ContentRight handelOpenMenu={handelOpenMenu} navigation={navigation} />;
     };
 
     const contentLeft = () => {
