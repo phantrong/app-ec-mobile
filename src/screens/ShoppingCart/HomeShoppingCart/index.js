@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 
 import { Header, MenuUser, Footer, Buttom, ViewPsition, BoxBottomScreen } from '../../component';
 import { ImageIcon } from '../../../components';
+
 import Check from './Check';
 import BoxShop from './BoxShop';
 import BoxProduct from './BoxProduct';
@@ -156,7 +157,7 @@ const HomeShoppingCart = ({ navigation }) => {
         <ViewPsition>
             <Header navigation={navigation} handelOpenMenu={handelOpenMenu} />
             {closeMenu ? <MenuUser handelClose={handelClose} navigation={navigation} /> : null}
-            <BoxBottomScreen addressBox>
+            <BoxBottomScreen addressBox navigation={navigation} configBoxAddress={'RepairAddress'}>
                 <View style={styles.checkAll}>
                     <TouchableOpacity
                         style={[styles.boxCheck, isCheckAll && styles.checked]}

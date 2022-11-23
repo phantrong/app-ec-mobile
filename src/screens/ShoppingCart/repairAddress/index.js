@@ -1,10 +1,22 @@
-import { View, Text } from 'react-native';
-import React from 'react';
+import { View } from 'react-native';
+import React, { useState } from 'react';
 
-const RepairAddress = () => {
+import { Header, MenuUser, Footer } from '../../component';
+
+const RepairAddress = ({ navigation }) => {
+    const [closeMenu, setCloseMenu] = useState(false);
+
+    const handelClose = (close) => {
+        setCloseMenu(close);
+    };
+
+    const handelOpenMenu = (open) => {
+        setCloseMenu(open);
+    };
     return (
         <View>
-            <Text>RepairAddress</Text>
+            <Header navigation={navigation} handelOpenMenu={handelOpenMenu} />
+            {closeMenu ? <MenuUser handelClose={handelClose} navigation={navigation} /> : null}
         </View>
     );
 };
