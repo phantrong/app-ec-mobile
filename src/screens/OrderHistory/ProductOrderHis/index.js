@@ -4,8 +4,8 @@ import React, { useState } from 'react';
 import { Header, MenuUser, GoBack, ViewPsition, BoxBottomScreen } from '../../component';
 import { Colors, Images } from '../../../assets';
 
-import BoxShop from '../../ShoppingCart/BoxShop';
-import BoxProduct from '../../ShoppingCart/BoxProduct';
+import BoxShop from '../../ShoppingCart/HomeShoppingCart/BoxShop';
+import BoxProduct from '../../ShoppingCart/HomeShoppingCart/BoxProduct';
 import StatusOrder from './Status';
 
 const productOrders = [
