@@ -9,12 +9,13 @@ import { Colors, Icons } from '../../../assets';
 import { menuItems } from '../../../assets/Data';
 import colors from '../../../assets/colors';
 
-const MenuUser = ({ handelClose }) => {
+const MenuUser = ({ handelClose, navigation }) => {
     const [item, setItem] = useState(0);
     // const [close, setClose] = useState(true)
 
-    const handelClick = (index, name) => {
+    const handelClick = (index, name, config) => {
         setItem(index);
+        navigation.navigate(config);
     };
 
     return (
@@ -36,7 +37,7 @@ const MenuUser = ({ handelClose }) => {
                             height: 50,
                         }}
                         activeOpacity={0.5}
-                        onPress={() => handelClick(index, menuItem.title)}
+                        onPress={() => handelClick(index, menuItem.title, menuItem.config)}
                         key={index}
                     >
                         <Item
@@ -44,6 +45,7 @@ const MenuUser = ({ handelClose }) => {
                             icon={menuItem.icon}
                             itemStyle={item === index && styles.itemStyle}
                             iconColor={item === index && Colors.CS_WHITE}
+                            navigation={navigation}
                         />
                     </TouchableOpacity>
                 ))}
@@ -60,7 +62,7 @@ const styles = StyleSheet.create({
         right: 0,
         left: 0,
         backgroundColor: Colors.CS_BACK_GROUND_OPACITY,
-        zIndex: 100,
+        zIndex: 2000,
     },
     menu: {
         backgroundColor: Colors.CS_WHITE,

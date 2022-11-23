@@ -1,8 +1,8 @@
 import { View, Text, TouchableOpacity } from 'react-native';
 import React from 'react';
 
-import { Images, Colors } from '../../../assets';
-import { Avatar } from '../../../components';
+import { Images, Colors } from '../../../../assets';
+import { Avatar } from '../../../../components';
 
 const BoxShop = ({ avatar, nameShop, navigation }) => {
     return (

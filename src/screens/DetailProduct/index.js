@@ -7,7 +7,7 @@ import BoxShopInfo from './BoxShopInfo';
 import BoxProductDes from './BoxProductDes';
 
 import { Section, HeaderBar } from '../../components';
-import { Header, Footer, BoxProduct, MenuUser } from '../component';
+import { Header, Footer, BoxProduct, MenuUser, ViewPsition } from '../component';
 
 import { Images, Colors } from '../../assets';
 
@@ -27,9 +27,9 @@ const DetailProduct = ({ navigation }) => {
         setCloseMenu(open);
     };
     return (
-        <View>
+        <ViewPsition>
             <Header navigation={navigation} handelOpenMenu={handelOpenMenu} />
-            {closeMenu ? <MenuUser handelClose={handelClose} /> : null}
+            {closeMenu ? <MenuUser handelClose={handelClose} navigation={navigation} /> : null}
             <BoxBuying />
             <ScrollView>
                 <BoxOrder
@@ -77,7 +77,7 @@ const DetailProduct = ({ navigation }) => {
                 <Footer />
                 <Footer />
             </ScrollView>
-        </View>
+        </ViewPsition>
     );
 };
 

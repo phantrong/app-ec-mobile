@@ -5,7 +5,7 @@ import Checked from './Checked';
 
 import { Colors } from '../../../assets';
 
-const BoxCheck = ({ title, categorys }) => {
+const BoxCheck = ({ title, categorys, notChecked, styleCheck, styleTextNotTick, styleBox }) => {
     const [checked, setChecked] = useState(0);
 
     const handleCheck = (index) => {
@@ -16,11 +16,17 @@ const BoxCheck = ({ title, categorys }) => {
 
     return (
         <View style={styles.wrapper}>
-            <Text style={styles.title}>{title}</Text>
-            <View style={styles.boxCheck}>
+            {title ? <Text style={styles.title}>{title}</Text> : null}
+            <View style={[styles.boxCheck, styleBox]}>
                 {categorys.map((category, index) => (
                     <TouchableOpacity key={index} onPress={() => handleCheck(index)} activeOpacity={0.7}>
-                        <Checked name={category} checked={index === checked} />
+                        <Checked
+                            name={category}
+                            checked={index === checked}
+                            notchecked={notChecked}
+                            styleNotChecked={styleCheck}
+                            styleTextNotChecked={styleTextNotTick}
+                        />
                     </TouchableOpacity>
                 ))}
             </View>

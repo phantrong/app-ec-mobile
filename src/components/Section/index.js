@@ -1,8 +1,8 @@
 import { View, StyleSheet } from 'react-native';
 import React from 'react';
 
-const Secction = ({ children, direction }) => {
-    return <View style={[styles.wrapper, { flexDirection: direction }]}>{children}</View>;
+const Secction = ({ children, direction, style }) => {
+    return <View style={[styles.wrapper, { flexDirection: direction }, style]}>{children}</View>;
 };
 
 const styles = StyleSheet.create({
