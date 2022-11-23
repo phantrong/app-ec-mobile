@@ -1,6 +1,7 @@
 export default {
     CLOSE: require('./close.png'),
     ARROW_LEFT: require('./arrow-left.png'),
+    ARROW_RIGHT: require('./arrow-right.png'),
     HEART: require('./heart.png'),
     SEARCH_NORMAL: require('./search-normal.png'),
     SHOPPING_CART: require('./shopping-cart.png'),
@@ -20,4 +21,5 @@ export default {
     CALL: require('./call.png'),
     CLOCK: require('./clock.png'),
     TRASHCAN: require('./trashCan.png'),
+    EYE: require('./eye.png'),
 };

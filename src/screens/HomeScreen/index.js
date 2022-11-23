@@ -20,7 +20,7 @@ const HomeScreen = ({ navigation }) => {
     return (
         <View>
             <Header navigation={navigation} handelOpenMenu={handelOpenMenu} />
-            {closeMenu ? <MenuUser handelClose={handelClose} /> : null}
+            {closeMenu ? <MenuUser handelClose={handelClose} navigation={navigation} /> : null}
 
             <NavBarHome items={['new products', 'popular item', 'store list']} />
 

@@ -9,6 +9,9 @@ import BoxCheck from './BoxCheck';
 import Label from './Label';
 import InputNumber from './InputNumber';
 import Buttom from './Buttom';
+import GoBack from './ButtomBack';
+import ViewPsition from './ViewPosition';
+import BoxBottomScreen from './BoxBottomScreen';
 
 export {
     Header,
@@ -22,4 +25,7 @@ export {
     BoxCheck,
     Label,
     InputNumber,
+    GoBack,
+    ViewPsition,
+    BoxBottomScreen,
 };

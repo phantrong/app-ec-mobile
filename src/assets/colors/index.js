@@ -22,6 +22,7 @@ export default {
     CS_GRAY2: '#888888',
     CS_BACK_GROUND_OPACITY: 'rgba(59, 59, 59, 0.7)',
     CS_BACK_GROUND_GREEN: '#528F75',
+    CS_BACK_GROUND_F6: '#F6F6F6',
     CS_BORDER_D6: '##D6D6D6',
     CS_ORANGE2: '#E2582A',
 };

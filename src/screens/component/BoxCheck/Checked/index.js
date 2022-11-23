@@ -3,21 +3,25 @@ import React from 'react';
 
 import { Colors, Icons } from '../../../../assets';
 
-const Checked = ({ name, checked }) => {
+const Checked = ({ name, checked, notchecked, styleNotChecked, styleTextNotChecked }) => {
     // console.log(name.length);
     return (
         <View
             style={[
                 styles.wrapper,
                 name.length == 1 ? styles.width40 : styles.padding10,
-                checked ? styles.checked : null,
+                checked ? (notchecked ? styleNotChecked : styles.checked) : null,
             ]}
         >
-            <Text style={[styles.text, checked ? styles.textChecked : null]}>{name}</Text>
+            <Text style={[styles.text, checked ? (notchecked ? styleTextNotChecked : styles.textChecked) : null]}>
+                {name}
+            </Text>
             {checked ? (
-                <View style={styles.boxChecked}>
-                    <Image source={Icons.CHECKED} resizeMode="contain" style={styles.img} />
-                </View>
+                notchecked ? null : (
+                    <View style={styles.boxChecked}>
+                        <Image source={Icons.CHECKED} resizeMode="contain" style={styles.img} />
+                    </View>
+                )
             ) : null}
         </View>
     );
