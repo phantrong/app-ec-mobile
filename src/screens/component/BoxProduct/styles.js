@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
     wrapper: {
-        width: 180,
+        width: '44%',
         marginHorizontal: 10,
         marginVertical: 10,
         height: 300,

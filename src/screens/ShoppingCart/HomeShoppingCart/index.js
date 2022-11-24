@@ -9,96 +9,16 @@ import BoxShop from './BoxShop';
 import BoxProduct from './BoxProduct';
 
 import { Colors, Icons, Images } from '../../../assets';
+import Data from '../../../assets/Data';
+import { set } from 'react-native-reanimated';
 
-const myCart = [
-    {
-        nameShop: 'cửa hàng khanh',
-        image: Images.AVATAR,
-        products: [
-            {
-                cart_item_id: 1,
-                product_id: 1,
-                product_name: 'Kristina Bayer',
-                product_image: Images.PRODUCT_TEST2,
-                price: 5138485,
-                price_discount: 1570633,
-                stock: 1000,
-                quantity: 6,
-            },
-            {
-                cart_item_id: 2,
-                product_id: 2,
-                product_name: 'Kristina Bayer',
-                product_image: Images.PRODUCT_TEST2,
-                price: 5138485,
-                price_discount: 1570633,
-                stock: 1000,
-                quantity: 6,
-            },
-            {
-                cart_item_id: 3,
-                product_id: 3,
-                product_name: 'Kristina Bayer',
-                product_image: Images.PRODUCT_TEST2,
-                price: 5138485,
-                price_discount: 1570633,
-                stock: 1000,
-                quantity: 6,
-            },
-        ],
-    },
-
-    {
-        nameShop: 'cửa hàng khanh2',
-        image: Images.AVATAR,
-        products: [
-            {
-                cart_item_id: 4,
-                product_id: 5,
-                product_name: 'Kristina Bayer',
-                product_image: Images.PRODUCT_TEST2,
-                price: 5138485,
-                price_discount: 0,
-                stock: 1000,
-                quantity: 6,
-            },
-            {
-                cart_item_id: 5,
-                product_id: 4,
-                product_name: 'Kristina Bayer',
-                product_image: Images.PRODUCT_TEST2,
-                price: 5138485,
-                price_discount: 5138485,
-                stock: 1000,
-                quantity: 6,
-            },
-            {
-                cart_item_id: 6,
-                product_id: 6,
-                product_name: 'Kristina Bayer',
-                product_image: Images.PRODUCT_TEST2,
-                price: 5138485,
-                // price_discount: 1570633,
-                stock: 1000,
-                quantity: 6,
-            },
-            {
-                cart_item_id: 7,
-                product_id: 7,
-                product_name: 'Kristina Bayer',
-                product_image: Images.PRODUCT_TEST2,
-                price: 5138485,
-                price_discount: 1570633,
-                stock: 1000,
-                quantity: 6,
-            },
-        ],
-    },
-];
+const myCart = Data.myCart;
 
 const HomeShoppingCart = ({ navigation }) => {
     const [closeMenu, setCloseMenu] = useState(false);
     const [cart, setCart] = useState(myCart);
+    const [priceProduct, setPriceProduct] = useState([]);
+    const [totalAmount, setTotalAmount] = useState(0);
     const [delProduct, setDelProduct] = useState();
     const [isCheckAll, setIsCheckAll] = useState(false);
     const [isChecked, setIsChecked] = useState([]);
@@ -106,6 +26,7 @@ const HomeShoppingCart = ({ navigation }) => {
 
     console.log(listCartId, 'cart');
     console.log(isChecked, 'check');
+    console.log(priceProduct);
 
     const handelClose = (close) => {
         setCloseMenu(close);
@@ -143,6 +64,19 @@ const HomeShoppingCart = ({ navigation }) => {
         }
     };
 
+    const calculatePrice = (id, totalProduct) => {
+        const isPrice = priceProduct.includes([priceProduct.id] === id);
+        const isCheck = isChecked.includes(id);
+
+        setPriceProduct([...priceProduct, { id: id, totalProduct: totalProduct }]);
+
+        if (isCheck) {
+            setTotalAmount(totalAmount + totalProduct);
+        } else {
+            setTotalAmount(totalAmount - totalProduct);
+        }
+    };
+
     const handleClick = (id, cartId, checked) => {
         setIsChecked([...isChecked, id]);
         setListCartId([...listCartId, cartId]);
@@ -157,32 +91,37 @@ const HomeShoppingCart = ({ navigation }) => {
         <ViewPsition>
             <Header navigation={navigation} handelOpenMenu={handelOpenMenu} />
             {closeMenu ? <MenuUser handelClose={handelClose} navigation={navigation} /> : null}
-            <BoxBottomScreen addressBox navigation={navigation} configBoxAddress={'RepairAddress'}>
-                <View style={styles.checkAll}>
-                    <TouchableOpacity
-                        style={[styles.boxCheck, isCheckAll && styles.checked]}
-                        onPress={handleSelectAll}
-                        activeOpacity={0.9}
-                    >
-                        <Check />
-                    </TouchableOpacity>
-                    <Text>Check All</Text>
-                </View>
-                {/* <Text>Total: 11111</Text> */}
-                <Buttom
-                    iconColor={Colors.CS_ORANGE2}
-                    backgroudColor={Colors.CS_ORANGE2}
-                    borderColor={Colors.CS_ORANGE2}
-                    label={'buy now'}
-                    colorLabel={Colors.CS_WHITE}
-                    widthButtom={150}
-                    heightButtom={40}
-                />
-            </BoxBottomScreen>
+            {cart ? (
+                <BoxBottomScreen addressBox navigation={navigation} configBoxAddress={'RepairAddress'}>
+                    <View style={styles.checkAll}>
+                        <TouchableOpacity
+                            style={[styles.boxCheck, isCheckAll && styles.checked]}
+                            onPress={handleSelectAll}
+                            activeOpacity={0.9}
+                        >
+                            <Check />
+                        </TouchableOpacity>
+                        <Text>Check All</Text>
+                    </View>
+                    {/* <Text>Total: {totalAmount}</Text> */}
+                    <Buttom
+                        iconColor={Colors.CS_ORANGE2}
+                        backgroudColor={Colors.CS_ORANGE2}
+                        borderColor={Colors.CS_ORANGE2}
+                        label={'buy now'}
+                        colorLabel={Colors.CS_WHITE}
+                        widthButtom={150}
+                        heightButtom={40}
+                        onPress={() => {
+                            navigation.navigate('ConfirmPayInfo');
+                        }}
+                    />
+                </BoxBottomScreen>
+            ) : null}
             <ScrollView style={{ paddingHorizontal: 10, paddingTop: 20 }}>
                 <Text style={{ color: Colors.CS_TEXT, fontSize: 18, fontWeight: '700' }}>Giỏ hàng của bạn</Text>
                 <Text style={{ color: Colors.CS_TEXT, fontSize: 14, fontWeight: '400', marginBottom: 10 }}>
-                    Số lượng hàng trong giỏ: {5}
+                    {cart ? `Số lượng hàng trong giỏ: ${5}` : 'Hiện tại bạn không có mặ hàng nào trong giỏ'}
                 </Text>
 
                 {cart ? (
@@ -210,6 +149,7 @@ const HomeShoppingCart = ({ navigation }) => {
                                         <Check />
                                     </TouchableOpacity>
                                     <BoxProduct
+                                        id={product.product_id}
                                         image={product.product_image}
                                         title={product.product_name}
                                         price={product.price}
@@ -222,6 +162,7 @@ const HomeShoppingCart = ({ navigation }) => {
                                         }
                                         navigation={navigation}
                                         navigateConfig={'DetailProduct'}
+                                        calculatePrice={calculatePrice}
                                     />
                                     <TouchableOpacity
                                         style={[
@@ -240,14 +181,21 @@ const HomeShoppingCart = ({ navigation }) => {
                         </View>
                     ))
                 ) : (
-                    <View>
-                        <Text>khong có san phảm</Text>
+                    <View style={styles.notCart}>
+                        <Buttom
+                            iconColor={Colors.CS_TITLE}
+                            backgroudColor={Colors.CS_TITLE}
+                            borderColor={Colors.CS_TITLE}
+                            label={'Mua hàng ngay'}
+                            colorLabel={Colors.CS_WHITE}
+                            widthButtom={300}
+                            heightButtom={50}
+                            onPress={() => navigation.navigate('Home')}
+                        />
                     </View>
                 )}
-
-                <Footer />
-                <Footer />
             </ScrollView>
+            <Footer />
         </ViewPsition>
     );
 };
@@ -301,6 +249,11 @@ const styles = StyleSheet.create({
     checkAll: {
         flexDirection: 'row',
         alignItems: 'center',
+    },
+
+    notCart: {
+        alignItems: 'center',
+        marginTop: 100,
     },
 });
 

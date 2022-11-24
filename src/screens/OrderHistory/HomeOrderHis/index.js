@@ -2,7 +2,7 @@ import { View, Text, ScrollView, StyleSheet, TouchableOpacity } from 'react-nati
 import React, { useState } from 'react';
 
 import { Section } from '../../../components';
-import { Header, MenuUser, Footer, BoxCheck } from '../../component';
+import { Header, MenuUser, Footer, BoxCheck, ViewPsition } from '../../component';
 
 import ItemOrderHis from './Item';
 import { Colors } from '../../../assets';
@@ -18,7 +18,7 @@ const HomeOrderHis = ({ navigation }) => {
         setCloseMenu(open);
     };
     return (
-        <View>
+        <ViewPsition>
             <Header navigation={navigation} handelOpenMenu={handelOpenMenu} />
             {closeMenu ? <MenuUser handelClose={handelClose} navigation={navigation} /> : null}
 
@@ -68,7 +68,7 @@ const HomeOrderHis = ({ navigation }) => {
 
                 <Footer />
             </ScrollView>
-        </View>
+        </ViewPsition>
     );
 };
 

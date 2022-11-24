@@ -34,6 +34,7 @@ const HomeScreen = ({ navigation }) => {
                     <BoxProduct navigation={navigation} />
                     <BoxProduct navigation={navigation} />
                     <BoxProduct navigation={navigation} />
+                    <BoxProduct navigation={navigation} />
                 </Section>
 
                 <TitleSection titleName={'Category'} />

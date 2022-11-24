@@ -1,11 +1,12 @@
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { InputNumber } from '../../../component';
 
 import { Colors } from '../../../../assets';
 
 const BoxProduct = ({
+    id,
     image,
     title,
     price,
@@ -16,7 +17,20 @@ const BoxProduct = ({
     navigation,
     navigateConfig,
     onLayout,
+    calculatePrice,
 }) => {
+    const [totalPrice, setTotalPrice] = useState(() => (priceSale || priceSale === 0 ? priceSale : price));
+
+    if (calculatePrice) {
+        useEffect(() => {
+            calculatePrice(id, totalPrice);
+        }, [totalPrice]);
+    }
+
+    const amountProduct = (amount) => {
+        setTotalPrice(priceSale || priceSale === 0 ? priceSale * amount : price * amount);
+    };
+
     return (
         <TouchableOpacity style={styles.wrapper} onPress={() => navigation.navigate(navigateConfig)}>
             <Image source={image} style={styles.image} />
@@ -38,7 +52,7 @@ const BoxProduct = ({
                 {notInputQuantity ? (
                     <Text style={styles.quantity}>{`Số lượng: ${quantity}`}</Text>
                 ) : (
-                    <InputNumber width={130} maxProduct={12} />
+                    <InputNumber width={130} maxProduct={12} amountProduct={amountProduct} />
                 )}
             </View>
         </TouchableOpacity>

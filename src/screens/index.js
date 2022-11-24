@@ -10,6 +10,7 @@ import OrderHistory from './OrderHistory';
 import Setting from './Setting';
 import DetailProduct from './DetailProduct';
 import ShoppingCart from './ShoppingCart';
+import SuccessPurScreen from './successPurScreen';
 
 export default {
     IntroScreen,
@@ -24,4 +25,5 @@ export default {
     Setting,
     DetailProduct,
     ShoppingCart,
+    SuccessPurScreen,
 };

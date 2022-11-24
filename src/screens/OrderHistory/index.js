@@ -7,7 +7,7 @@ import ProductOrderHis from './ProductOrderHis';
 
 const StackOrderHis = createStackNavigator();
 
-const OrderHistory = () => {
+const OrderHistory = (props) => {
     return (
         <StackOrderHis.Navigator initialRouteName="HomeOrderHis" screenOptions={{ headerShown: false }}>
             <StackOrderHis.Screen key={1} name="HomeOrderHis" component={HomeOrderHis} />

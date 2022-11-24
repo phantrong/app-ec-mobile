@@ -6,8 +6,10 @@ import { ImageIcon } from '../../../components';
 
 import { Colors, Icons } from '../../../assets';
 
-import { menuItems } from '../../../assets/Data';
+import Data from '../../../assets/Data';
 import colors from '../../../assets/colors';
+
+const menuItems = Data.menuItems;
 
 const MenuUser = ({ handelClose, navigation }) => {
     const [item, setItem] = useState(0);
