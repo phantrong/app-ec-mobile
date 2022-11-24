@@ -17,7 +17,7 @@ const BoxBottomScreen = ({ children, addressBox, navigation, configBoxAddress })
                         style={{ flexDirection: 'row', alignItems: 'center' }}
                         onPress={() => navigation.navigate(configBoxAddress)}
                     >
-                        <Text style={[styles.text, { fontWeight: '400', marginRight: 5 }]}>Sửa Địa Chỉ</Text>
+                        <Text style={[styles.text, { fontWeight: '400', marginRight: 5 }]}>Chi tiết</Text>
                         <ImageIcon name={Icons.ARROW_RIGHT} size={20} tintColor={Colors.CS_TEXT} />
                     </TouchableOpacity>
                 </View>

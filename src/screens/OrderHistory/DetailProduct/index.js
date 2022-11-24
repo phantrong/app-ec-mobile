@@ -1,9 +1,9 @@
 import { View, ScrollView, StyleSheet } from 'react-native';
 import React, { useState } from 'react';
 
-import { Header, MenuUser, GoBack } from '../../component';
-import { Colors } from '../../../assets';
-import Item from './Item';
+import { Header, MenuUser, GoBack, ItemAddressInfo, ViewPsition } from '../../component';
+
+import { Colors, Icons } from '../../../assets';
 
 const DetailProduct = ({ navigation }) => {
     const [closeMenu, setCloseMenu] = useState(false);
@@ -15,8 +15,9 @@ const DetailProduct = ({ navigation }) => {
     const handelOpenMenu = (open) => {
         setCloseMenu(open);
     };
+
     return (
-        <View>
+        <ViewPsition>
             <Header navigation={navigation} handelOpenMenu={handelOpenMenu} />
             {closeMenu ? <MenuUser handelClose={handelClose} navigation={navigation} /> : null}
 
@@ -30,12 +31,12 @@ const DetailProduct = ({ navigation }) => {
                     navigation={navigation}
                 />
                 <View style={styles.contentBody}>
-                    <Item title={'tên'} detail={'son môi dưỡng ẩm'} />
-                    <Item title={'số điện thoại'} detail={'0338204170'} />
-                    <Item title={'địa chị'} detail={'lương phúc - việt long - sóc sơn - hà nội'} />
+                    <ItemAddressInfo title={'tên'} detail={'son môi dưỡng ẩm'} />
+                    <ItemAddressInfo title={'số điện thoại'} detail={'0338204170'} />
+                    <ItemAddressInfo title={'địa chị'} detail={'lương phúc - việt long - sóc sơn - hà nội'} />
                 </View>
             </ScrollView>
-        </View>
+        </ViewPsition>
     );
 };
 

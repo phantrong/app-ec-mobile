@@ -1,12 +1,13 @@
-import { View, Text, StyleSheet } from 'react-native';
 import React from 'react';
-import { Colors } from '../../../../assets';
+import { View, Text, StyleSheet } from 'react-native';
 
-const Item = ({ title, detail }) => {
+import { Colors } from '../../../assets';
+
+const ItemAddressInfo = ({ title, detail, styleTitle, styleDetail }) => {
     return (
         <View style={styles.wrapper}>
-            <Text style={styles.title}>{`${title} :`}</Text>
-            <Text style={styles.detail}>{detail}</Text>
+            <Text style={[styles.title, styleTitle]}>{`${title} :`}</Text>
+            <Text style={[styles.detail, styleDetail]}>{detail}</Text>
         </View>
     );
 };
@@ -33,4 +34,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Item;
+export default ItemAddressInfo;

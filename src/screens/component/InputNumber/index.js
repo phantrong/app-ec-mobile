@@ -1,14 +1,17 @@
 import { View, TextInput, StyleSheet } from 'react-native';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { ImageIcon } from '../../../components';
 
 import { Colors, Icons } from '../../../assets';
 
-const InputNumber = ({ maxProduct, width }) => {
+const InputNumber = ({ maxProduct, width, amountProduct }) => {
     const [value, setValue] = useState('1');
 
     // console.log('call API: ' + value);
+    useEffect(() => {
+        amountProduct(Number(value));
+    }, [value]);
 
     const handelInput = (text) => {
         const value = Number(text);

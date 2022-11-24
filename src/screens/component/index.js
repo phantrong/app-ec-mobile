@@ -12,6 +12,7 @@ import Buttom from './Buttom';
 import GoBack from './ButtomBack';
 import ViewPsition from './ViewPosition';
 import BoxBottomScreen from './BoxBottomScreen';
+import ItemAddressInfo from './ItemAddressInfo';
 
 export {
     Header,
@@ -28,4 +29,5 @@ export {
     GoBack,
     ViewPsition,
     BoxBottomScreen,
+    ItemAddressInfo,
 };

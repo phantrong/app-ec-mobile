@@ -17,6 +17,7 @@ export default {
     CHECKED: require('./Vector.png'),
     INCREASE: require('./add.png'),
     REDUCED: require('./minus.png'),
+    EDIT: require('./edit.png'),
     CALENDAR_EDIT: require('./calendar-edit.png'),
     CALL: require('./call.png'),
     CLOCK: require('./clock.png'),
