@@ -3,7 +3,6 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { Colors } from '../../assets';
 import { Box, NavBar } from '../../components';
 import { useForm } from 'react-hook-form';
-import { normalize } from '../../configs/commons';
 import ContentRegister from './ContentRegister';
 import styles from './styles';
 

@@ -1,51 +1,41 @@
 import React from 'react';
+import { View } from 'react-native';
 import { getStatusBarHeight } from 'react-native-iphone-x-helper';
 import { InputItem, Text } from '../../components';
 import HandleLogin from './HandleLogin';
 import { isEqual } from 'react-fast-compare';
-import { Button } from 'react-native';
 
-const ContentLogin = ({
-    control,
-    errors,
-    handleSubmit,
-    onSubmit,
-    onForgotPassword,
-    onShopLogin,
-    onRegister,
-    loadingButtonSubmit,
-}) => {
+const ContentLogin = ({ control, errors, handleSubmit, onSubmit, onForgotPassword, onLoginGoogle, onRegister }) => {
     return (
         <>
             <Text margin={[getStatusBarHeight() + 100, 0, 0, 0]} size={32} color={'#180E25'} fontWeight="700">
                 Login
             </Text>
             <Text margin={[15, 0, 0, 0]} size={15} color={'#827D89'} fontWeight="400">
-                Login for user
+                And notes your idea
             </Text>
             <InputItem
                 control={control}
-                name="email"
-                errors={errors.email}
-                placeholder="Email Address"
+                name="firstName"
+                errors={errors.firstName}
+                placeholder="cs_tech@gmail.com"
                 label="Email Address"
                 margin={[20, 0, 0, 0]}
             />
             <InputItem
                 control={control}
-                name="password"
+                name="lastName"
                 security={true}
-                errors={errors.password}
+                errors={errors.lastName}
                 label="Password"
                 margin={[20, 0, 0, 0]}
             />
             <HandleLogin
                 handleSubmit={handleSubmit}
                 onSubmit={onSubmit}
-                // onForgotPassword={onForgotPassword}
-                onShopLogin={onShopLogin}
+                onForgotPassword={onForgotPassword}
+                onLoginGoogle={onLoginGoogle}
                 onRegister={onRegister}
-                loadingButtonSubmit={loadingButtonSubmit}
             />
         </>
     );
