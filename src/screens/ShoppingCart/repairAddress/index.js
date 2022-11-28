@@ -1,25 +1,14 @@
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
-import React, { useState } from 'react';
+import React from 'react';
 
-import { Header, MenuUser, ViewPsition, ItemAddressInfo, GoBack } from '../../component';
+import { ViewPsition, ItemAddressInfo, GoBack } from '../../component';
 import { ImageIcon } from '../../../components';
 
 import { Colors, Icons } from '../../../assets';
 
 const RepairAddress = ({ navigation }) => {
-    const [closeMenu, setCloseMenu] = useState(false);
-
-    const handelClose = (close) => {
-        setCloseMenu(close);
-    };
-
-    const handelOpenMenu = (open) => {
-        setCloseMenu(open);
-    };
     return (
         <ViewPsition>
-            <Header navigation={navigation} handelOpenMenu={handelOpenMenu} />
-            {closeMenu ? <MenuUser handelClose={handelClose} navigation={navigation} /> : null}
             <ScrollView style={{ paddingHorizontal: 10, paddingTop: 20 }}>
                 <GoBack
                     title={'Quay lại'}

@@ -34,4 +34,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default ItemAddressInfo;
+export default React.memo(ItemAddressInfo);

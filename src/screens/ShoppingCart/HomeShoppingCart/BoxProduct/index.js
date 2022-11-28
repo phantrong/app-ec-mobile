@@ -1,5 +1,5 @@
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, memo } from 'react';
 
 import { InputNumber } from '../../../component';
 
@@ -113,4 +113,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default BoxProduct;
+export default memo(BoxProduct);

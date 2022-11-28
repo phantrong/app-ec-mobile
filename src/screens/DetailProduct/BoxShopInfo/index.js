@@ -1,5 +1,5 @@
 import { View, StyleSheet } from 'react-native';
-import React from 'react';
+import React, { memo } from 'react';
 
 import TitleShop from './Title';
 import InfoShop from './Info';
@@ -35,4 +35,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default BoxShopInfo;
+export default memo(BoxShopInfo);

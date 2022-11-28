@@ -19,4 +19,4 @@ const BoxShop = ({ avatar, nameShop, navigation }) => {
     );
 };
 
-export default BoxShop;
+export default React.memo(BoxShop);

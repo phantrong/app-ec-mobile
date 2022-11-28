@@ -1,21 +1,19 @@
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 import React, { useState, useEffect } from 'react';
 
-import { Header, MenuUser, Footer, Buttom, ViewPsition, BoxBottomScreen } from '../../component';
+import { Footer, Buttom, ViewPsition, BoxBottomScreen } from '../../component';
 import { ImageIcon } from '../../../components';
 
 import Check from './Check';
 import BoxShop from './BoxShop';
 import BoxProduct from './BoxProduct';
 
-import { Colors, Icons, Images } from '../../../assets';
+import { Colors, Icons } from '../../../assets';
 import Data from '../../../assets/Data';
-import { set } from 'react-native-reanimated';
 
 const myCart = Data.myCart;
 
 const HomeShoppingCart = ({ navigation }) => {
-    const [closeMenu, setCloseMenu] = useState(false);
     const [cart, setCart] = useState(myCart);
     const [priceProduct, setPriceProduct] = useState([]);
     const [totalAmount, setTotalAmount] = useState(0);
@@ -27,14 +25,6 @@ const HomeShoppingCart = ({ navigation }) => {
     console.log(listCartId, 'cart');
     console.log(isChecked, 'check');
     console.log(priceProduct);
-
-    const handelClose = (close) => {
-        setCloseMenu(close);
-    };
-
-    const handelOpenMenu = (open) => {
-        setCloseMenu(open);
-    };
 
     useEffect(() => {
         setCart(myCart);
@@ -64,18 +54,18 @@ const HomeShoppingCart = ({ navigation }) => {
         }
     };
 
-    const calculatePrice = (id, totalProduct) => {
-        const isPrice = priceProduct.includes([priceProduct.id] === id);
-        const isCheck = isChecked.includes(id);
+    // const calculatePrice = (id, totalProduct) => {
+    //     const isPrice = priceProduct.includes([priceProduct.id] === id);
+    //     const isCheck = isChecked.includes(id);
 
-        setPriceProduct([...priceProduct, { id: id, totalProduct: totalProduct }]);
+    //     setPriceProduct([...priceProduct, { id: id, totalProduct: totalProduct }]);
 
-        if (isCheck) {
-            setTotalAmount(totalAmount + totalProduct);
-        } else {
-            setTotalAmount(totalAmount - totalProduct);
-        }
-    };
+    //     if (isCheck) {
+    //         setTotalAmount(totalAmount + totalProduct);
+    //     } else {
+    //         setTotalAmount(totalAmount - totalProduct);
+    //     }
+    // };
 
     const handleClick = (id, cartId, checked) => {
         setIsChecked([...isChecked, id]);
@@ -89,8 +79,6 @@ const HomeShoppingCart = ({ navigation }) => {
 
     return (
         <ViewPsition>
-            <Header navigation={navigation} handelOpenMenu={handelOpenMenu} />
-            {closeMenu ? <MenuUser handelClose={handelClose} navigation={navigation} /> : null}
             {cart ? (
                 <BoxBottomScreen addressBox navigation={navigation} configBoxAddress={'RepairAddress'}>
                     <View style={styles.checkAll}>
@@ -162,7 +150,7 @@ const HomeShoppingCart = ({ navigation }) => {
                                         }
                                         navigation={navigation}
                                         navigateConfig={'DetailProduct'}
-                                        calculatePrice={calculatePrice}
+                                        // calculatePrice={calculatePrice}
                                     />
                                     <TouchableOpacity
                                         style={[

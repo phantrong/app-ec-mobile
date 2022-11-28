@@ -31,4 +31,4 @@ const BoxBuying = () => {
     );
 };
 
-export default BoxBuying;
+export default React.memo(BoxBuying);

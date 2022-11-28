@@ -45,7 +45,7 @@ const menuItems = [
     {
         title: 'logout',
         icon: icons.LOGOUT,
-        // config: 'ChatList',
+        config: 'LoginScreen',
     },
 ];
 

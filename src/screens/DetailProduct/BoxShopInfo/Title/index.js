@@ -63,4 +63,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default TitleShop;
+export default React.memo(TitleShop);

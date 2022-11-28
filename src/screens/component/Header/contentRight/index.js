@@ -2,14 +2,12 @@ import { View, StyleSheet } from 'react-native';
 import React from 'react';
 
 import { ImageIcon } from '../../../../components';
-// import MenuUser from '../../MenuUser';
 import icons from '../../../../assets/icon';
 
-const ContentRight = ({ handelOpenMenu, navigation }) => {
+const ContentRight = ({ handelOpenMenu, openSearch, navigation }) => {
     return (
         <View style={styles.wrapper}>
-            {/* <MenuUser /> */}
-            <ImageIcon name={icons.SEARCH_NORMAL} pressable />
+            <ImageIcon name={icons.SEARCH_NORMAL} pressable onPress={() => openSearch(true)} />
             <ImageIcon
                 name={icons.SHOPPING_CART}
                 pressable
@@ -30,6 +28,17 @@ const styles = StyleSheet.create({
         marginRight: 10,
 
         height: '100%',
+    },
+
+    searchBox: {
+        position: 'absolute',
+        width: '100%',
+        top: -100,
+        right: -200,
+        bottom: 0,
+        left: 0,
+        backgroundColor: 'red',
+        zIndex: 3000,
     },
 });
 

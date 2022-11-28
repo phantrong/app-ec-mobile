@@ -23,4 +23,4 @@ const Label = ({ name, backgroundColor, nameColor, style }) => {
     );
 };
 
-export default Label;
+export default React.memo(Label);

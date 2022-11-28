@@ -50,4 +50,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Buttom;
+export default React.memo(Buttom);

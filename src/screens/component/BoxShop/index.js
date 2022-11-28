@@ -1,5 +1,5 @@
 import { View, Text } from 'react-native';
-import React from 'react';
+import React, { memo } from 'react';
 
 import { ImageIcon, Avatar } from '../../../components';
 import styles from './styles';
@@ -23,4 +23,4 @@ const BoxShop = ({ nameShop, describe, image, address }) => {
     );
 };
 
-export default BoxShop;
+export default memo(BoxShop);

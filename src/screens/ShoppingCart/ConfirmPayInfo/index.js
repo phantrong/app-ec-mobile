@@ -1,11 +1,11 @@
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import React, { useState } from 'react';
 
-import { Header, MenuUser, ViewPsition, Buttom, GoBack, BoxBottomScreen } from '../../component';
+import { ViewPsition, Buttom, GoBack, BoxBottomScreen } from '../../component';
 import BoxShop from '../HomeShoppingCart/BoxShop';
 import BoxProduct from '../HomeShoppingCart/BoxProduct';
 
-import { Colors, Icons, Images } from '../../../assets';
+import { Colors, Images } from '../../../assets';
 
 const productOrders = [
     {
@@ -37,24 +37,14 @@ const productOrders = [
 ];
 
 const ConfirmPayInfo = ({ navigation }) => {
-    const [closeMenu, setCloseMenu] = useState(false);
     const [totalPrice, setTotalPrice] = useState(0);
-
-    const handelClose = (close) => {
-        setCloseMenu(close);
-    };
-
-    const handelOpenMenu = (open) => {
-        setCloseMenu(open);
-    };
 
     const calculatePrice = (quantity, price) => {
         setTotalPrice(totalPrice + quantity * price);
     };
+
     return (
         <ViewPsition>
-            <Header navigation={navigation} handelOpenMenu={handelOpenMenu} />
-            {closeMenu ? <MenuUser handelClose={handelClose} navigation={navigation} /> : null}
             <BoxBottomScreen addressBox navigation={navigation} configBoxAddress={'RepairAddress'}>
                 <Text style={{ fontSize: 16, fontWeight: '700' }}>
                     Total: <Text style={{ color: Colors.CS_ORANGE2 }}>{totalPrice}</Text>
