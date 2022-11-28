@@ -15,7 +15,7 @@ export default {
     CS_BLACK: '#000000',
     CS_GRAY: '#9a9a9a',
     TRANSPARENT: 'transparent',
-    CS_GREEN: '#d3d399',
+    CS_GREEN: '#FFFFFF',
     CS_BUTTON: '#5E7AA9',
     CS_TITLE: '#7A6A56',
     CS_TEXT: '#3B3B3B',
@@ -26,4 +26,5 @@ export default {
     CS_BACK_GROUND_F6: '#F6F6F6',
     CS_BORDER_D6: '##D6D6D6',
     CS_ORANGE2: '#E2582A',
+    CS_BLOWN: '#7A6A56',
 };

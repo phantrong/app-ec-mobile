@@ -4,7 +4,7 @@ import Box from '../Box';
 import { Colors, Images } from '../../assets';
 import ImageIcon from '../ImageIcon';
 import { normalize } from '../../configs/commons';
-import { StyleSheet } from 'react-native';
+import { ActivityIndicator, StyleSheet } from 'react-native';
 
 const ButtonCustomize = ({
     onPress,
@@ -25,6 +25,7 @@ const ButtonCustomize = ({
     tintColorLeft,
     tintColorRight,
     normal = false,
+    isLoading = false,
 }) => {
     const backgroundColor = normal ? Colors.TRANSPARENT : Colors.CS_WHITE;
     const color = normal ? Colors.TRANSPARENT : Colors.TRANSPARENT;
@@ -69,6 +70,7 @@ const ButtonCustomize = ({
                     {label}
                 </Text>
                 <Box />
+                <ActivityIndicator style={{ paddingLeft: 10 }} animating={isLoading} />
             </Box>
             <Box width={'15%'} justify="center" align="center">
                 {rightItem ? (

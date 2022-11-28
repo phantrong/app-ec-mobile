@@ -8,7 +8,7 @@ import styles from './styles';
 const width = Dimensions.get('screen').width;
 const PADDING = normalize(20);
 const WIDTH_LINE = width / 2 - 2 * PADDING;
-const HandleLogin = ({ handleSubmit, onSubmit, onForgotPassword, onShopLogin, onRegister, loadingButtonSubmit }) => {
+const HandleLogin = ({ handleSubmit, onSubmit, onForgotPassword, onLoginGoogle, onRegister }) => {
     return (
         <>
             <Text
@@ -28,7 +28,6 @@ const HandleLogin = ({ handleSubmit, onSubmit, onForgotPassword, onShopLogin, on
                 styleLabel={styles.buttonLogin}
                 tintColorRight="white"
                 onPress={handleSubmit(onSubmit)}
-                isLoading={loadingButtonSubmit}
             />
             <Box margin={[15, 0]} flexDirection="row" align="center" flex={1} justify="space-between">
                 <Box height={0.5} background="#EFEEF0" width={WIDTH_LINE} />
@@ -38,13 +37,15 @@ const HandleLogin = ({ handleSubmit, onSubmit, onForgotPassword, onShopLogin, on
                 <Box height={0.5} background="#EFEEF0" width={WIDTH_LINE} />
             </Box>
             <ButtonCustomize
-                label={'Login for shop'}
-                background={Colors.CS_BLOWN}
-                styleLabel={{ color: Colors.CS_WHITE }}
-                tintColorRight="white"
+                label={'Login with google'}
+                background={Colors.CS_WHITE}
+                styleLabel={{ color: Colors.CS_BLACK }}
+                tintColorRight={Colors.CS_BLACK}
+                LeftItem={true}
+                leftImage={Images.GOOGLE}
                 leftSizeImage={24}
                 tintColorLeft={false}
-                onPress={onShopLogin}
+                onPress={onLoginGoogle}
             />
             <Text
                 margin={[30, 0, 0, 0]}

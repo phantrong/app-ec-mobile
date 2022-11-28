@@ -24,7 +24,7 @@ const FirstStack = createStackNavigator();
 const Router = () => {
     return (
         // <MenuDrawer />
-        <FirstStack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
+        <FirstStack.Navigator initialRouteName="LoginScreen" screenOptions={{ headerShown: false }}>
             <FirstStack.Screen key={1} name="LoginScreen" component={LoginScreen} />
             <FirstStack.Screen key={2} name="RegisterScreen" component={RegisterScreen} />
             <FirstStack.Screen key={3} name="Home" component={HomeScreen} />
