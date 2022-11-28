@@ -50,7 +50,7 @@ const ImageIcon = ({ name, style, pressable, margin, padding, boxProps, onPress,
     );
 };
 
-export default ImageIcon;
+export default React.memo(ImageIcon);
 
 const styles = StyleSheet.create({
     defaultStyle: { height: normalize(24), width: normalize(24) },

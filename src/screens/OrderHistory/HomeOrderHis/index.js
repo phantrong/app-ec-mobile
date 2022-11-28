@@ -1,27 +1,15 @@
-import { View, Text, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
-import React, { useState } from 'react';
+import { Text, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
+import React from 'react';
 
 import { Section } from '../../../components';
-import { Header, MenuUser, Footer, BoxCheck, ViewPsition } from '../../component';
+import { Footer, BoxCheck, ViewPsition } from '../../component';
 
 import ItemOrderHis from './Item';
 import { Colors } from '../../../assets';
 
 const HomeOrderHis = ({ navigation }) => {
-    const [closeMenu, setCloseMenu] = useState(false);
-
-    const handelClose = (close) => {
-        setCloseMenu(close);
-    };
-
-    const handelOpenMenu = (open) => {
-        setCloseMenu(open);
-    };
     return (
         <ViewPsition>
-            <Header navigation={navigation} handelOpenMenu={handelOpenMenu} />
-            {closeMenu ? <MenuUser handelClose={handelClose} navigation={navigation} /> : null}
-
             <ScrollView>
                 <Text style={styles.title}>Lịch sử đặt hàng</Text>
 

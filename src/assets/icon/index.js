@@ -3,6 +3,7 @@ export default {
     ARROW_LEFT: require('./arrow-left.png'),
     ARROW_RIGHT: require('./arrow-right.png'),
     HEART: require('./heart.png'),
+    HEART_RED: require('./heart-red.png'),
     SEARCH_NORMAL: require('./search-normal.png'),
     SHOPPING_CART: require('./shopping-cart.png'),
     USER: require('./user.png'),

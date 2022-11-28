@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 
 import Checked from './Checked';
 
@@ -55,4 +55,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default BoxCheck;
+export default memo(BoxCheck);

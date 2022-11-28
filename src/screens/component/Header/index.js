@@ -1,13 +1,12 @@
 import { Text, TouchableOpacity } from 'react-native';
-import React from 'react';
+import React, { memo } from 'react';
 
 import { HeaderBar } from '../../../components';
-// import MenuUser from '../MenuUser';
 
 import ContentRight from './contentRight';
-const Header = ({ navigation, handelOpenMenu }) => {
+const Header = ({ navigation, handelOpenMenu, openSearch }) => {
     const customizeRight = () => {
-        return <ContentRight handelOpenMenu={handelOpenMenu} navigation={navigation} />;
+        return <ContentRight handelOpenMenu={handelOpenMenu} openSearch={openSearch} navigation={navigation} />;
     };
 
     const contentLeft = () => {
@@ -20,4 +19,4 @@ const Header = ({ navigation, handelOpenMenu }) => {
     return <HeaderBar componentLeft={contentLeft} title={null} componentRight={customizeRight} />;
 };
 
-export default Header;
+export default memo(Header);

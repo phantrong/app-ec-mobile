@@ -1,7 +1,7 @@
 import { View, Text, ScrollView, StyleSheet } from 'react-native';
 import React, { useState } from 'react';
 
-import { Header, MenuUser, GoBack, ViewPsition, BoxBottomScreen } from '../../component';
+import { GoBack, ViewPsition, BoxBottomScreen } from '../../component';
 import { Colors, Images } from '../../../assets';
 
 import BoxShop from '../../ShoppingCart/HomeShoppingCart/BoxShop';
@@ -38,16 +38,7 @@ const productOrders = [
 ];
 
 const ProductOrderHis = ({ navigation }) => {
-    const [closeMenu, setCloseMenu] = useState(false);
     const [totalPrice, setTotalPrice] = useState(0);
-
-    const handelClose = (close) => {
-        setCloseMenu(close);
-    };
-
-    const handelOpenMenu = (open) => {
-        setCloseMenu(open);
-    };
 
     const calculatePrice = (quantity, price) => {
         setTotalPrice(totalPrice + quantity * price);
@@ -59,8 +50,6 @@ const ProductOrderHis = ({ navigation }) => {
                     Total: <Text style={{ color: Colors.CS_ORANGE2 }}>{totalPrice}</Text>
                 </Text>
             </BoxBottomScreen>
-            <Header navigation={navigation} handelOpenMenu={handelOpenMenu} />
-            {closeMenu ? <MenuUser handelClose={handelClose} navigation={navigation} /> : null}
 
             <ScrollView style={{ paddingHorizontal: 10, paddingTop: 20 }}>
                 <GoBack

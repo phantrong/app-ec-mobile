@@ -1,5 +1,5 @@
-import { View, StyleSheet, TouchableOpacity } from 'react-native';
-import React, { useState } from 'react';
+import { View, StyleSheet, TouchableOpacity, Animated } from 'react-native';
+import React, { useState, memo, useCallback, useRef, useEffect } from 'react';
 
 import Item from './Item/Item';
 import { ImageIcon } from '../../../components';
@@ -8,20 +8,31 @@ import { Colors, Icons } from '../../../assets';
 
 import Data from '../../../assets/Data';
 import colors from '../../../assets/colors';
+import { Easing } from 'react-native-reanimated';
 
 const menuItems = Data.menuItems;
 
-const MenuUser = ({ handelClose, navigation }) => {
+const MenuUser = ({ handelClose, navigation, isOpen }) => {
     const [item, setItem] = useState(0);
-    // const [close, setClose] = useState(true)
 
-    const handelClick = (index, name, config) => {
+    const animation = useRef(new Animated.Value(700)).current;
+
+    useEffect(() => {
+        Animated.timing(animation, {
+            toValue: 0,
+            duration: 300,
+            useNativeDriver: false,
+            easing: Easing.sin,
+        }).start();
+    }, []);
+
+    const handelClick = useCallback((index, name, config) => {
         setItem(index);
         navigation.navigate(config);
-    };
+    }, []);
 
     return (
-        <View style={styles.wrapper}>
+        <Animated.View style={[{ left: isOpen && animation }, styles.wrapper]}>
             <View style={styles.menu}>
                 <ImageIcon
                     name={Icons.CLOSE}
@@ -47,12 +58,11 @@ const MenuUser = ({ handelClose, navigation }) => {
                             icon={menuItem.icon}
                             itemStyle={item === index && styles.itemStyle}
                             iconColor={item === index && Colors.CS_WHITE}
-                            navigation={navigation}
                         />
                     </TouchableOpacity>
                 ))}
             </View>
-        </View>
+        </Animated.View>
     );
 };
 
@@ -62,7 +72,6 @@ const styles = StyleSheet.create({
         top: 0,
         bottom: 0,
         right: 0,
-        left: 0,
         backgroundColor: Colors.CS_BACK_GROUND_OPACITY,
         zIndex: 2000,
     },
@@ -79,4 +88,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default MenuUser;
+export default memo(MenuUser);

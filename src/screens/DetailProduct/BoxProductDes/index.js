@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet } from 'react-native';
-import React from 'react';
+import React, { memo } from 'react';
 
 import Item from './Item';
 import { Colors } from '../../../assets';
@@ -38,4 +38,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default BoxProductDes;
+export default memo(BoxProductDes);

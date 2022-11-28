@@ -63,4 +63,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default BoxOrder;
+export default React.memo(BoxOrder);

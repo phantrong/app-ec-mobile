@@ -1,24 +1,14 @@
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
-import React, { useState, useCallback } from 'react';
+import { View, StyleSheet, ScrollView } from 'react-native';
+import React, { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
-import { Header, MenuUser, ViewPsition, GoBack } from '../../component';
+import { ViewPsition, GoBack } from '../../component';
 import { InputItem, ButtonCustomize } from '../../../components';
 
-import { Colors, Icons } from '../../../assets';
+import { Colors } from '../../../assets';
 
 const EditAddress = ({ navigation }) => {
-    const [closeMenu, setCloseMenu] = useState(false);
-
-    const handelClose = (close) => {
-        setCloseMenu(close);
-    };
-
-    const handelOpenMenu = (open) => {
-        setCloseMenu(open);
-    };
-
     const {
         control,
         handleSubmit,
@@ -38,8 +28,6 @@ const EditAddress = ({ navigation }) => {
 
     return (
         <ViewPsition>
-            <Header navigation={navigation} handelOpenMenu={handelOpenMenu} />
-            {closeMenu ? <MenuUser handelClose={handelClose} navigation={navigation} /> : null}
             <ScrollView style={{ paddingHorizontal: 10, paddingTop: 20 }}>
                 <GoBack
                     title={'Quay lại'}
@@ -78,7 +66,7 @@ const EditAddress = ({ navigation }) => {
                         <InputItem
                             control={control}
                             name="address"
-                            errors={errors.fullName}
+                            errors={errors.address}
                             placeholder="Nhập địa chỉ"
                             label="Địa chỉ nhận hàng"
                             margin={[20, 0, 0, 0]}

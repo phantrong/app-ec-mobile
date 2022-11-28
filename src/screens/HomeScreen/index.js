@@ -2,26 +2,14 @@ import { View, ScrollView } from 'react-native';
 import React, { useState } from 'react';
 
 import { Section } from '../../components';
-import { Header, TitleSection, BoxProduct, BoxShop, MenuUser, Footer } from '../component';
+import { TitleSection, BoxProduct, BoxShop, Footer } from '../component';
 import NavBarHome from './NavbarItem';
 import { Images } from '../../assets';
+import HeaderLayout from '../HeaderLayout';
 
 const HomeScreen = ({ navigation }) => {
-    const [closeMenu, setCloseMenu] = useState(false);
-
-    const handelClose = (close) => {
-        setCloseMenu(close);
-    };
-
-    const handelOpenMenu = (open) => {
-        setCloseMenu(open);
-    };
-
     return (
-        <View>
-            <Header navigation={navigation} handelOpenMenu={handelOpenMenu} />
-            {closeMenu ? <MenuUser handelClose={handelClose} navigation={navigation} /> : null}
-
+        <HeaderLayout navigation={navigation}>
             <NavBarHome items={['new products', 'popular item', 'store list']} />
 
             <ScrollView>
@@ -74,7 +62,7 @@ const HomeScreen = ({ navigation }) => {
                 <Footer />
             </ScrollView>
             {/* <Text>Home hello world</Text> */}
-        </View>
+        </HeaderLayout>
     );
 };
 

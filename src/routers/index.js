@@ -17,25 +17,9 @@ import OrderHistory from '../screens/OrderHistory';
 import Setting from '../screens/Setting';
 import ShoppingCart from '../screens/ShoppingCart';
 import SuccessPurScreen from '../screens/SuccessPurScreen/index';
+import SearchScreen from '../screens/SearchScreen';
 
 const FirstStack = createStackNavigator();
-// const Drawer = createDrawerNavigator();
-
-// const MenuDrawer = () => {
-//     return (
-//         <Drawer.Navigator initialRouteName="Home">
-//             <Drawer.Screen name="Home" component={HomeScreen} />
-//             <Drawer.Screen name="Profile" component={Profile} />
-//             <Drawer.Screen name="DetailProduct" component={DetailProduct} />
-//             <Drawer.Screen name="CouManagement" component={CouManagement} />
-//             <Drawer.Screen name="DeliveryAddress" component={DeliveryAddress} />
-//             <Drawer.Screen name="IntProduct" component={IntProduct} />
-//             <Drawer.Screen name="OrderHistory" component={OrderHistory} />
-//             <Drawer.Screen name="Setting" component={Setting} />
-//             <Drawer.Screen name="LoginScreen" component={LoginScreen} />
-//         </Drawer.Navigator>
-//     );
-// };
 
 const Router = () => {
     return (
@@ -54,6 +38,7 @@ const Router = () => {
             <FirstStack.Screen key={10} name="Setting" component={Setting} />
             <FirstStack.Screen key={11} name="ShoppingCart" component={ShoppingCart} />
             <FirstStack.Screen key={12} name="SuccessPurScreen" component={SuccessPurScreen} />
+            <FirstStack.Screen key={13} name="SearchScreen" component={SearchScreen} />
         </FirstStack.Navigator>
     );
 };

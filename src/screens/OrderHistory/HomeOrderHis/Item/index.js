@@ -100,4 +100,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default ItemOrderHis;
+export default React.memo(ItemOrderHis);

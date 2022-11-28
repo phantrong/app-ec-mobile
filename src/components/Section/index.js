@@ -1,7 +1,7 @@
 import { View, StyleSheet } from 'react-native';
 import React from 'react';
 
-const Secction = ({ children, direction, style }) => {
+const Section = ({ children, direction, style }) => {
     return <View style={[styles.wrapper, { flexDirection: direction }, style]}>{children}</View>;
 };
 
@@ -14,4 +14,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Secction;
+export default Section;

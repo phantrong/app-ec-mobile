@@ -26,4 +26,4 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
 });
-export default InfoShop;
+export default React.memo(InfoShop);

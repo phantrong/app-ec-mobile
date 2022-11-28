@@ -25,4 +25,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default GoBack;
+export default React.memo(GoBack);

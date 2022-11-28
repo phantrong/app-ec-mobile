@@ -1,5 +1,5 @@
 import { View, Image, Text, StyleSheet, ScrollView } from 'react-native';
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 
 import { Colors } from '../../../assets';
 
@@ -74,4 +74,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default ImgProduct;
+export default memo(ImgProduct);
