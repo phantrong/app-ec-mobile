@@ -6,6 +6,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 // import IntroScreen from '../screens/IntroScreen/index';
 import LoginScreen from '../screens/LoginScreen';
 import RegisterScreen from '../screens/RegisterScreen';
+import ShopLoginScreen from '../screens/ShopLoginScreen';
 import HomeScreen from '../screens/HomeScreen';
 import DetailProduct from '../screens/DetailProduct';
 import Profile from '../screens/Profile';
@@ -26,6 +27,7 @@ const Router = () => {
         // <MenuDrawer />
         <FirstStack.Navigator initialRouteName="LoginScreen" screenOptions={{ headerShown: false }}>
             <FirstStack.Screen key={1} name="LoginScreen" component={LoginScreen} />
+            <FirstStack.Screen key={13} name="ShopLoginScreen" component={ShopLoginScreen} />
             <FirstStack.Screen key={2} name="RegisterScreen" component={RegisterScreen} />
             <FirstStack.Screen key={3} name="Home" component={HomeScreen} />
             <FirstStack.Screen key={3} name="DetailProduct" component={DetailProduct} />

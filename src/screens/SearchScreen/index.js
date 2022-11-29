@@ -13,7 +13,7 @@ const SearchScreen = ({ navigation }) => {
     const [listProductSearch, setListProductSearch] = useState([]);
 
     return (
-        <HeaderLayout>
+        <HeaderLayout navigation={navigation}>
             <BoxSearch />
             <ScrollView style={styles.wrapper}>
                 <Text style={styles.title}>Sản Phẩm</Text>

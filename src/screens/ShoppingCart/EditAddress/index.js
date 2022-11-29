@@ -74,6 +74,8 @@ const EditAddress = ({ navigation }) => {
                         <ButtonCustomize
                             margin={[40, 0, 0, 0]}
                             label={'Hoàn Thành'}
+                            LeftItem={true}
+                            rightItem={false}
                             background={Colors.CS_TITLE}
                             styleLabel={styles.buttonLaybel}
                             onPress={handleSubmit(onSubmit)}

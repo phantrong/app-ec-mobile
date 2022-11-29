@@ -48,8 +48,8 @@ const ButtonCustomize = ({
             margin={margin}
             onPress={onPress}
         >
-            <Box width={LeftItem ? null : '15%'} justify="center" align="center" />
-            <Box justify="center" align="center" flexDirection="row">
+            <Box width={LeftItem ? '0%' : '15%'} justify="center" align="center" />
+            <Box justify="center" align="center" alignSelf="center" flexDirection="row">
                 {LeftItem ? (
                     <ImageIcon
                         name={leftImage}
@@ -72,7 +72,7 @@ const ButtonCustomize = ({
                 <Box />
                 <ActivityIndicator style={{ paddingLeft: 10 }} animating={isLoading} />
             </Box>
-            {LeftItem && !rightItem ? null : (
+            {rightItem ? (
                 <Box width={'15%'} justify="center" align="center">
                     {rightItem ? (
                         <ImageIcon
@@ -84,7 +84,7 @@ const ButtonCustomize = ({
                         />
                     ) : null}
                 </Box>
-            )}
+            ) : null}
         </Box>
     );
 };

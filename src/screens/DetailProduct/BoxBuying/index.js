@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { ImageIcon } from '../../../components';
 import { Buttom, BoxBottomScreen } from '../../component';
 import { Colors, Icons } from '../../../assets';
 
-const BoxBuying = () => {
+const BoxBuying = ({ navigation, isLike }) => {
+    const [isLikePr, setIsLikePr] = useState(isLike);
+
+    console.log(isLikePr);
+
     return (
         <BoxBottomScreen>
             <Buttom
@@ -26,7 +30,11 @@ const BoxBuying = () => {
                 widthButtom={150}
                 heightButtom={40}
             />
-            <ImageIcon name={Icons.HEART} size={28} pressable />
+            {isLikePr ? (
+                <ImageIcon name={Icons.HEART_RED} margin={[0, 10, 0, 0]} pressable onPress={() => setIsLikePr(false)} />
+            ) : (
+                <ImageIcon name={Icons.HEART} margin={[0, 10, 0, 0]} pressable onPress={() => setIsLikePr(true)} />
+            )}
         </BoxBottomScreen>
     );
 };

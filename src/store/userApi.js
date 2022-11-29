@@ -7,7 +7,7 @@ export const userApi = createApi({
 
     // Cấu hình chung cho tất cả request
     baseQuery: fetchBaseQuery({
-        baseUrl: API_URL,
+        baseUrl: API_URL || 'http://192.168.1.4:8000/api/',
 
         prepareHeaders: (headers, { getState }) => {
             // getState() giúp lấy ra toàn bộ state trong store

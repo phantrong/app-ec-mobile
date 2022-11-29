@@ -27,15 +27,15 @@ const styles = StyleSheet.create({
         borderRadius: 10,
     },
 
-    btnLoginGoogle: {
-        borderRadius: 10,
-        height: 45,
+    // btnLoginGoogle: {
+    //     borderRadius: 10,
+    //     height: 45,
 
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderWidth: 1,
-        borderColor: Colors.CS_BORDER_D6,
-    },
+    //     flexDirection: 'row',
+    //     justifyContent: 'center',
+    //     alignItems: 'center',
+    //     borderWidth: 1,
+    //     borderColor: Colors.CS_BORDER_D6,
+    // },
 });
 export default styles;
