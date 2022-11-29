@@ -7,10 +7,11 @@ const HandleRegister = ({ handleSubmit, onSubmit }) => {
         <>
             <ButtonCustomize
                 margin={[40, 0, 0, 0]}
-                label={'Register'}
-                background="#6A3EA1"
-                styleLabel={styles.buttonLogin}
-                tintColorRight="white"
+                label={'Đăng ký'}
+                background={Colors.CS_TITLE}
+                styleLabel={styles.labelLogin}
+                style={styles.btnLogin}
+                // tintColorRight="white"
                 onPress={handleSubmit(onSubmit)}
             />
         </>

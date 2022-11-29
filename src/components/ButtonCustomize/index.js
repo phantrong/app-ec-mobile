@@ -72,18 +72,19 @@ const ButtonCustomize = ({
                 <Box />
                 <ActivityIndicator style={{ paddingLeft: 10 }} animating={isLoading} />
             </Box>
-            <Box width={'15%'} justify="center" align="center">
-                {rightItem ? (
-                    <ImageIcon
-                        name={rightImage}
-                        size={rightSizeImage ?? 14}
-                        margin={[0, 5]}
-                        style={styleImageRight}
-                        tintColor={tintColorRight ?? color}
-                    />
-                ) : null}
-                <Box />
-            </Box>
+            {LeftItem && !rightItem ? null : (
+                <Box width={'15%'} justify="center" align="center">
+                    {rightItem ? (
+                        <ImageIcon
+                            name={rightImage}
+                            size={rightSizeImage ?? 14}
+                            margin={[0, 5]}
+                            style={styleImageRight}
+                            tintColor={tintColorRight ?? color}
+                        />
+                    ) : null}
+                </Box>
+            )}
         </Box>
     );
 };

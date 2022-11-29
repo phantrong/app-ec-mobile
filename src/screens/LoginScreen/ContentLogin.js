@@ -3,7 +3,7 @@ import { getStatusBarHeight } from 'react-native-iphone-x-helper';
 import { InputItem, Text } from '../../components';
 import HandleLogin from './HandleLogin';
 import { isEqual } from 'react-fast-compare';
-import { Button } from 'react-native';
+import { Colors } from '../../assets';
 
 const ContentLogin = ({
     control,
@@ -17,8 +17,8 @@ const ContentLogin = ({
 }) => {
     return (
         <>
-            <Text margin={[getStatusBarHeight() + 100, 0, 0, 0]} size={32} color={'#180E25'} fontWeight="700">
-                Login
+            <Text margin={[getStatusBarHeight() + 100, 0, 0, 0]} size={32} color={Colors.CS_TEXT} fontWeight="700">
+                Đăng Nhập
             </Text>
             <Text margin={[15, 0, 0, 0]} size={15} color={'#827D89'} fontWeight="400">
                 Login for user
@@ -27,8 +27,8 @@ const ContentLogin = ({
                 control={control}
                 name="email"
                 errors={errors.email}
-                placeholder="Email Address"
-                label="Email Address"
+                placeholder="Nhập email ..."
+                label="Email"
                 margin={[20, 0, 0, 0]}
             />
             <InputItem
@@ -36,7 +36,8 @@ const ContentLogin = ({
                 name="password"
                 security={true}
                 errors={errors.password}
-                label="Password"
+                placeholder="Nhập mật khẩu ..."
+                label="Mật khẩu"
                 margin={[20, 0, 0, 0]}
             />
             <HandleLogin

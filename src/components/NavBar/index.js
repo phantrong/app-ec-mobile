@@ -21,6 +21,7 @@ const NavBar = React.memo(
         componentCenter,
         title,
         handleLeftBack,
+        heightBoxCus,
         leftIcon = true,
         label = 'Back',
         border = true,
@@ -32,7 +33,7 @@ const NavBar = React.memo(
         return (
             <Box
                 width={'100%'}
-                height={getDefaultHeaderHeight()}
+                height={heightBoxCus ? heightBoxCus : getDefaultHeaderHeight()}
                 align="center"
                 flexDirection="row"
                 background={Colors.TRANSPARENT}

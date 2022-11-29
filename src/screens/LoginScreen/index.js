@@ -46,8 +46,8 @@ const LoginScreen = () => {
     const onRegister = useCallback(() => navigation.navigate('RegisterScreen'), [navigation]);
     const onShopLogin = useCallback(() => navigation.navigate('RegisterScreen'), [navigation]);
     return (
-        <Box background={Colors.CS_GREEN} width="100%" height="100%" flex={1}>
-            <NavBar leftIcon label="Back to Home" border={true} />
+        <Box background={Colors.CS_WHITE} width="100%" height="100%" flex={1}>
+            {/* <NavBar leftIcon label="Back to Home" border={true} /> */}
             <KeyboardAwareScrollView
                 enableOnAndroid
                 bounces={false}

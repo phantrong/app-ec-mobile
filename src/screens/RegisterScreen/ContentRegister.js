@@ -2,29 +2,31 @@ import React from 'react';
 import { InputItem, Text } from '../../components';
 import { isEqual } from 'react-fast-compare';
 import HandleRegister from './HandleRegister';
+import { Colors } from '../../assets';
 
 const ContentRegister = ({ control, errors, handleSubmit, onSubmit, onForgotPassword, onLoginGoogle, onRegister }) => {
     return (
         <>
             <Text margin={[10, 0, 0, 0]} size={32} color={'#180E25'} fontWeight="700">
-                Register
+                Đăng Ký
             </Text>
-            <Text margin={[15, 0, 0, 0]} size={15} color={'#827D89'} fontWeight="400">
+            {/* <Text margin={[15, 0, 0, 0]} size={15} color={'#827D89'} fontWeight="400">
                 And start taking notes
-            </Text>
+            </Text> */}
             <InputItem
                 control={control}
                 name="fullName"
                 errors={errors.fullName}
-                placeholder="cs_tech@gmail.com"
-                label="Full Name"
+                placeholder="Nhập tên của bạn ..."
+                label="Tên của bạn"
                 margin={[20, 0, 0, 0]}
             />
             <InputItem
                 control={control}
                 name="email"
                 errors={errors.email}
-                label="Email Address"
+                placeholder={'Nhập email ...'}
+                label="Địa chỉ Email"
                 margin={[20, 0, 0, 0]}
             />
             <InputItem
@@ -32,7 +34,8 @@ const ContentRegister = ({ control, errors, handleSubmit, onSubmit, onForgotPass
                 name="password"
                 security={true}
                 errors={errors.password}
-                label="Password"
+                placeholder={'Nhập mật khẩu ...'}
+                label="Mật khẩu"
                 margin={[20, 0, 0, 0]}
             />
             <InputItem
@@ -40,7 +43,8 @@ const ContentRegister = ({ control, errors, handleSubmit, onSubmit, onForgotPass
                 name="rePassword"
                 security={true}
                 errors={errors.rePassword}
-                label="Re Password"
+                placeholder={'Nhập lại mật khẩu ...'}
+                label="Xác nhận mật khẩu"
                 margin={[20, 0, 0, 0]}
             />
             <HandleRegister
