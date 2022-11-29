@@ -20,7 +20,7 @@ const colors = ['yellow', 'green', 'blue'];
 const DetailProduct = ({ navigation }) => {
     return (
         <HeaderLayout navigation={navigation}>
-            <BoxBuying />
+            <BoxBuying isLike />
             <ScrollView>
                 <BoxOrder
                     images={images}

@@ -18,10 +18,11 @@ const Profile = () => {
 
     return (
         <View>
-            <Text>{profile?.name}</Text>
-            <Text>{profile?.email}</Text>
-            <Text>{profile?.phone}</Text>
-            <Text>{profile?.birthday}</Text>
+            <Text>{profile.data.data.name}</Text>
+            <Text>{profile?.data?.data?.email}</Text>
+            <Text>{profile?.data?.data?.phone}</Text>
+            <Text>{profile?.data?.data?.birthday}</Text>
+            <Text>{profile?.data?.data?.created_at}</Text>
         </View>
     );
 };

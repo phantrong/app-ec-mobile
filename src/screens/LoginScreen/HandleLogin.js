@@ -1,8 +1,8 @@
 import React from 'react';
-import { Colors, Images } from '../../assets';
+import { Colors } from '../../assets';
 import { Box, ButtonCustomize, Text } from '../../components';
 import { normalize } from '../../configs/commons';
-import { Dimensions, StyleSheet } from 'react-native';
+import { Dimensions } from 'react-native';
 import styles from './styles';
 
 const width = Dimensions.get('screen').width;
@@ -16,10 +16,12 @@ const HandleLogin = ({ handleSubmit, onSubmit, onForgotPassword, onShopLogin, on
             </Text>
             <ButtonCustomize
                 margin={[40, 0, 0, 0]}
-                label={'Đăng Nhập'}
+                label={'Đăng nhập mua hàng'}
                 background={Colors.CS_TITLE}
                 styleLabel={styles.labelLogin}
                 style={styles.btn}
+                rightItem={false}
+                LeftItem={true}
                 onPress={handleSubmit(onSubmit)}
                 isLoading={loadingButtonSubmit}
             />
@@ -31,12 +33,12 @@ const HandleLogin = ({ handleSubmit, onSubmit, onForgotPassword, onShopLogin, on
                 <Box height={0.5} background="#EFEEF0" width={WIDTH_LINE} />
             </Box>
             <ButtonCustomize
-                label={'Login for shop'}
+                label={'Đăng nhập shop'}
                 background={Colors.CS_BLOWN}
-                styleLabel={{ color: Colors.CS_WHITE }}
-                tintColorRight="white"
-                leftSizeImage={24}
-                tintColorLeft={false}
+                styleLabel={styles.labelLogin}
+                style={styles.btn}
+                rightItem={false}
+                LeftItem={true}
                 onPress={onShopLogin}
             />
             <Text
@@ -57,11 +59,5 @@ const HandleLogin = ({ handleSubmit, onSubmit, onForgotPassword, onShopLogin, on
         </>
     );
 };
-
-// const styles = StyleSheet.create({
-//     forgotStyle: {
-//         color: Colors.CS_TITLE,
-//     },
-// });
 
 export default React.memo(HandleLogin);

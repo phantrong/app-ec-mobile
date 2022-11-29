@@ -1,25 +1,25 @@
 import React from 'react';
-import { View } from 'react-native';
 import { getStatusBarHeight } from 'react-native-iphone-x-helper';
 import { InputItem, Text } from '../../components';
 import HandleLogin from './HandleLogin';
 import { isEqual } from 'react-fast-compare';
+import { Colors } from '../../assets';
 
 const ContentLogin = ({ control, errors, handleSubmit, onSubmit, onForgotPassword, onLoginGoogle, onRegister }) => {
     return (
         <>
-            <Text margin={[getStatusBarHeight() + 100, 0, 0, 0]} size={32} color={'#180E25'} fontWeight="700">
-                Login
+            <Text margin={[getStatusBarHeight() + 100, 0, 0, 0]} size={32} color={Colors.CS_TEXT} fontWeight="700">
+                Đăng Nhập Shop
             </Text>
-            <Text margin={[15, 0, 0, 0]} size={15} color={'#827D89'} fontWeight="400">
-                And notes your idea
+            <Text margin={[15, 0, 0, 0]} size={15} color={Colors.CS_TEXT} fontWeight="400">
+                Đăng nhập shop của bạn
             </Text>
             <InputItem
                 control={control}
                 name="firstName"
                 errors={errors.firstName}
-                placeholder="cs_tech@gmail.com"
-                label="Email Address"
+                placeholder="Nhập Email ..."
+                label="Email Shop"
                 margin={[20, 0, 0, 0]}
             />
             <InputItem
@@ -27,7 +27,8 @@ const ContentLogin = ({ control, errors, handleSubmit, onSubmit, onForgotPasswor
                 name="lastName"
                 security={true}
                 errors={errors.lastName}
-                label="Password"
+                placeholder={'Mật khảu shop ...'}
+                label="Mật khẩu"
                 margin={[20, 0, 0, 0]}
             />
             <HandleLogin

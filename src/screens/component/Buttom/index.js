@@ -18,6 +18,7 @@ const Buttom = ({
     return (
         <ButtonCustomize
             LeftItem={icon}
+            rightItem={false}
             label={label}
             leftImage={icon}
             tintColorLeft={iconColor}

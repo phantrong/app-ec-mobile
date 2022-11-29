@@ -1,5 +1,6 @@
 import React from 'react';
 import { ButtonCustomize } from '../../components';
+import { Colors } from '../../assets';
 import styles from './styles';
 
 const HandleRegister = ({ handleSubmit, onSubmit }) => {
@@ -7,11 +8,12 @@ const HandleRegister = ({ handleSubmit, onSubmit }) => {
         <>
             <ButtonCustomize
                 margin={[40, 0, 0, 0]}
-                label={'Đăng ký'}
+                label={'Đăng Ký'}
                 background={Colors.CS_TITLE}
                 styleLabel={styles.labelLogin}
                 style={styles.btnLogin}
-                // tintColorRight="white"
+                rightItem={false}
+                LeftItem={true}
                 onPress={handleSubmit(onSubmit)}
             />
         </>

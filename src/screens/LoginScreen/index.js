@@ -5,6 +5,7 @@ import { Box, NavBar } from '../../components';
 import { useForm } from 'react-hook-form';
 import styles from './styles';
 import ContentLogin from './ContentLogin';
+
 import { useNavigation } from '@react-navigation/native';
 import { useLoginMutation } from '../../store/userApi';
 import { useSelector } from 'react-redux';
@@ -44,7 +45,7 @@ const LoginScreen = () => {
         }
     }, [loginRespone]);
     const onRegister = useCallback(() => navigation.navigate('RegisterScreen'), [navigation]);
-    const onShopLogin = useCallback(() => navigation.navigate('RegisterScreen'), [navigation]);
+    const onShopLogin = useCallback(() => navigation.navigate('ShopLoginScreen'), [navigation]);
     return (
         <Box background={Colors.CS_WHITE} width="100%" height="100%" flex={1}>
             {/* <NavBar leftIcon label="Back to Home" border={true} /> */}
