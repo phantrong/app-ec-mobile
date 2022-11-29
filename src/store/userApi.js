@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { API_URL } from 'react-native-dotenv';
 
 export const userApi = createApi({
     // Tương tự tên Slice khi tạo Slice thông thường
@@ -6,7 +7,7 @@ export const userApi = createApi({
 
     // Cấu hình chung cho tất cả request
     baseQuery: fetchBaseQuery({
-        baseUrl: 'http://192.168.0.100:8000/api/',
+        baseUrl: API_URL,
 
         prepareHeaders: (headers, { getState }) => {
             // getState() giúp lấy ra toàn bộ state trong store

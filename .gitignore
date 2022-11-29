@@ -66,3 +66,7 @@ buck-out/
 yarn.lock
 MainActivity.java
 android/app/src/main/java/com/appecmobile/MainActivity.java
+
+# custom
+.env
+package-lock.json
