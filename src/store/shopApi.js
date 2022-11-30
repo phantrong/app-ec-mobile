@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { API_URL } from 'react-native-dotenv';
+import { API_URL } from '../../config.env';
 
 export const shopApi = createApi({
     // Tương tự tên Slice khi tạo Slice thông thường
