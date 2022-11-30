@@ -20,6 +20,9 @@ import ShoppingCart from '../screens/ShoppingCart';
 import SuccessPurScreen from '../screens/SuccessPurScreen/index';
 import SearchScreen from '../screens/SearchScreen';
 import ShopProfile from '../screens/ShopFrofile';
+import ShopManageProduct from '../screens/ShopManageProduct';
+import ShopOrderHistory from '../screens/ShopOrderHistory';
+import ShopSetting from '../screens/ShopSetting';
 
 const FirstStack = createStackNavigator();
 
@@ -46,6 +49,9 @@ const Router = () => {
             {/* for shop */}
             <FirstStack.Screen key={'shop' + 1} name="ShopLoginScreen" component={ShopLoginScreen} />
             <FirstStack.Screen key={'shop' + 2} name="ShopProfile" component={ShopProfile} />
+            <FirstStack.Screen key={'shop' + 3} name="ShopManageProduct" component={ShopManageProduct} />
+            <FirstStack.Screen key={'shop' + 4} name="ShopOrderHistory" component={ShopOrderHistory} />
+            <FirstStack.Screen key={'shop' + 5} name="ShopSetting" component={ShopSetting} />
         </FirstStack.Navigator>
     );
 };

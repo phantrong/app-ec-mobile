@@ -14,6 +14,8 @@ export const userSlice = createSlice({
     initialState,
     // Reducers chứa các hàm xử lý cập nhật state
     reducers: {
+        // for logout
+        logout: () => initialState,
         updateUsername: () => {},
     },
 
@@ -38,7 +40,7 @@ export const userSlice = createSlice({
 });
 
 // Export action ra để sử dụng cho tiện.
-export const { updateUsername } = userSlice.actions;
+export const { updateUsername, logout } = userSlice.actions;
 
 // Action là 1 hàm trả về object dạng {type, payload}, chạy thử console.log(updateUsername()) để xem chi tiết
 

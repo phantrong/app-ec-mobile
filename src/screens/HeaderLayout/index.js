@@ -1,9 +1,9 @@
 import React, { useState, useCallback, memo } from 'react';
 
-import { Header, MenuUser, ViewPsition } from '../component';
+import { Header, MenuShop, MenuUser, ViewPsition } from '../component';
 import SearchHeader from './SearchHeader';
 
-const HeaderLayout = ({ navigation, children }) => {
+const HeaderLayout = ({ navigation, children, type = 'user' }) => {
     const [closeMenu, setCloseMenu] = useState(false);
     const [openSearch, setOpenSearch] = useState(false);
 
@@ -17,12 +17,16 @@ const HeaderLayout = ({ navigation, children }) => {
 
     return (
         <ViewPsition>
-            <Header navigation={navigation} handelOpenMenu={handelOpenMenu} openSearch={setOpenSearch} />
-            {closeMenu ? <MenuUser handelClose={handelClose} navigation={navigation} isOpen={closeMenu} /> : null}
-            {openSearch ? (
+            <Header navigation={navigation} handelOpenMenu={handelOpenMenu} openSearch={setOpenSearch} type={type} />
+            {closeMenu && type === 'user' ? (
+                <MenuUser handelClose={handelClose} navigation={navigation} isOpen={closeMenu} />
+            ) : null}
+            {closeMenu && type === 'shop' ? (
+                <MenuShop handelClose={handelClose} navigation={navigation} isOpen={closeMenu} />
+            ) : null}
+            {openSearch && type === 'user' ? (
                 <SearchHeader navigation={navigation} closeSearch={setOpenSearch} isOpen={openSearch} />
             ) : null}
-            {/* <SearchHeader navigation={navigation} closeSearch={setOpenSearch} isOpen={openSearch}/> */}
             {children}
         </ViewPsition>
     );

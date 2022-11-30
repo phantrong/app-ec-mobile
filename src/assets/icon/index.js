@@ -24,4 +24,5 @@ export default {
     CLOCK: require('./clock.png'),
     TRASHCAN: require('./trashCan.png'),
     EYE: require('./eye.png'),
+    ORDER: require('./receipt-text.png'),
 };

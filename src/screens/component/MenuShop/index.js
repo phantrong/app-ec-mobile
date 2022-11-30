@@ -1,7 +1,7 @@
 import { View, StyleSheet, TouchableOpacity, Animated } from 'react-native';
 import React, { useState, memo, useCallback, useRef, useEffect } from 'react';
 
-import Item from './Item/Item';
+import Item from '../MenuUser/Item/Item';
 import { ImageIcon } from '../../../components';
 
 import { Colors, Icons } from '../../../assets';
@@ -11,11 +11,11 @@ import colors from '../../../assets/colors';
 import { Easing } from 'react-native-reanimated';
 import { useRoute } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
-import { logout } from '../../../store/userSlice';
+import { logout } from '../../../store/shopSlice';
 
-const menuItems = Data.menuItems;
+const menuItems = Data.shopMenuItems;
 
-const MenuUser = ({ handelClose, navigation, isOpen }) => {
+const MenuShop = ({ handelClose, navigation, isOpen }) => {
     const route = useRoute();
     const dispatch = useDispatch();
     const [item, setItem] = useState();
@@ -41,7 +41,7 @@ const MenuUser = ({ handelClose, navigation, isOpen }) => {
 
     const handelClick = useCallback(
         (config) => {
-            if (config === 'LoginScreen') {
+            if (config === 'ShopLoginScreen') {
                 dispatch(logout());
             }
             navigation.navigate(config);
@@ -106,4 +106,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default memo(MenuUser);
+export default memo(MenuShop);

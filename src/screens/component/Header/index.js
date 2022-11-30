@@ -4,9 +4,11 @@ import React, { memo } from 'react';
 import { HeaderBar } from '../../../components';
 
 import ContentRight from './contentRight';
-const Header = ({ navigation, handelOpenMenu, openSearch }) => {
+const Header = ({ navigation, handelOpenMenu, openSearch, type = 'user' }) => {
     const customizeRight = () => {
-        return <ContentRight handelOpenMenu={handelOpenMenu} openSearch={openSearch} navigation={navigation} />;
+        return (
+            <ContentRight handelOpenMenu={handelOpenMenu} openSearch={openSearch} navigation={navigation} type={type} />
+        );
     };
 
     const contentLeft = () => {

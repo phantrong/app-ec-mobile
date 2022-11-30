@@ -4,6 +4,7 @@ import { selectUserAuth } from '../../store/userSlice';
 import { useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import { useGetUserProfileQuery } from '../../store/userApi';
+import HeaderLayout from '../HeaderLayout';
 
 const Profile = () => {
     const navigation = useNavigation();
@@ -20,13 +21,15 @@ const Profile = () => {
     }, []);
 
     return (
-        <View>
-            <Text>{profileData?.name}</Text>
-            <Text>{profileData?.email}</Text>
-            <Text>{profileData?.phone}</Text>
-            <Text>{profileData?.birthday}</Text>
-            <Text>{profileData?.created_at}</Text>
-        </View>
+        <HeaderLayout navigation={navigation}>
+            <View>
+                <Text>{profileData?.name}</Text>
+                <Text>{profileData?.email}</Text>
+                <Text>{profileData?.phone}</Text>
+                <Text>{profileData?.birthday}</Text>
+                <Text>{profileData?.created_at}</Text>
+            </View>
+        </HeaderLayout>
     );
 };
 
