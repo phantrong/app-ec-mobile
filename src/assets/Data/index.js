@@ -1,8 +1,7 @@
 import icons from '../icon';
 import Images from '../images';
 
-const menuItems = [
-    {
+const menuItems = [{
         title: 'profile',
         icon: icons.USER,
         config: 'Profile',
@@ -49,12 +48,37 @@ const menuItems = [
     },
 ];
 
-const myCart = [
+const shopMenuItems = [{
+        title: 'Thông tin cửa hàng',
+        icon: icons.USER,
+        config: 'ShopProfile',
+    },
     {
+        title: 'Quản lý sản phẩm',
+        icon: icons.BOX,
+        config: 'ShopManageProduct',
+    },
+    {
+        title: 'Quản lý đơn hàng',
+        icon: icons.ORDER,
+        config: 'ShopOrderHistory',
+    },
+    {
+        title: 'Cài đặt',
+        icon: icons.SETTING,
+        config: 'ShopSetting',
+    },
+    {
+        title: 'Đăng xuất',
+        icon: icons.LOGOUT,
+        config: 'ShopLoginScreen',
+    },
+];
+
+const myCart = [{
         nameShop: 'cửa hàng khanh',
         image: Images.AVATAR,
-        products: [
-            {
+        products: [{
                 cart_item_id: 1,
                 product_id: 1,
                 product_name: 'Kristina Bayer',
@@ -90,8 +114,7 @@ const myCart = [
     {
         nameShop: 'cửa hàng khanh2',
         image: Images.AVATAR,
-        products: [
-            {
+        products: [{
                 cart_item_id: 4,
                 product_id: 5,
                 product_name: 'Kristina Bayer',
@@ -135,4 +158,4 @@ const myCart = [
     },
 ];
 
-export default { menuItems, myCart };
+export default { menuItems, shopMenuItems, myCart };

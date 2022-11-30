@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import { selectStaffAuth } from '../../store/shopSlice';
 import { useGetShopProfileQuery } from '../../store/shopApi';
+import HeaderLayout from '../HeaderLayout';
 
 const ShopProfile = () => {
     const navigation = useNavigation();
@@ -20,13 +21,15 @@ const ShopProfile = () => {
     }, []);
 
     return (
-        <View>
-            <Text>{profileData?.name}</Text>
-            <Text>{profileData?.address_detail}</Text>
-            <Text>{profileData?.description}</Text>
-            <Text>{profileData?.avatar}</Text>
-            <Text>{profileData?.cover_image}</Text>
-        </View>
+        <HeaderLayout navigation={navigation} type={'shop'}>
+            <View>
+                <Text>{profileData?.name}</Text>
+                <Text>{profileData?.address_detail}</Text>
+                <Text>{profileData?.description}</Text>
+                <Text>{profileData?.avatar}</Text>
+                <Text>{profileData?.cover_image}</Text>
+            </View>
+        </HeaderLayout>
     );
 };
 

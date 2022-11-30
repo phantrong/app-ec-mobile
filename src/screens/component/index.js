@@ -3,6 +3,7 @@ import TitleSection from './TitleSection';
 import BoxProduct from './BoxProduct';
 import BoxShop from './BoxShop';
 import MenuUser from './MenuUser';
+import MenuShop from './MenuShop';
 import Footer from './Footer';
 import ImgProduct from './ImgProduct';
 import BoxCheck from './BoxCheck';
@@ -21,6 +22,7 @@ export {
     BoxProduct,
     BoxShop,
     MenuUser,
+    MenuShop,
     Footer,
     ImgProduct,
     BoxCheck,
