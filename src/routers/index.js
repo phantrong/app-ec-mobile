@@ -19,6 +19,7 @@ import Setting from '../screens/Setting';
 import ShoppingCart from '../screens/ShoppingCart';
 import SuccessPurScreen from '../screens/SuccessPurScreen/index';
 import SearchScreen from '../screens/SearchScreen';
+import ShopProfile from '../screens/ShopFrofile';
 
 const FirstStack = createStackNavigator();
 
@@ -26,21 +27,25 @@ const Router = () => {
     return (
         // <MenuDrawer />
         <FirstStack.Navigator initialRouteName="LoginScreen" screenOptions={{ headerShown: false }}>
-            <FirstStack.Screen key={1} name="LoginScreen" component={LoginScreen} />
-            <FirstStack.Screen key={13} name="ShopLoginScreen" component={ShopLoginScreen} />
-            <FirstStack.Screen key={2} name="RegisterScreen" component={RegisterScreen} />
-            <FirstStack.Screen key={3} name="Home" component={HomeScreen} />
-            <FirstStack.Screen key={3} name="DetailProduct" component={DetailProduct} />
-            <FirstStack.Screen key={4} name="Profile" component={Profile} />
-            <FirstStack.Screen key={5} name="ChatList" component={ChatList} />
-            <FirstStack.Screen key={6} name="CouManagement" component={CouManagement} />
-            <FirstStack.Screen key={7} name="DeliveryAddress" component={DeliveryAddress} />
-            <FirstStack.Screen key={8} name="IntProduct" component={IntProduct} />
-            <FirstStack.Screen key={9} name="OrderHistory" component={OrderHistory} />
-            <FirstStack.Screen key={10} name="Setting" component={Setting} />
-            <FirstStack.Screen key={11} name="ShoppingCart" component={ShoppingCart} />
-            <FirstStack.Screen key={12} name="SuccessPurScreen" component={SuccessPurScreen} />
-            <FirstStack.Screen key={13} name="SearchScreen" component={SearchScreen} />
+            {/* for user  */}
+            <FirstStack.Screen key={'user' + 1} name="LoginScreen" component={LoginScreen} />
+            <FirstStack.Screen key={'user' + 2} name="RegisterScreen" component={RegisterScreen} />
+            <FirstStack.Screen key={'user' + 3} name="Home" component={HomeScreen} />
+            <FirstStack.Screen key={'user' + 4} name="DetailProduct" component={DetailProduct} />
+            <FirstStack.Screen key={'user' + 5} name="Profile" component={Profile} />
+            <FirstStack.Screen key={'user' + 6} name="ChatList" component={ChatList} />
+            <FirstStack.Screen key={'user' + 7} name="CouManagement" component={CouManagement} />
+            <FirstStack.Screen key={'user' + 8} name="DeliveryAddress" component={DeliveryAddress} />
+            <FirstStack.Screen key={'user' + 9} name="IntProduct" component={IntProduct} />
+            <FirstStack.Screen key={'user' + 10} name="OrderHistory" component={OrderHistory} />
+            <FirstStack.Screen key={'user' + 11} name="Setting" component={Setting} />
+            <FirstStack.Screen key={'user' + 12} name="ShoppingCart" component={ShoppingCart} />
+            <FirstStack.Screen key={'user' + 13} name="SuccessPurScreen" component={SuccessPurScreen} />
+            <FirstStack.Screen key={'user' + 14} name="SearchScreen" component={SearchScreen} />
+
+            {/* for shop */}
+            <FirstStack.Screen key={'shop' + 1} name="ShopLoginScreen" component={ShopLoginScreen} />
+            <FirstStack.Screen key={'shop' + 2} name="ShopProfile" component={ShopProfile} />
         </FirstStack.Navigator>
     );
 };

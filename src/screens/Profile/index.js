@@ -1,28 +1,31 @@
 import { View, Text } from 'react-native';
-import React from 'react';
-import { selectAuth } from '../../store/userSlice';
+import React, { useEffect } from 'react';
+import { selectUserAuth } from '../../store/userSlice';
 import { useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
-import { useGetProfileQuery } from '../../store/userApi';
+import { useGetUserProfileQuery } from '../../store/userApi';
 
 const Profile = () => {
     const navigation = useNavigation();
     // Select data from store
-    const auth = useSelector(selectAuth);
-    const profile = useGetProfileQuery();
+    const auth = useSelector(selectUserAuth);
+    const profile = useGetUserProfileQuery();
+    const profileData = profile?.data?.data;
 
     // Navigate to login page if is not authenticated
-    if (!auth || profile?.error?.originalStatus === 401) {
-        navigation.navigate('LoginScreen');
-    }
+    useEffect(() => {
+        if (!auth?.token_customer || profile?.error?.originalStatus === 401) {
+            navigation.navigate('LoginScreen');
+        }
+    }, []);
 
     return (
         <View>
-            <Text>{profile.data.data.name}</Text>
-            <Text>{profile?.data?.data?.email}</Text>
-            <Text>{profile?.data?.data?.phone}</Text>
-            <Text>{profile?.data?.data?.birthday}</Text>
-            <Text>{profile?.data?.data?.created_at}</Text>
+            <Text>{profileData?.name}</Text>
+            <Text>{profileData?.email}</Text>
+            <Text>{profileData?.phone}</Text>
+            <Text>{profileData?.birthday}</Text>
+            <Text>{profileData?.created_at}</Text>
         </View>
     );
 };

@@ -7,7 +7,7 @@ import { Colors, Icons } from '../../../assets';
 const BoxBuying = ({ navigation, isLike }) => {
     const [isLikePr, setIsLikePr] = useState(isLike);
 
-    console.log(isLikePr);
+    // console.log(isLikePr);
 
     return (
         <BoxBottomScreen>

@@ -1,9 +1,9 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { API_URL } from 'react-native-dotenv';
 
-export const userApi = createApi({
+export const shopApi = createApi({
     // Tương tự tên Slice khi tạo Slice thông thường
-    reducerPath: 'userApi',
+    reducerPath: 'shopApi',
 
     // Cấu hình chung cho tất cả request
     baseQuery: fetchBaseQuery({
@@ -12,11 +12,11 @@ export const userApi = createApi({
         prepareHeaders: (headers, { getState }) => {
             // getState() giúp lấy ra toàn bộ state trong store
             // getState().user lấy ra state trong userSlice
-            const token = getState().user?.auth;
+            const token = getState().shop?.auth;
 
             // Nếu có token thì thêm vào headers
             if (token) {
-                headers.set('Authorization', `Bearer ${token?.token_customer}`);
+                headers.set('Authorization', `Bearer ${token?.token_staff}`);
             }
 
             return headers;
@@ -25,18 +25,18 @@ export const userApi = createApi({
 
     // Các endpoints (lệnh gọi request)
     endpoints: (builder) => ({
-        userLogin: builder.mutation({
+        staffLogin: builder.mutation({
             query: (credentials) => ({
-                url: `customers/login`,
+                url: `staff/login`,
                 method: 'POST',
                 body: credentials,
             }),
         }),
 
-        getUserProfile: builder.query({
-            query: () => `customers/profile`,
+        getShopProfile: builder.query({
+            query: () => `staff/my-store`,
         }),
     }),
 });
 
-export const { useUserLoginMutation, useGetUserProfileQuery } = userApi;
+export const { useStaffLoginMutation, useGetShopProfileQuery } = shopApi;
