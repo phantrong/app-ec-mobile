@@ -5,7 +5,16 @@ import HandleLogin from './HandleLogin';
 import { isEqual } from 'react-fast-compare';
 import { Colors } from '../../assets';
 
-const ContentLogin = ({ control, errors, handleSubmit, onSubmit, onForgotPassword, onLoginGoogle, onRegister }) => {
+const ContentLogin = ({
+    control,
+    errors,
+    handleSubmit,
+    onSubmit,
+    onForgotPassword,
+    onUserLogin,
+    onRegister,
+    loadingButtonSubmit,
+}) => {
     return (
         <>
             <Text margin={[getStatusBarHeight() + 100, 0, 0, 0]} size={32} color={Colors.CS_TEXT} fontWeight="700">
@@ -16,17 +25,17 @@ const ContentLogin = ({ control, errors, handleSubmit, onSubmit, onForgotPasswor
             </Text>
             <InputItem
                 control={control}
-                name="firstName"
-                errors={errors.firstName}
+                name="email"
+                errors={errors.email}
                 placeholder="Nhập Email ..."
                 label="Email Shop"
                 margin={[20, 0, 0, 0]}
             />
             <InputItem
                 control={control}
-                name="lastName"
+                name="password"
                 security={true}
-                errors={errors.lastName}
+                errors={errors.password}
                 placeholder={'Mật khảu shop ...'}
                 label="Mật khẩu"
                 margin={[20, 0, 0, 0]}
@@ -35,8 +44,9 @@ const ContentLogin = ({ control, errors, handleSubmit, onSubmit, onForgotPasswor
                 handleSubmit={handleSubmit}
                 onSubmit={onSubmit}
                 onForgotPassword={onForgotPassword}
-                onLoginGoogle={onLoginGoogle}
+                onUserLogin={onUserLogin}
                 onRegister={onRegister}
+                loadingButtonSubmit={loadingButtonSubmit}
             />
         </>
     );

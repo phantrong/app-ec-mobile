@@ -1,25 +1,20 @@
 import React, { useCallback, useEffect } from 'react';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Colors } from '../../assets';
-import { Box, NavBar } from '../../components';
+import { Box } from '../../components';
 import { useForm } from 'react-hook-form';
 import styles from './styles';
 import ContentLogin from './ContentLogin';
 
 import { useNavigation } from '@react-navigation/native';
-import { useLoginMutation } from '../../store/userApi';
+import { useUserLoginMutation } from '../../store/userApi';
 import { useSelector } from 'react-redux';
-import { selectAuth } from '../../store/userSlice';
+import { selectUserAuth } from '../../store/userSlice';
 
 const LoginScreen = () => {
     const navigation = useNavigation();
     // Select data from store
-    const auth = useSelector(selectAuth);
-    // Navigate to home page if authenticated
-    if (auth) {
-        navigation.navigate('Home');
-    }
-
+    const auth = useSelector(selectUserAuth);
     const {
         control,
         handleSubmit,
@@ -30,22 +25,31 @@ const LoginScreen = () => {
             password: '',
         },
     });
-
-    const [login, loginRespone] = useLoginMutation();
-
-    const onSubmit = useCallback((body) => {
-        login(body).unwrap();
-    }, []);
+    const [userLogin, loginRespone] = useUserLoginMutation();
 
     useEffect(() => {
         if (loginRespone?.data?.success) {
             navigation.navigate('Home');
-        } else {
-            console.log(loginRespone.error);
         }
     }, [loginRespone]);
+
+    useEffect(() => {
+        // Navigate to home page if authenticated
+        if (auth?.token_customer) {
+            navigation.navigate('Home');
+        }
+    }, []);
+
     const onRegister = useCallback(() => navigation.navigate('RegisterScreen'), [navigation]);
     const onShopLogin = useCallback(() => navigation.navigate('ShopLoginScreen'), [navigation]);
+    const onSubmit = useCallback((body) => {
+        userLogin(body)
+            .unwrap()
+            .catch((error) => {
+                alert(error?.data?.message);
+            });
+    }, []);
+
     return (
         <Box background={Colors.CS_WHITE} width="100%" height="100%" flex={1}>
             {/* <NavBar leftIcon label="Back to Home" border={true} /> */}

@@ -1,22 +1,24 @@
 import { ScrollView } from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { Section } from '../../components';
 import { TitleSection, BoxProduct, BoxShop, Footer } from '../component';
 import NavBarHome from './NavbarItem';
 import { Images } from '../../assets';
 import HeaderLayout from '../HeaderLayout';
-import { selectAuth } from '../../store/userSlice';
+import { selectUserAuth } from '../../store/userSlice';
 import { useSelector } from 'react-redux';
 
 const HomeScreen = ({ navigation }) => {
     // Select data from store
-    const auth = useSelector(selectAuth);
+    const auth = useSelector(selectUserAuth);
 
     // Navigate to login page if is not authenticated
-    if (!auth) {
-        navigation.navigate('LoginScreen');
-    }
+    useEffect(() => {
+        if (!auth?.token_customer) {
+            navigation.navigate('LoginScreen');
+        }
+    }, []);
 
     return (
         <HeaderLayout navigation={navigation}>

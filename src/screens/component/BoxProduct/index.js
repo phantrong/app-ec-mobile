@@ -9,7 +9,7 @@ import styles from './styles';
 const BoxProduct = ({ image, category, name, sale = true, price, priceSale, isLike = false, navigation }) => {
     const [isLikePr, setIsLikePr] = useState(isLike);
 
-    console.log(isLikePr);
+    // console.log(isLikePr);
 
     return (
         <TouchableOpacity

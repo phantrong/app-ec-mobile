@@ -21,7 +21,7 @@ const ContentLogin = ({
                 Đăng Nhập
             </Text>
             <Text margin={[15, 0, 0, 0]} size={15} color={'#827D89'} fontWeight="400">
-                Login for user
+                Đăng nhập mua hàng
             </Text>
             <InputItem
                 control={control}
