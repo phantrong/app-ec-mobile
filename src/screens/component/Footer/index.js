@@ -6,8 +6,8 @@ import { Images, Colors } from '../../../assets';
 const Footer = () => {
     return (
         <View style={styles.wrapper}>
-            <ImageBackground source={Images.FOOTER} resizeMode={'cover'} style={styles.image}>
-                <Text style={styles.logo}>Shopping Cart</Text>
+            <ImageBackground resizeMode={'cover'} style={styles.image}>
+                <Text style={styles.logo}>My Cart</Text>
             </ImageBackground>
         </View>
     );

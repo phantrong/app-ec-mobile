@@ -36,7 +36,19 @@ export const userApi = createApi({
         getUserProfile: builder.query({
             query: () => `customers/profile`,
         }),
+
+        getProductHome: builder.query({
+            query: (filter) => {
+                return { url: `customers/products`, params: filter };
+            },
+        }),
+
+        getShopHome: builder.query({
+            query: (filterShop) => {
+                return { url: 'stores', params: filterShop };
+            },
+        }),
     }),
 });
 
-export const { useUserLoginMutation, useGetUserProfileQuery } = userApi;
+export const { useUserLoginMutation, useGetUserProfileQuery, useGetProductHomeQuery, useGetShopHomeQuery } = userApi;

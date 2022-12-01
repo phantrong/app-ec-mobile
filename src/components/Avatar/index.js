@@ -1,27 +1,33 @@
-import { Image } from 'react-native';
+import { Image, View } from 'react-native';
 import propTypes from 'prop-types';
 
+import { Images } from '../../assets';
+
 function Avatar({ source, width, height, style = {} }) {
+    console.log(source);
     return (
+        // <View style={{ width: width, height: height, borderColor: 'black', borderWidth: 1 }}>
         <Image
-            source={source}
+            source={{ uri: source }}
             style={[
                 {
                     width: width,
                     height: height,
-                    borderColor: 'black',
-                    borderWidth: 1,
+
                     borderRadius: 100,
                     resizeMode: 'contain',
+                    borderWidth: 1,
                 },
                 style,
             ]}
+            resizeMode="contain"
         />
+        // </View>
     );
 }
 
 Avatar.propTypes = {
-    source: propTypes.number,
+    source: propTypes.string,
     width: propTypes.number,
     height: propTypes.number,
 };
