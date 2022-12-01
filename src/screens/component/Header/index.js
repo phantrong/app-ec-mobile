@@ -4,6 +4,7 @@ import React, { memo } from 'react';
 import { HeaderBar } from '../../../components';
 
 import ContentRight from './contentRight';
+import { Colors } from '../../../assets';
 const Header = ({ navigation, handelOpenMenu, openSearch, type = 'user' }) => {
     const customizeRight = () => {
         return (
@@ -14,7 +15,9 @@ const Header = ({ navigation, handelOpenMenu, openSearch, type = 'user' }) => {
     const contentLeft = () => {
         return (
             <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-                <Text style={{ fontSize: 20 }}>Shopping Cart</Text>
+                <Text style={{ fontSize: 20, fontWeight: '700', textTransform: 'uppercase', color: Colors.CS_TITLE }}>
+                    my cart
+                </Text>
             </TouchableOpacity>
         );
     };

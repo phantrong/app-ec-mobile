@@ -12,7 +12,7 @@ const BoxShop = ({ nameShop, describe, image, address }) => {
             <View style={styles.content}>
                 <View style={styles.address}>
                     <ImageIcon name={Icons.ADDRESS} margin={[0, 0, 0, 5]} size={18} />
-                    <Text style={styles.addressText}>Address</Text>
+                    <Text style={styles.addressText}>{address}</Text>
                 </View>
                 <Text style={styles.name}>{nameShop}</Text>
                 <Text style={styles.describe} numberOfLines={2} ellipsizeMode={'tail'}>

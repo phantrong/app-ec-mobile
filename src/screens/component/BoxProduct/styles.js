@@ -1,11 +1,12 @@
 import { StyleSheet } from 'react-native';
+import { Colors } from '../../../assets';
 
 const styles = StyleSheet.create({
     wrapper: {
         width: '44%',
         marginHorizontal: 10,
         marginVertical: 10,
-        height: 300,
+        marginTop: 20,
     },
 
     image: {
@@ -14,26 +15,26 @@ const styles = StyleSheet.create({
     },
 
     content: {
+        width: '100%',
         margin: 5,
     },
 
     title: {
-        fontSize: 13,
-        lineHeight: 17,
-        color: '#888888',
-        fontStyle: 'normal',
-        fontWeight: 'normal',
+        fontSize: 14,
+        color: Colors.CS_GRAY2,
+        fontWeight: '400',
+
+        overflow: 'hidden',
     },
 
     text: {
-        fontsixe: 15,
-        lineHeight: 17,
-        color: '#3B3B3B',
-        fontStyle: 'normal',
+        fontsixe: 16,
+        color: Colors.CS_TEXT,
+        fontWeight: '400',
+        alignSelf: 'flex-start',
     },
 
     boxPrice: {
-        // flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
@@ -41,8 +42,10 @@ const styles = StyleSheet.create({
     },
 
     boxPriceSale: {
+        width: 100,
         flexDirection: 'row',
         alignItems: 'center',
+        flexWrap: 'wrap',
     },
 
     sale: {
@@ -50,14 +53,14 @@ const styles = StyleSheet.create({
         lineHeight: 17,
         textDecorationStyle: 'solid',
         textDecorationLine: 'line-through',
-        color: '#888888',
+        color: Colors.CS_GRAY2,
         marginRight: 3,
     },
 
     price: {
         fontSize: 18,
         lineHeight: 26,
-        color: '#E2582A',
+        color: Colors.CS_ORANGE2,
     },
 
     boxIcon: {

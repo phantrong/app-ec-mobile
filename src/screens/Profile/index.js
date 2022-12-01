@@ -11,6 +11,7 @@ const Profile = () => {
     // Select data from store
     const auth = useSelector(selectUserAuth);
     const profile = useGetUserProfileQuery();
+    // console.log(profile);
     const profileData = profile?.data?.data;
 
     // Navigate to login page if is not authenticated

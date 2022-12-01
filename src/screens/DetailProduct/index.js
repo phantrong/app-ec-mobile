@@ -55,14 +55,14 @@ const DetailProduct = ({ navigation }) => {
                 >
                     Featured products
                 </Text>
-                <Section direction={'row'}>
+                {/* <Section direction={'row'}>
                     <BoxProduct />
                     <BoxProduct />
                     <BoxProduct />
                     <BoxProduct />
                     <BoxProduct />
                     <BoxProduct />
-                </Section>
+                </Section> */}
 
                 <Footer />
                 <Footer />
