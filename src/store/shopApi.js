@@ -36,7 +36,61 @@ export const shopApi = createApi({
         getShopProfile: builder.query({
             query: () => `staff/my-store`,
         }),
+
+        getShopListProduct: builder.query({
+            query: (filter) => {
+                return {
+                    url: `staff/product/list`,
+                    params: filter,
+                };
+            },
+        }),
+
+        getShopDetailProduct: builder.query({
+            query: (id) => `staff/product/${id}`,
+        }),
+
+        addProduct: builder.mutation({
+            query: (credentials) => ({
+                url: `staff/product`,
+                method: 'POST',
+                body: credentials,
+            }),
+        }),
+
+        editProduct: builder.mutation({
+            query: ({ productId, ...credentials }) => ({
+                url: `staff/product/update/${productId}`,
+                method: 'POST',
+                body: credentials,
+            }),
+        }),
+
+        uploadImage: builder.mutation({
+            query: (credentials) => ({
+                url: `upload-file`,
+                method: 'POST',
+                body: credentials,
+                headers: {
+                    'Content-Type': 'multipart/form-data; ',
+                },
+            }),
+        }),
+
+        getCategoryList: builder.query({
+            query: () => `categories`,
+        }),
     }),
 });
 
-export const { useStaffLoginMutation, useGetShopProfileQuery } = shopApi;
+export const {
+    usePrefetch,
+    useStaffLoginMutation,
+    useGetShopProfileQuery,
+    useGetShopListProductQuery,
+    useGetShopDetailProductQuery,
+    useAddProductMutation,
+    useEditProductMutation,
+    useGetCategoryListQuery,
+    useUploadImageMutation,
+} = shopApi;
