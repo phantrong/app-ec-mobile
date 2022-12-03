@@ -25,13 +25,13 @@ const ImgProduct = ({ images }) => {
                 horizontal
                 style={styles.wrap}
             >
-                {images.map((e, index) => (
-                    <Image source={e} key={index} style={styles.wrap} />
+                {images?.map((image, index) => (
+                    <Image source={{ uri: image.media_path }} key={index} style={styles.wrap} />
                 ))}
             </ScrollView>
             <View style={styles.wrapDot}>
                 <Text style={styles.boxActive}>
-                    <Text>{imgActive == images.length ? images.length : imgActive + 1}</Text>/{images.length}
+                    <Text>{imgActive == images?.length ? images?.length : imgActive + 1}</Text>/{images?.length}
                 </Text>
             </View>
         </View>

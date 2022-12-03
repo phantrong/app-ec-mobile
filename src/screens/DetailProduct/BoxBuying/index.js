@@ -4,7 +4,7 @@ import { ImageIcon } from '../../../components';
 import { Buttom, BoxBottomScreen } from '../../component';
 import { Colors, Icons } from '../../../assets';
 
-const BoxBuying = ({ navigation, isLike }) => {
+const BoxBuying = ({ navigation, isLike, handelClick, handelBuyProduct }) => {
     const [isLikePr, setIsLikePr] = useState(isLike);
 
     // console.log(isLikePr);
@@ -20,6 +20,7 @@ const BoxBuying = ({ navigation, isLike }) => {
                 colorLabel={Colors.CS_ORANGE2}
                 widthButtom={150}
                 heightButtom={40}
+                onPress={handelClick}
             />
             <Buttom
                 iconColor={Colors.CS_ORANGE2}
@@ -29,6 +30,7 @@ const BoxBuying = ({ navigation, isLike }) => {
                 colorLabel={Colors.CS_WHITE}
                 widthButtom={150}
                 heightButtom={40}
+                onPress={handelBuyProduct}
             />
             {isLikePr ? (
                 <ImageIcon name={Icons.HEART_RED} margin={[0, 10, 0, 0]} pressable onPress={() => setIsLikePr(false)} />

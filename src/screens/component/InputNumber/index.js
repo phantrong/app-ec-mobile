@@ -5,8 +5,14 @@ import { ImageIcon } from '../../../components';
 
 import { Colors, Icons } from '../../../assets';
 
-const InputNumber = ({ maxProduct, width, amountProduct }) => {
+const InputNumber = ({ maxProduct, width, amountProduct, setQuanity }) => {
     const [value, setValue] = useState('1');
+
+    if (setQuanity) {
+        useEffect(() => {
+            setQuanity(Number(value));
+        }, [value]);
+    }
 
     // console.log('call API: ' + value);
     if (amountProduct) {

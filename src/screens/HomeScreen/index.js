@@ -33,7 +33,7 @@ const HomeScreen = ({ navigation }) => {
     const productsHome = useGetProductHomeQuery(filter);
     const products = productsHome?.data?.data || [];
 
-    console.log(products);
+    // console.log(products);
     // Lấy thông tin shop
     const shopsHome = useGetShopHomeQuery(filterShop);
     const shops = shopsHome?.data?.data || [];
@@ -61,7 +61,7 @@ const HomeScreen = ({ navigation }) => {
                 <TitleSection titleName={'Sản phẩm'} />
                 <Section direction={'row'}>
                     {products?.map((product, index) => {
-                        // console.log(index);
+                        const shop = shops?.filter((shop) => shop.id === product.store_id);
                         if (index >= amountShow) {
                             return;
                         } else {
@@ -74,6 +74,8 @@ const HomeScreen = ({ navigation }) => {
                                     price={product.price}
                                     priceSale={product.discount}
                                     sale={true}
+                                    productId={product.id}
+                                    storeInfo={shop}
                                     key={product.id}
                                 />
                             );

@@ -5,19 +5,38 @@ import { BoxCheck, ImgProduct, Label, InputNumber } from '../../component';
 
 import { Colors } from '../../../assets';
 
-const BoxOrder = ({ images, sizes, colors, maxProduct, price, desProduct }) => {
+const BoxOrder = ({
+    images,
+    sizes,
+    colors,
+    maxProduct,
+    price,
+    priceSale,
+    category,
+    desProduct,
+    sale = true,
+    setQuanity,
+}) => {
     return (
         <View style={styles.wrapper}>
             <ImgProduct images={images} />
 
+            <Text style={styles.category}>{category}</Text>
             <Text style={styles.desProduct}>{desProduct}</Text>
-            <Text style={styles.price}>${price}</Text>
+            {sale ? (
+                <View style={styles.boxPriceSale}>
+                    <Text style={styles.sale}>${price}</Text>
+                    <Text style={styles.price}>${priceSale}</Text>
+                </View>
+            ) : (
+                <Text style={styles.price}>${price}</Text>
+            )}
             <Label name={'new'} backgroundColor={Colors.CS_ORANGE2} nameColor={Colors.CS_WHITE} />
-            <BoxCheck title={'color'} categorys={colors} />
-            <BoxCheck title={'size'} categorys={sizes} />
+            {colors ? <BoxCheck title={'color'} categorys={colors} /> : null}
+            {sizes ? <BoxCheck title={'size'} categorys={sizes} /> : null}
 
             <Text style={styles.amount}>amount</Text>
-            <InputNumber maxProduct={maxProduct} width={150} />
+            <InputNumber maxProduct={maxProduct} width={150} setQuanity={setQuanity} />
             <Text style={styles.totalQuantity}>total amount left: {maxProduct}.</Text>
         </View>
     );
@@ -36,11 +55,29 @@ const styles = StyleSheet.create({
         padding: 8,
         alignSelf: 'center',
     },
+    category: {
+        fontSize: 18,
+        fontWeight: '700',
+        color: Colors.CS_ORANGE2,
+        marginTop: 10,
+    },
     desProduct: {
         marginTop: 15,
         fontSize: 18,
         fontWeight: '700',
         color: Colors.CS_TEXT,
+    },
+    boxPriceSale: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        height: 50,
+    },
+    sale: {
+        fontSize: 16,
+        textDecorationStyle: 'solid',
+        textDecorationLine: 'line-through',
+        color: Colors.CS_GRAY2,
+        marginRight: 3,
     },
     price: {
         marginVertical: 8,

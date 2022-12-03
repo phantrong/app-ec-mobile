@@ -6,7 +6,18 @@ import { ImageIcon } from '../../../components';
 import { Images, Icons } from '../../../assets';
 
 import styles from './styles';
-const BoxProduct = ({ image, category, name, sale = true, price, priceSale, isLike = false, navigation }) => {
+const BoxProduct = ({
+    image,
+    category,
+    name,
+    sale = true,
+    price,
+    priceSale,
+    isLike = false,
+    navigation,
+    productId,
+    storeInfo,
+}) => {
     const [isLikePr, setIsLikePr] = useState(isLike);
 
     // console.log(isLikePr);
@@ -21,7 +32,7 @@ const BoxProduct = ({ image, category, name, sale = true, price, priceSale, isLi
         <TouchableOpacity
             style={styles.wrapper}
             onPress={() => {
-                navigation.navigate('DetailProduct');
+                navigation.navigate('DetailProduct', { productId: productId, storeInfo: storeInfo });
             }}
         >
             <Image style={styles.image} source={{ uri: image || Images.IMAGEERROR }} resizeMode="contain" />

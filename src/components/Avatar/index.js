@@ -4,9 +4,7 @@ import propTypes from 'prop-types';
 import { Images } from '../../assets';
 
 function Avatar({ source, width, height, style = {} }) {
-    console.log(source);
     return (
-        // <View style={{ width: width, height: height, borderColor: 'black', borderWidth: 1 }}>
         <Image
             source={{ uri: source }}
             style={[
