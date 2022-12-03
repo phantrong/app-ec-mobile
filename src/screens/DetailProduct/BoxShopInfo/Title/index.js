@@ -30,7 +30,7 @@ const TitleShop = ({ avatarShop, nameShop }) => {
                         borderColor={Colors.CS_TITLE}
                         label={'reserve'}
                         colorLabel={Colors.CS_WHITE}
-                        widthButtom={105}
+                        widthButtom={120}
                         heightButtom={35}
                     />
                 </View>

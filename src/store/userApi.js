@@ -33,6 +33,14 @@ export const userApi = createApi({
             }),
         }),
 
+        userAddtoCart: builder.mutation({
+            query: (body) => ({
+                url: 'cart/add',
+                method: 'POST',
+                body: body,
+            }),
+        }),
+
         getUserProfile: builder.query({
             query: () => `customers/profile`,
         }),
@@ -48,7 +56,27 @@ export const userApi = createApi({
                 return { url: 'stores', params: filterShop };
             },
         }),
+
+        getDetailProduct: builder.query({
+            query: (filterDetail) => {
+                return { url: `customers/products/${filterDetail}` };
+            },
+        }),
+
+        getDetailProductRelate: builder.query({
+            query: (idProduct) => {
+                return { url: `customers/products/${idProduct}/reference` };
+            },
+        }),
     }),
 });
 
-export const { useUserLoginMutation, useGetUserProfileQuery, useGetProductHomeQuery, useGetShopHomeQuery } = userApi;
+export const {
+    useUserLoginMutation,
+    useUserAddtoCartMutation,
+    useGetUserProfileQuery,
+    useGetProductHomeQuery,
+    useGetShopHomeQuery,
+    useGetDetailProductQuery,
+    useGetDetailProductRelateQuery,
+} = userApi;

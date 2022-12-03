@@ -13,7 +13,7 @@ const BoxShop = ({ avatar, nameShop, navigation }) => {
                 alignItems: 'center',
             }}
         >
-            <Avatar source={avatar} width={35} height={35} style={{ marginRight: 10 }} />
+            {/* <Avatar source={avatar} width={35} height={35} style={{ marginRight: 10 }} /> */}
             <Text style={{ fontSize: 16, fontWeight: '700', color: Colors.CS_TEXT }}>{nameShop}</Text>
         </TouchableOpacity>
     );
