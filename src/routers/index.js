@@ -19,10 +19,10 @@ import Setting from '../screens/Setting';
 import ShoppingCart from '../screens/ShoppingCart';
 import SuccessPurScreen from '../screens/SuccessPurScreen/index';
 import SearchScreen from '../screens/SearchScreen';
-import ShopProfile from '../screens/ShopFrofile';
 import ShopManageProduct from '../screens/ShopManageProduct';
 import ShopOrderHistory from '../screens/ShopOrderHistory';
 import ShopSetting from '../screens/ShopSetting';
+import ShopProfile from '../screens/ShopProfile';
 
 const FirstStack = createStackNavigator();
 

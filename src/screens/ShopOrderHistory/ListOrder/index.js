@@ -1,60 +1,45 @@
-import { Text, ScrollView, StyleSheet, View, FlatList, TouchableOpacity } from 'react-native';
+import { Text, ScrollView, StyleSheet, View, FlatList } from 'react-native';
 import React, { useCallback, useEffect, useState } from 'react';
 import { Footer, ViewPsition } from '../../component';
-import ItemProduct from './Item';
+import ItemOrder from './Item';
 import { Colors } from '../../../assets';
-import { useGetShopListProductQuery, usePrefetch } from '../../../store/shopApi';
-import { Box, ButtonCustomize } from '../../../components';
-import colors from '../../../assets/colors';
+import { useGetShopListSubOrderQuery, usePrefetch } from '../../../store/shopApi';
+import { Box } from '../../../components';
 import Pagination from '../../component/Pagination';
 
 const PER_PAGE_DEFAULT = 10;
 
 const defaultFilter = {
     per_page: 10,
-    name: '',
+    date: '',
     page: 1,
 };
 
-const ListProduct = ({ navigation }) => {
+const ListOrder = ({ navigation }) => {
     const [filter, setFilter] = useState(defaultFilter);
-    const listProductResponse = useGetShopListProductQuery(filter);
-    const prefetchListProduct = usePrefetch('getShopListProduct', {
+    const listOrderResponse = useGetShopListSubOrderQuery(filter);
+    const prefetchListOrder = usePrefetch('getShopListSubOrder', {
         force: true,
     });
-    const listProduct = listProductResponse?.data?.data?.products?.data || [];
+    const listOrder = listOrderResponse?.data?.data?.data || [];
 
-    const fetchListProduct = useCallback(() => {
-        prefetchListProduct(filter);
+    const fetchListOrder = useCallback(() => {
+        prefetchListOrder(filter);
     }, [filter]);
 
     // Navigate to login page if is not authenticated
     useEffect(() => {
-        if (listProduct?.error?.originalStatus === 401) {
+        if (listOrder?.error?.originalStatus === 401) {
             navigation.navigate('ShopLoginScreen');
         }
-        fetchListProduct();
+        fetchListOrder();
     }, []);
 
     return (
         <ViewPsition>
             <ScrollView>
                 <Box>
-                    <Text style={styles.title}>Danh sách sản phẩm</Text>
-                </Box>
-                <Box flex={1} style={styles.btnAdd}>
-                    <TouchableOpacity style={styles.btn} activeOpacity={0.5}>
-                        <ButtonCustomize
-                            margin={[10, 0, 0, 0]}
-                            label={'Thêm sản phẩm'}
-                            background={colors.CS_TITLE}
-                            styleLabel={styles.labelBtn}
-                            style={styles.btn}
-                            rightItem={false}
-                            LeftItem={true}
-                            onPress={() => navigation.navigate('AddProduct')}
-                        />
-                    </TouchableOpacity>
+                    <Text style={styles.title}>Danh sách đơn hàng</Text>
                 </Box>
                 <FlatList
                     data={[1]}
@@ -63,17 +48,18 @@ const ListProduct = ({ navigation }) => {
                     renderItem={() => {
                         return (
                             <View>
-                                <ItemProduct title />
-                                {listProduct?.length
-                                    ? listProduct.map((item, index) => (
-                                          <ItemProduct
+                                <ItemOrder title />
+                                {listOrder?.length
+                                    ? listOrder.map((item, index) => (
+                                          <ItemOrder
                                               key={index}
                                               index={index + PER_PAGE_DEFAULT * (filter.page - 1)}
-                                              productId={item?.id}
-                                              imagePath={item?.product_medias[0]?.media_path}
-                                              nameProduct={item?.name}
-                                              price={item?.price}
-                                              discount={item?.discount}
+                                              orderId={item?.id}
+                                              customerName={item?.receiver_name}
+                                              orderCode={item?.code}
+                                              quantity={item?.quantity}
+                                              totalPrice={item?.total_payment}
+                                              orderDate={item?.ordered_at}
                                               status={item?.status}
                                               filter={filter}
                                           />
@@ -86,8 +72,8 @@ const ListProduct = ({ navigation }) => {
                 <Pagination
                     filter={filter}
                     setFilter={setFilter}
-                    lastPage={listProductResponse?.data?.data?.products?.last_page || 1}
-                    activePage={listProductResponse?.data?.data?.products?.current_page || 1}
+                    lastPage={listOrderResponse?.data?.data?.last_page || 1}
+                    activePage={listOrderResponse?.data?.data?.current_page || 1}
                     notChecked
                     styleCheck={styles.boxNumber}
                     styleTextNotTick={styles.boxNumberText}
@@ -142,4 +128,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default ListProduct;
+export default ListOrder;

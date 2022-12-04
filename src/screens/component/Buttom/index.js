@@ -14,6 +14,7 @@ const Buttom = ({
     colorLabel,
     style,
     onPress,
+    isLoading = false,
 }) => {
     return (
         <ButtonCustomize
@@ -28,6 +29,7 @@ const Buttom = ({
             background={backgroudColor}
             style={[styles.buttom, { borderColor: borderColor, width: widthButtom, height: heightButtom }, style]}
             onPress={onPress}
+            isLoading={isLoading}
         />
     );
 };
