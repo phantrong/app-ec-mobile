@@ -101,6 +101,14 @@ export const shopApi = createApi({
                 body: credentials,
             }),
         }),
+
+        registerShop: builder.mutation({
+            query: (credentials) => ({
+                url: `staff/sign-up`,
+                method: 'POST',
+                body: credentials,
+            }),
+        }),
     }),
 });
 
@@ -117,4 +125,5 @@ export const {
     useGetShopListSubOrderQuery,
     useGetShopSubOrderDetailQuery,
     useChangeOrderStatusMutation,
+    useRegisterShopMutation,
 } = shopApi;
