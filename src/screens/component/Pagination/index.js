@@ -7,7 +7,6 @@ import { Colors } from '../../../assets';
 
 const Pagination = ({
     title,
-    fromPage = 1,
     lastPage,
     activePage,
     notChecked,
@@ -36,10 +35,10 @@ const Pagination = ({
             {title ? <Text style={styles.title}>{title}</Text> : null}
             <View style={[styles.boxCheck, styleBox]}>
                 {categorys.map((category, index) => (
-                    <TouchableOpacity key={index + 1} onPress={() => handleCheck(index + 1)} activeOpacity={0.7}>
+                    <TouchableOpacity key={category} onPress={() => handleCheck(category)} activeOpacity={0.7}>
                         <Checked
                             name={category}
-                            checked={index + 1 === checked}
+                            checked={category === checked}
                             notchecked={notChecked}
                             styleNotChecked={styleCheck}
                             styleTextNotChecked={styleTextNotTick}

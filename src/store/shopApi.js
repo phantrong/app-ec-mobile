@@ -80,6 +80,27 @@ export const shopApi = createApi({
         getCategoryList: builder.query({
             query: () => `categories`,
         }),
+
+        getShopListSubOrder: builder.query({
+            query: (filter) => {
+                return {
+                    url: `staff/my-store/list-sub-order`,
+                    params: filter,
+                };
+            },
+        }),
+
+        getShopSubOrderDetail: builder.query({
+            query: (id) => `staff/my-store/detail-sub-order/${id}`,
+        }),
+
+        changeOrderStatus: builder.mutation({
+            query: (credentials) => ({
+                url: `staff/my-store/sub-order/change-status`,
+                method: 'POST',
+                body: credentials,
+            }),
+        }),
     }),
 });
 
@@ -93,4 +114,7 @@ export const {
     useEditProductMutation,
     useGetCategoryListQuery,
     useUploadImageMutation,
+    useGetShopListSubOrderQuery,
+    useGetShopSubOrderDetailQuery,
+    useChangeOrderStatusMutation,
 } = shopApi;
