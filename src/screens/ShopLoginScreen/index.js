@@ -39,7 +39,7 @@ const ShopLoginScreen = () => {
         }
     }, []);
 
-    const onRegister = useCallback(() => navigation.navigate('RegisterScreen'), [navigation]);
+    const onRegister = useCallback(() => navigation.navigate('ShopRegisterScreen'), [navigation]);
     const onUserLogin = useCallback(() => navigation.navigate('LoginScreen'), [navigation]);
     const onSubmit = useCallback((body) => {
         staffLogin(body)
