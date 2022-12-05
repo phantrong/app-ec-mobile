@@ -117,6 +117,14 @@ export const shopApi = createApi({
                 body: credentials,
             }),
         }),
+
+        changeStaffPassword: builder.mutation({
+            query: (credentials) => ({
+                url: `staff/setting/password`,
+                method: 'POST',
+                body: credentials,
+            }),
+        }),
     }),
 });
 
@@ -135,4 +143,5 @@ export const {
     useChangeOrderStatusMutation,
     useRegisterShopMutation,
     useUpdateShopProfileMutation,
+    useChangeStaffPasswordMutation,
 } = shopApi;

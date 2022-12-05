@@ -34,7 +34,7 @@ const UploadImage = ({ errors, label, margin, setValueForm, name, imagePath, ima
                     }
                 })
                 .catch((error) => {
-                    alert(error?.data?.message || error?.data?.messages);
+                    alert(error?.data?.messages || error?.data?.message);
                 });
         } else {
             // If no file selected the show alert

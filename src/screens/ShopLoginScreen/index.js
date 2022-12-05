@@ -45,7 +45,7 @@ const ShopLoginScreen = () => {
         staffLogin(body)
             .unwrap()
             .catch((error) => {
-                alert(error?.data?.message || error?.data?.messages);
+                alert(error?.data?.messages || error?.data?.message);
             });
     }, []);
 

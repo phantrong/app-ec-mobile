@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import React, { useCallback, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
@@ -9,7 +9,7 @@ import { useForm } from 'react-hook-form';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Colors, Images } from '../../assets';
 import TextArea from '../../components/TextArea';
-import { Box, ButtonCustomize, InputItem } from '../../components';
+import { Box, ButtonCustomize, InputItem, Text } from '../../components';
 import colors from '../../assets/colors';
 import UploadImage from '../../components/UploadImage';
 
@@ -63,7 +63,7 @@ const ShopProfile = () => {
                 prefetchShopProfile();
             })
             .catch((error) => {
-                alert(error?.data?.message || error?.data?.messages);
+                alert(error?.data?.messages || error?.data?.message);
             });
     }, []);
 
@@ -79,7 +79,7 @@ const ShopProfile = () => {
                 >
                     {profileData ? (
                         <View padding={20}>
-                            <Text margin={[50, 0, 0, 0]} size={60} color={Colors.CS_TEXT} fontWeight="700">
+                            <Text margin={[10, 0, 0, 0]} size={32} color={'#180E25'} fontWeight="700">
                                 Thông tin cửa hàng
                             </Text>
                             <Box style={styles.boxUpload}>

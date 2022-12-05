@@ -93,7 +93,7 @@ const EditProduct = ({ navigation, route }) => {
                     // navigation.navigate('ListProduct');
                 })
                 .catch((error) => {
-                    alert(error?.data?.message || error?.data?.messages);
+                    alert(error?.data?.messages || error?.data?.message);
                 });
         },
         [productId],
