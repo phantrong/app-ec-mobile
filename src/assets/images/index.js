@@ -4,6 +4,7 @@ export default {
     GO_BACK: require('./cheveron_left.png'),
     HEADPHONE: require('./headphone.png'),
     AVATAR: require('./avatar_test.png'),
+    AVATAR_SHOP: require('./avatar-shop-default.png'),
     FOOTER: require('./Footer.png'),
     PRODUCT_TEST: require('./imageProduct_Test.png'),
     PRODUCT_TEST2: require('./son_test.png'),
