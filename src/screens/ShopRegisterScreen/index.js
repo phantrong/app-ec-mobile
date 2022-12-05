@@ -53,7 +53,7 @@ const ShopRegisterScreen = ({ navigation }) => {
                         );
                     })
                     .catch((error) => {
-                        alert(error?.data?.message || error?.data?.messages);
+                        alert(error?.data?.messages || error?.data?.message);
                     });
             }
         },

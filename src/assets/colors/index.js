@@ -24,7 +24,7 @@ export default {
     CS_BACK_GROUND_OPACITY2: 'rgba(59, 59, 59, 0.8)',
     CS_BACK_GROUND_GREEN: '#528F75',
     CS_BACK_GROUND_F6: '#F6F6F6',
-    CS_BORDER_D6: '##D6D6D6',
+    CS_BORDER_D6: '#D6D6D6',
     CS_ORANGE2: '#E2582A',
     CS_BLOWN: '#7A6A56',
 };
