@@ -37,6 +37,14 @@ export const shopApi = createApi({
             query: () => `staff/my-store`,
         }),
 
+        updateShopProfile: builder.mutation({
+            query: (credentials) => ({
+                url: `staff/my-store`,
+                method: 'POST',
+                body: credentials,
+            }),
+        }),
+
         getShopListProduct: builder.query({
             query: (filter) => {
                 return {
@@ -126,4 +134,5 @@ export const {
     useGetShopSubOrderDetailQuery,
     useChangeOrderStatusMutation,
     useRegisterShopMutation,
+    useUpdateShopProfileMutation,
 } = shopApi;

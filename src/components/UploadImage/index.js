@@ -10,9 +10,9 @@ import ImageIcon from '../ImageIcon';
 import Text from '../Text';
 import DocumentPicker from 'react-native-document-picker';
 
-const UploadImage = ({ errors, label, margin, setValueForm, name, imagePath }) => {
+const UploadImage = ({ errors, label, margin, setValueForm, name, imagePath, imageDefault }) => {
     const [error, setError] = useState();
-    const [path, setPath] = useState(imagePath);
+    const [path, setPath] = useState(imagePath || imageDefault);
     const [singleFile, setSingleFile] = useState();
     const [uploadImage, uploadImageResponse] = useUploadImageMutation();
 
@@ -29,12 +29,12 @@ const UploadImage = ({ errors, label, margin, setValueForm, name, imagePath }) =
                 .then((response) => {
                     if (response?.success) {
                         setValueForm(name, response?.data);
+                        setPath(response?.data);
                         alert(response?.message);
                     }
                 })
                 .catch((error) => {
-                    // console.log(error);
-                    alert(error?.data?.message);
+                    alert(error?.data?.message || error?.data?.messages);
                 });
         } else {
             // If no file selected the show alert
@@ -66,13 +66,18 @@ const UploadImage = ({ errors, label, margin, setValueForm, name, imagePath }) =
     };
 
     const deleteImg = useCallback(() => {
-        setPath('');
+        setPath(imageDefault || '');
+        setValueForm(name, '');
         setSingleFile();
     });
 
     useEffect(() => {
         console.log(errors);
     }, [errors]);
+
+    useEffect(() => {
+        setPath(imagePath || imageDefault);
+    }, [imagePath, imageDefault]);
 
     useEffect(() => {
         if (singleFile != null) {
@@ -89,12 +94,16 @@ const UploadImage = ({ errors, label, margin, setValueForm, name, imagePath }) =
             ) : null}
             <TouchableOpacity activeOpacity={0.5} onPress={selectImg}>
                 <Box style={styles.boxUpload}>
-                    {singleFile != null || imagePath ? (
+                    {singleFile != null || path ? (
                         <Image
                             style={styles.image}
-                            source={{
-                                uri: path,
-                            }}
+                            source={
+                                path === imagePath
+                                    ? {
+                                          uri: path,
+                                      }
+                                    : path
+                            }
                         />
                     ) : (
                         <ImageIcon name={Icons.INCREASE} margin={[0, 0, 0, 0]} />
@@ -107,7 +116,7 @@ const UploadImage = ({ errors, label, margin, setValueForm, name, imagePath }) =
                     Vui lòng nhập đủ thông tin.
                 </Text>
             )}
-            {singleFile != null || imagePath ? (
+            {singleFile != null || path !== imageDefault ? (
                 <TouchableOpacity style={styles.btn} activeOpacity={0.5}>
                     <ButtonCustomize
                         margin={[10, 0, 0, 0]}
@@ -148,6 +157,10 @@ const styles = StyleSheet.create({
         width: 150,
         height: 40,
         borderRadius: 10,
+    },
+    image: {
+        width: 150,
+        height: 150,
     },
 });
 
