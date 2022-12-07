@@ -31,5 +31,32 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: Colors.CS_BORDER_D6,
     },
+    dropdownPicker: {
+        marginTop: 20,
+    },
+    dropdown: {
+        borderColor: '#C8C5CB',
+    },
+    label: {
+        fontWeight: '700',
+        fontSize: 16,
+        color: 'black',
+        marginBottom: 10,
+    },
+    labelLogin: {
+        fontSize: 18,
+        fontWeight: '500',
+        color: Colors.CS_WHITE,
+    },
+
+    btn: {
+        height: 45,
+        borderRadius: 10,
+    },
+
+    boxUpload: {
+        flex: 1,
+        flexDirection: 'row',
+    },
 });
 export default styles;

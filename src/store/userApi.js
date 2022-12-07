@@ -68,6 +68,14 @@ export const userApi = createApi({
                 return { url: `customers/products/${idProduct}/reference` };
             },
         }),
+
+        registerUser: builder.mutation({
+            query: (body) => ({
+                url: 'customers/store',
+                method: 'POST',
+                body: body,
+            }),
+        }),
     }),
 });
 
@@ -79,4 +87,5 @@ export const {
     useGetShopHomeQuery,
     useGetDetailProductQuery,
     useGetDetailProductRelateQuery,
+    useRegisterUserMutation,
 } = userApi;

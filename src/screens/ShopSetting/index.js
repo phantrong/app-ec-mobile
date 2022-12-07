@@ -49,7 +49,7 @@ const ShopSetting = () => {
         changePassword(body)
             .unwrap()
             .then((data) => {
-                Alert.alert('Thông báo', data?.messages || data?.message, [
+                Alert.alert('Thông báo', data?.message || data?.messages, [
                     {
                         text: 'OK',
                         onPress: () => {
