@@ -4,7 +4,7 @@ import React from 'react';
 import { ImageIcon } from '../../../components';
 import { Colors, Icons } from '../../../assets';
 
-const BoxBottomScreen = ({ children, addressBox, navigation, configBoxAddress }) => {
+const BoxBottomScreen = ({ children, addressBox, navigation, configBoxAddress, isConfirm, addressShip }) => {
     return (
         <View style={styles.wrapper}>
             {addressBox ? (
@@ -15,7 +15,9 @@ const BoxBottomScreen = ({ children, addressBox, navigation, configBoxAddress })
                     </View>
                     <TouchableOpacity
                         style={{ flexDirection: 'row', alignItems: 'center' }}
-                        onPress={() => navigation.navigate(configBoxAddress)}
+                        onPress={() =>
+                            navigation.navigate(configBoxAddress, { isConfirm: isConfirm, addressShip: addressShip })
+                        }
                     >
                         <Text style={[styles.text, { fontWeight: '400', marginRight: 5 }]}>Chi tiết</Text>
                         <ImageIcon name={Icons.ARROW_RIGHT} size={20} tintColor={Colors.CS_TEXT} />

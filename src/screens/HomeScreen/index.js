@@ -7,9 +7,9 @@ import { TitleSection, BoxProduct, BoxShop, Footer, Buttom } from '../component'
 import NavBarHome from './NavbarItem';
 import { Images, Colors } from '../../assets';
 import HeaderLayout from '../HeaderLayout';
-import { selectUserAuth } from '../../store/userSlice';
-import { useSelector } from 'react-redux';
-import { useGetProductHomeQuery, useGetShopHomeQuery } from '../../store/userApi';
+import { selectUserAuth, selectUserProfile, updateShipmentDetail } from '../../store/userSlice';
+import { useSelector, useDispatch } from 'react-redux';
+import { useGetProductHomeQuery, useGetShopHomeQuery, useGetUserProfileQuery } from '../../store/userApi';
 
 const defaultFilter = {
     is_paginate: 0,
@@ -24,6 +24,9 @@ const HomeScreen = ({ navigation }) => {
     const [filterShop, setFilterShop] = useState(defaultFilterShop);
 
     const auth = useSelector(selectUserAuth);
+    useGetUserProfileQuery();
+    // const dispathAddress = useDispatch();
+    // dispathAddress(updateShipmentDetail({ name: userName.name, phone: userName.phone, address: userName.address }));
 
     // xử lý khi muốn xem thêm
     const [amountShow, setAmountShow] = useState(6);

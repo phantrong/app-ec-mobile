@@ -41,6 +41,23 @@ export const userApi = createApi({
             }),
         }),
 
+        useDelProductCart: builder.mutation({
+            query: (body) => {
+                return {
+                    url: `cart/delete?product_id=${body}`,
+                    method: 'DELETE',
+                };
+            },
+        }),
+
+        useCreateOrder: builder.mutation({
+            query: (body) => ({
+                url: 'cart/create-order',
+                method: 'POST',
+                body: body,
+            }),
+        }),
+
         getUserProfile: builder.query({
             query: () => `customers/profile`,
         }),
@@ -76,16 +93,24 @@ export const userApi = createApi({
                 body: body,
             }),
         }),
+
+        getListProductMyCart: builder.query({
+            query: () => 'cart/list-product',
+        }),
     }),
 });
 
 export const {
+    usePrefetch,
     useUserLoginMutation,
     useUserAddtoCartMutation,
+    useUseDelProductCartMutation,
+    useUseCreateOrderMutation,
     useGetUserProfileQuery,
     useGetProductHomeQuery,
     useGetShopHomeQuery,
     useGetDetailProductQuery,
     useGetDetailProductRelateQuery,
     useRegisterUserMutation,
+    useGetListProductMyCartQuery,
 } = userApi;

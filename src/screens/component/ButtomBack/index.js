@@ -4,9 +4,17 @@ import React from 'react';
 import { ImageIcon } from '../../../components';
 import { Colors, Icons } from '../../../assets';
 
-const GoBack = ({ iconLeft, title, styleTitle, sizeIcon, colorIcon, navigation }) => {
+const GoBack = ({ iconLeft, title, styleTitle, sizeIcon, colorIcon, navigation, functionBack }) => {
+    const handelBack = () => {
+        if (navigation) {
+            navigation.goBack();
+        } else {
+            functionBack();
+        }
+    };
+
     return (
-        <TouchableOpacity style={styles.wrapper} onPress={() => navigation.goBack()}>
+        <TouchableOpacity style={styles.wrapper} onPress={handelBack}>
             {iconLeft ? (
                 <ImageIcon name={Icons.ARROW_LEFT} size={sizeIcon} margin={[0, 0, 0, 10]} tintColor={colorIcon} />
             ) : null}
