@@ -5,8 +5,8 @@ import { ImageIcon } from '../../../components';
 
 import { Colors, Icons } from '../../../assets';
 
-const InputNumber = ({ maxProduct, width, amountProduct, setQuanity }) => {
-    const [value, setValue] = useState('1');
+const InputNumber = ({ quantity, maxProduct, width, amountProduct, setQuanity }) => {
+    const [value, setValue] = useState(quantity ? String(quantity) : '1');
 
     if (setQuanity) {
         useEffect(() => {

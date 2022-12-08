@@ -1,6 +1,6 @@
 import { View, Text } from 'react-native';
 import React, { useEffect } from 'react';
-import { selectUserAuth } from '../../store/userSlice';
+import { selectUserAuth, selectUserProfile, selectUserShipmentDetail } from '../../store/userSlice';
 import { useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import { useGetUserProfileQuery } from '../../store/userApi';
@@ -10,6 +10,8 @@ const Profile = () => {
     const navigation = useNavigation();
     // Select data from store
     const auth = useSelector(selectUserAuth);
+    const username = useSelector(selectUserShipmentDetail);
+    console.log(username);
     const profile = useGetUserProfileQuery();
     // console.log(profile);
     const profileData = profile?.data?.data;

@@ -45,11 +45,6 @@ const DetailProduct = ({ route, navigation }) => {
     const productAddCart = { product_id: route.params.productId, quantity: quanityProduct };
     const [userAdd, addRespone] = useUserAddtoCartMutation();
 
-    console.log(productAddCart);
-    useEffect(() => {
-        console.log(addRespone?.data);
-    }, [addRespone]);
-
     const handelAddCart = useCallback(() => {
         userAdd(productAddCart)
             .unwrap()
@@ -65,9 +60,7 @@ const DetailProduct = ({ route, navigation }) => {
                 alert(error?.data?.message);
             });
 
-        if (addRespone?.data?.success) {
-            navigation.navigate('ShoppingCart');
-        }
+        navigation.navigate('ShoppingCart');
     }, []);
 
     return (

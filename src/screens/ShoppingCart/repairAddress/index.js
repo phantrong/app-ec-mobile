@@ -1,12 +1,18 @@
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
-import React from 'react';
 
 import { ViewPsition, ItemAddressInfo, GoBack } from '../../component';
 import { ImageIcon } from '../../../components';
-
+import { selectUserShipmentDetail } from '../../../store/userSlice';
+import { useSelector } from 'react-redux';
 import { Colors, Icons } from '../../../assets';
 
-const RepairAddress = ({ navigation }) => {
+const RepairAddress = ({ route, navigation }) => {
+    const address = useSelector(selectUserShipmentDetail);
+
+    let addressShip = route.params.addressShip;
+    if (address) {
+        addressShip = useSelector(selectUserShipmentDetail);
+    }
     return (
         <ViewPsition>
             <ScrollView style={{ paddingHorizontal: 10, paddingTop: 20 }}>
@@ -21,17 +27,19 @@ const RepairAddress = ({ navigation }) => {
                 <View style={styles.contentBody}>
                     <View style={styles.titleBody}>
                         <Text style={styles.title}>Thông tin nhận hàng</Text>
-                        <ImageIcon
-                            name={Icons.EDIT}
-                            size={30}
-                            tintColor={Colors.CS_TEXT}
-                            pressable
-                            onPress={() => navigation.navigate('EditAddress')}
-                        />
+                        {route.params.isConfirm ? null : (
+                            <ImageIcon
+                                name={Icons.EDIT}
+                                size={30}
+                                tintColor={Colors.CS_TEXT}
+                                pressable
+                                onPress={() => navigation.navigate('EditAddress')}
+                            />
+                        )}
                     </View>
-                    <ItemAddressInfo title={'tên'} detail={'son môi dưỡng ẩm'} />
-                    <ItemAddressInfo title={'số điện thoại'} detail={'0338204170'} />
-                    <ItemAddressInfo title={'địa chị'} detail={'lương phúc - việt long - sóc sơn - hà nội'} />
+                    <ItemAddressInfo title={'tên'} detail={addressShip?.name} />
+                    <ItemAddressInfo title={'số điện thoại'} detail={addressShip?.phone} />
+                    <ItemAddressInfo title={'địa chị'} detail={addressShip?.address} />
                 </View>
             </ScrollView>
         </ViewPsition>

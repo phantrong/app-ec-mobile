@@ -52,7 +52,7 @@ const BoxProduct = ({
                 {notInputQuantity ? (
                     <Text style={styles.quantity}>{`Số lượng: ${quantity}`}</Text>
                 ) : (
-                    <InputNumber width={130} maxProduct={12} amountProduct={amountProduct} />
+                    <InputNumber width={130} maxProduct={12} quantity={quantity} amountProduct={amountProduct} />
                 )}
             </View>
         </TouchableOpacity>

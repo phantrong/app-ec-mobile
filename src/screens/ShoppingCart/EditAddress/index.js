@@ -3,6 +3,9 @@ import React, { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
+import { updateShipmentDetail } from '../../../store/userSlice';
+import { useDispatch } from 'react-redux';
+
 import { ViewPsition, GoBack } from '../../component';
 import { InputItem, ButtonCustomize } from '../../../components';
 
@@ -15,14 +18,16 @@ const EditAddress = ({ navigation }) => {
         formState: { errors },
     } = useForm({
         defaultValues: {
-            ReciName: '',
+            name: '',
             phone: '',
             address: '',
         },
     });
 
+    const dispathAddress = useDispatch();
+
     const onSubmit = useCallback((data) => {
-        console.log(data);
+        dispathAddress(updateShipmentDetail(data));
         navigation.goBack();
     }, []);
 
@@ -48,7 +53,7 @@ const EditAddress = ({ navigation }) => {
                     >
                         <InputItem
                             control={control}
-                            name="ReciName"
+                            name="name"
                             errors={errors.ReciName}
                             placeholder="Nhập tên của bạn"
                             label="Người mua hàng"

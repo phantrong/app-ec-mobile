@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { ViewPsition, Buttom, GoBack, BoxBottomScreen } from '../../component';
 import BoxShop from '../HomeShoppingCart/BoxShop';
@@ -36,12 +36,29 @@ const productOrders = [
     },
 ];
 
-const ConfirmPayInfo = ({ navigation }) => {
+const ConfirmPayInfo = ({ route, navigation }) => {
+    const [cartCheck, setCartCheck] = useState(route.params.cart);
     const [totalPrice, setTotalPrice] = useState(0);
 
     const calculatePrice = (quantity, price) => {
         setTotalPrice(totalPrice + quantity * price);
     };
+    // console.log(route.params.cart, route.params.checked);
+
+    // useEffect(() => {
+    //     let newCartCheck = cartCheck;
+    //     console.log('TRUOC', newCartCheck);
+    //     for (let shop of newCartCheck) {
+    //         shop.products.filter((item) => !route.params.checked.includes(item.product_id));
+    //     }
+
+    //     console.log('SAU', newCartCheck);
+
+    //     // console.log('lan1', cartCheck[0]);
+    //     // console.log(route.params.checked.filter((item) => arr.includes(item)));
+    //     // cartCheck.filter
+    // }, [route.params.checked]);
+    // // const arr = [10, 17, 18];
 
     return (
         <ViewPsition>
@@ -73,9 +90,9 @@ const ConfirmPayInfo = ({ navigation }) => {
 
                 {productOrders.map((shop, indexShop) => (
                     <View style={styles.bodyContent} key={indexShop}>
-                        <View style={styles.shopBody}>
+                        {/* <View style={styles.shopBody}>
                             <BoxShop avatar={shop.image} nameShop={shop.nameShop} />
-                        </View>
+                        </View> */}
                         {shop.products.map((product, index) => (
                             <View style={styles.productBody} key={index}>
                                 <BoxProduct
