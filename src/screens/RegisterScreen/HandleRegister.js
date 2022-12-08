@@ -3,7 +3,7 @@ import { ButtonCustomize } from '../../components';
 import { Colors } from '../../assets';
 import styles from './styles';
 
-const HandleRegister = ({ handleSubmit, onSubmit }) => {
+const HandleRegister = ({ handleSubmit, onSubmit, loadingBtnSubmit }) => {
     return (
         <>
             <ButtonCustomize
@@ -15,6 +15,7 @@ const HandleRegister = ({ handleSubmit, onSubmit }) => {
                 rightItem={false}
                 LeftItem={true}
                 onPress={handleSubmit(onSubmit)}
+                isLoading={loadingBtnSubmit}
             />
         </>
     );

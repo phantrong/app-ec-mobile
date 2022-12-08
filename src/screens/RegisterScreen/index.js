@@ -1,4 +1,4 @@
-import { Text, TouchableOpacity } from 'react-native';
+import { Alert, Text, TouchableOpacity } from 'react-native';
 import React, { useCallback } from 'react';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
@@ -8,21 +8,46 @@ import { useForm } from 'react-hook-form';
 import ContentRegister from './ContentRegister';
 
 import styles from './styles';
+import { GENDER_MALE } from '../../configs/constants';
+import { useRegisterUserMutation } from '../../store/userApi';
 
 const RegisterScreen = ({ navigation }) => {
+    const [registerUser, registerUserResponse] = useRegisterUserMutation();
+
     const {
         control,
         handleSubmit,
+        setValue,
         formState: { errors },
     } = useForm({
         defaultValues: {
-            fullName: '',
+            name: '',
+            gender: GENDER_MALE,
+            birthday: '',
+            phone: '',
             email: '',
             password: '',
-            rePassword: '',
+            password_confirm: '',
         },
     });
-    const onSubmit = useCallback((data) => console.log(data), []);
+    const onSubmit = useCallback((body) => {
+        registerUser(body)
+            .unwrap()
+            .then((data) => {
+                Alert.alert('Thông báo', data?.message || data?.messages, [
+                    {
+                        text: 'OK',
+                        onPress: () => {
+                            navigation.navigate('LoginScreen');
+                        },
+                    },
+                ]);
+            })
+            .catch((error) => {
+                console.log(error);
+                alert(error?.data?.messages || error?.data?.message);
+            });
+    }, []);
 
     const componentLeft = () => {
         return (
@@ -43,7 +68,14 @@ const RegisterScreen = ({ navigation }) => {
                 keyboardShouldPersistTaps={'handled'}
                 contentContainerStyle={styles.container}
             >
-                <ContentRegister control={control} onSubmit={onSubmit} handleSubmit={handleSubmit} errors={errors} />
+                <ContentRegister
+                    control={control}
+                    onSubmit={onSubmit}
+                    handleSubmit={handleSubmit}
+                    errors={errors}
+                    setValueForm={setValue}
+                    loadingBtnSubmit={registerUserResponse?.isLoading}
+                />
             </KeyboardAwareScrollView>
         </Box>
     );
