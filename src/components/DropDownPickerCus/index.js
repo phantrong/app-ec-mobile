@@ -13,12 +13,17 @@ const DropDownPickerCus = ({
     style,
     styleDropDown,
     styleLabel,
+    name,
+    setValueForm,
 }) => {
     return (
         <View style={style ? style : ''}>
             {label ? <Text style={styleLabel ? styleLabel : ''}>{label}</Text> : null}
             <DropDownPicker
                 style={styleDropDown ? styleDropDown : ''}
+                onChangeValue={(value) => {
+                    if (setValueForm && name) setValueForm(name, value);
+                }}
                 open={open}
                 value={value}
                 items={items}

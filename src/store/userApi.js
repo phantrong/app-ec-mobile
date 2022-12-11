@@ -62,6 +62,14 @@ export const userApi = createApi({
             query: () => `customers/profile`,
         }),
 
+        updateUserProfile: builder.mutation({
+            query: (credentials) => ({
+                url: `customers/update/profile`,
+                method: 'POST',
+                body: credentials,
+            }),
+        }),
+
         getProductHome: builder.query({
             query: (filter) => {
                 return { url: `customers/products`, params: filter };
@@ -113,4 +121,5 @@ export const {
     useGetDetailProductRelateQuery,
     useRegisterUserMutation,
     useGetListProductMyCartQuery,
+    useUpdateUserProfileMutation,
 } = userApi;
