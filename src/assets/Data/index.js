@@ -1,54 +1,56 @@
 import icons from '../icon';
 import Images from '../images';
 
-const menuItems = [{
-        title: 'profile',
+const menuItems = [
+    {
+        title: 'Trang cá nhân',
         icon: icons.USER,
         config: 'Profile',
     },
+    // {
+    //     title: 'chat list',
+    //     icon: icons.MESSAGES3,
+    //     config: 'ChatList',
+    // },
+    // {
+    //     title: 'delivery address',
+    //     icon: icons.GROUP,
+    //     config: 'DeliveryAddress',
+    // },
+    // {
+    //     title: 'Interesting product',
+    //     icon: icons.HEART,
+    //     config: 'IntProduct',
+    // },
     {
-        title: 'chat list',
-        icon: icons.MESSAGES3,
-        config: 'ChatList',
-    },
-    {
-        title: 'delivery address',
-        icon: icons.GROUP,
-        config: 'DeliveryAddress',
-    },
-    {
-        title: 'Interesting product',
-        icon: icons.HEART,
-        config: 'IntProduct',
-    },
-    {
-        title: 'Order history',
+        title: 'Quản lý đơn hàng',
         icon: icons.BOX,
         config: 'OrderHistory',
     },
+    // {
+    //     title: 'Reservation history',
+    //     icon: icons.CALENDAR,
+    //     config: 'ChatList',
+    // },
+    // {
+    //     title: 'Coupon management',
+    //     icon: icons.TICKETDIS,
+    //     config: 'CouManagement',
+    // },
     {
-        title: 'Reservation history',
-        icon: icons.CALENDAR,
-        config: 'ChatList',
-    },
-    {
-        title: 'Coupon management',
-        icon: icons.TICKETDIS,
-        config: 'CouManagement',
-    },
-    {
-        title: 'setting',
+        title: 'Cài đặt',
         icon: icons.SETTING,
         config: 'Setting',
     },
     {
-        title: 'logout',
+        title: 'Đăng xuất',
         icon: icons.LOGOUT,
         config: 'LoginScreen',
     },
 ];
 
-const shopMenuItems = [{
+const shopMenuItems = [
+    {
         title: 'Thông tin cửa hàng',
         icon: icons.USER,
         config: 'ShopProfile',
@@ -75,10 +77,12 @@ const shopMenuItems = [{
     },
 ];
 
-const myCart = [{
+const myCart = [
+    {
         nameShop: 'cửa hàng khanh',
         image: Images.AVATAR,
-        products: [{
+        products: [
+            {
                 cart_item_id: 1,
                 product_id: 1,
                 product_name: 'Kristina Bayer',
@@ -114,7 +118,8 @@ const myCart = [{
     {
         nameShop: 'cửa hàng khanh2',
         image: Images.AVATAR,
-        products: [{
+        products: [
+            {
                 cart_item_id: 4,
                 product_id: 5,
                 product_name: 'Kristina Bayer',
