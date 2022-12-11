@@ -105,6 +105,14 @@ export const userApi = createApi({
         getListProductMyCart: builder.query({
             query: () => 'cart/list-product',
         }),
+
+        userChangePassword: builder.mutation({
+            query: (body) => ({
+                url: 'customers/setting/password',
+                method: 'POST',
+                body: body,
+            }),
+        }),
     }),
 });
 
@@ -122,4 +130,5 @@ export const {
     useRegisterUserMutation,
     useGetListProductMyCartQuery,
     useUpdateUserProfileMutation,
+    useUserChangePasswordMutation,
 } = userApi;
