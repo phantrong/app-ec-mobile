@@ -12,7 +12,7 @@ const ItemOrder = ({
     title,
     index,
     orderId,
-    customerName,
+    storeName,
     orderCode,
     quantity,
     totalPrice,
@@ -38,11 +38,11 @@ const ItemOrder = ({
                 <Text style={[title ? styles.title : null, styles.item, { width: 70 }]}>
                     {title ? 'STT' : index + 1}
                 </Text>
-                <Text style={[title ? styles.title : null, , styles.item, { width: 200 }]}>
-                    {title ? 'Tên khách hàng' : customerName}
-                </Text>
                 <Text style={[title ? styles.title : null, , styles.item, { width: 250 }]}>
                     {title ? 'Mã đơn hàng' : orderCode}
+                </Text>
+                <Text style={[title ? styles.title : null, , styles.item, { width: 200 }]}>
+                    {title ? 'Tên cửa hàng' : storeName}
                 </Text>
                 <Text style={[title ? styles.title : null, , styles.item, { width: 100 }]}>
                     {title ? 'Số lượng' : quantity}
