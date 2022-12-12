@@ -113,6 +113,27 @@ export const userApi = createApi({
                 body: body,
             }),
         }),
+
+        getListUserSubOrder: builder.query({
+            query: (filter) => {
+                return {
+                    url: `customers/order/list`,
+                    params: filter,
+                };
+            },
+        }),
+
+        getDetailUserSubOrder: builder.query({
+            query: (id) => `customers/order/${id}`,
+        }),
+
+        confirmSubOrder: builder.mutation({
+            query: (id, body) => ({
+                url: `customers/order/confirm/${id}`,
+                method: 'POST',
+                body: body,
+            }),
+        }),
     }),
 });
 
@@ -131,4 +152,7 @@ export const {
     useGetListProductMyCartQuery,
     useUpdateUserProfileMutation,
     useUserChangePasswordMutation,
+    useGetListUserSubOrderQuery,
+    useGetDetailUserSubOrderQuery,
+    useConfirmSubOrderMutation,
 } = userApi;

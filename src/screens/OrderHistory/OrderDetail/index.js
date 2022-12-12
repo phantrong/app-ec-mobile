@@ -2,25 +2,22 @@ import { View, Text, StyleSheet, Image, TouchableOpacity, Alert } from 'react-na
 import React, { useEffect } from 'react';
 import { Buttom, GoBack, ViewPsition } from '../../component';
 import { Colors } from '../../../assets';
-import { useChangeOrderStatusMutation, useGetShopSubOrderDetailQuery, usePrefetch } from '../../../store/shopApi';
 import { useCallback } from 'react';
 import { ScrollView } from 'react-native-gesture-handler';
 import BoxInfoCustomer from './boxInfoCustomer';
 import BoxProduct from './boxProduct';
-import { selectShopProfile } from '../../../store/shopSlice';
-import { useSelector } from 'react-redux';
-import { STATUS_ORDER_COLORS, STATUS_ORDER_DONE, STATUS_ORDER_LABEL } from '../../../configs/constants';
+import { STATUS_ORDER_COLORS, STATUS_ORDER_LABEL, STATUS_ORDER_SHIPPING } from '../../../configs/constants';
+import { useConfirmSubOrderMutation, useGetDetailUserSubOrderQuery, usePrefetch } from '../../../store/userApi';
 
 const OrderDetail = ({ navigation, route }) => {
     const orderId = route?.params?.orderId;
     const filter = route?.params?.filter;
-    const shopProfile = useSelector(selectShopProfile);
-    const orderDetailResponse = useGetShopSubOrderDetailQuery(orderId);
-    const [changeStatus, changeStatusResponse] = useChangeOrderStatusMutation();
-    const prefetchOrderDetail = usePrefetch('getShopSubOrderDetail', {
+    const orderDetailResponse = useGetDetailUserSubOrderQuery(orderId);
+    const [confirmOrder, confirmOrderResponse] = useConfirmSubOrderMutation();
+    const prefetchOrderDetail = usePrefetch('getDetailUserSubOrder', {
         force: true,
     });
-    const prefetchListOrder = usePrefetch('getShopListSubOrder', {
+    const prefetchListOrder = usePrefetch('getListUserSubOrder', {
         force: true,
     });
     const orderDetail = orderDetailResponse?.data?.data;
@@ -28,7 +25,7 @@ const OrderDetail = ({ navigation, route }) => {
     // Navigate to login page if is not authenticated
     useEffect(() => {
         if (orderDetailResponse?.error?.originalStatus === 401) {
-            navigation.navigate('ShopLoginScreen');
+            navigation.navigate('LoginScreen');
         }
     }, []);
 
@@ -52,18 +49,19 @@ const OrderDetail = ({ navigation, route }) => {
                 {
                     text: 'OK',
                     onPress: () => {
-                        if (orderDetail?.status && orderDetail?.status !== STATUS_ORDER_DONE) {
+                        if (orderDetail?.status && orderDetail?.status === STATUS_ORDER_SHIPPING) {
                             const body = {
                                 sub_order_id: orderDetail?.id,
                                 status: orderDetail?.status + 1,
                             };
-                            changeStatus(body)
+                            confirmOrder(orderDetail?.id, body)
                                 .then((data) => {
                                     alert(data?.data?.message);
                                     fetchOrderDetail();
                                     fetchListOrder();
                                 })
                                 .catch((error) => {
+                                    console.log(error);
                                     alert(error?.error?.data?.message);
                                 });
                         }
@@ -109,7 +107,7 @@ const OrderDetail = ({ navigation, route }) => {
                             style={styles.buttom}
                         />
                     </View>
-                    {orderDetail?.status !== STATUS_ORDER_DONE ? (
+                    {orderDetail?.status === STATUS_ORDER_SHIPPING ? (
                         <>
                             <Text style={{ color: Colors.CS_TEXT, fontSize: 18, fontWeight: '700' }}>
                                 Chuyển trạng thái tiếp theo
@@ -124,7 +122,7 @@ const OrderDetail = ({ navigation, route }) => {
                                     heightButtom={36}
                                     style={styles.buttom}
                                     onPress={changeStatusOrder}
-                                    isLoading={changeStatusResponse?.isLoading}
+                                    isLoading={confirmOrderResponse?.isLoading}
                                 />
                             </View>
                         </>
@@ -147,14 +145,14 @@ const OrderDetail = ({ navigation, route }) => {
                             >
                                 <Image
                                     source={{
-                                        uri: shopProfile?.avatar,
+                                        uri: orderDetail?.store?.avatar,
                                     }}
                                     width={35}
                                     height={35}
                                     style={{ marginRight: 10 }}
                                 />
                                 <Text style={{ fontSize: 16, fontWeight: '700', color: Colors.CS_TEXT }}>
-                                    {shopProfile?.name}
+                                    {orderDetail?.store?.name}
                                 </Text>
                             </TouchableOpacity>
                         </View>
