@@ -74,7 +74,7 @@ const HomeShoppingCart = ({ navigation }) => {
 
     useEffect(() => {
         if (createRespone?.data?.success) {
-            console.log(createRespone?.data);
+            // console.log(createRespone?.data);
             navigation.navigate('SuccessPurScreen');
         }
     }, [createRespone]);

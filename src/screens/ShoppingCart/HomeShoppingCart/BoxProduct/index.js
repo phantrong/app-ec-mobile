@@ -1,6 +1,8 @@
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import React, { useEffect, useState, memo } from 'react';
 
+import { formatPrice } from '../../../../functions';
+
 import { InputNumber } from '../../../component';
 
 import { Colors } from '../../../../assets';
@@ -20,6 +22,9 @@ const BoxProduct = ({
     calculatePrice,
 }) => {
     const [totalPrice, setTotalPrice] = useState(() => (priceSale || priceSale === 0 ? priceSale : price));
+
+    const priceFm = formatPrice(price);
+    const priceSaleFm = formatPrice(priceSale);
 
     if (calculatePrice) {
         useEffect(() => {
@@ -42,11 +47,11 @@ const BoxProduct = ({
                 <View style={styles.boxPrice}>
                     {isSale ? (
                         <View style={styles.price}>
-                            <Text style={[styles.price, styles.isSale]}>${price}</Text>
-                            <Text style={styles.price}>${priceSale || priceSale === 0 ? priceSale : price}</Text>
+                            <Text style={[styles.price, styles.isSale]}>${priceFm}</Text>
+                            <Text style={styles.price}>${priceSale || priceSale === 0 ? priceSaleFm : priceFm}</Text>
                         </View>
                     ) : (
-                        <Text style={[styles.price]}>${price}</Text>
+                        <Text style={[styles.price]}>${priceFm}</Text>
                     )}
                 </View>
                 {notInputQuantity ? (
@@ -82,7 +87,7 @@ const styles = StyleSheet.create({
     },
 
     boxPrice: {
-        flexDirection: 'row',
+        flexDirection: 'column',
         marginBottom: 10,
     },
 
@@ -90,10 +95,11 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: '400',
         color: Colors.CS_ORANGE2,
-        flexDirection: 'row',
+        flexDirection: 'column',
     },
 
     isSale: {
+        fontSize: 14,
         color: Colors.CS_GRAY2,
         textDecorationStyle: 'solid',
         textDecorationLine: 'line-through',

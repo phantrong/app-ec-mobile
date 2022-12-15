@@ -1,3 +1,4 @@
+import { executeReducerBuilderCallback } from '@reduxjs/toolkit/dist/mapBuilders';
 import { StyleSheet } from 'react-native';
 import { Colors } from '../../../assets';
 
@@ -7,6 +8,8 @@ const styles = StyleSheet.create({
         marginHorizontal: 10,
         marginVertical: 10,
         marginTop: 20,
+        borderColor: 'black',
+        // borderWidth: 1,
     },
 
     image: {
@@ -42,7 +45,7 @@ const styles = StyleSheet.create({
     },
 
     boxPriceSale: {
-        width: 100,
+        flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
         flexWrap: 'wrap',
@@ -58,13 +61,14 @@ const styles = StyleSheet.create({
     },
 
     price: {
-        fontSize: 18,
+        fontSize: 16,
         lineHeight: 26,
         color: Colors.CS_ORANGE2,
     },
 
     boxIcon: {
-        flexDirection: 'row',
+        flexDirection: 'column',
+        marginRight: 10,
     },
 });
 
