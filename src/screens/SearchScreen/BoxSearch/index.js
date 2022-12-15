@@ -5,7 +5,7 @@ import React, { useState, useRef } from 'react';
 import { ImageIcon } from '../../../components';
 import { Colors, Icons } from '../../../assets';
 
-const BoxSearch = () => {
+const BoxSearch = ({ valueChange }) => {
     const [valueSearch, setValueSearch] = useState('');
 
     const inputRef = useRef();
@@ -15,7 +15,13 @@ const BoxSearch = () => {
     };
 
     const handelSearch = () => {
-        inputRef.current.focus();
+        if (valueSearch.length > 1) {
+            setValueSearch('');
+            inputRef.current.blur();
+            valueChange(valueSearch);
+        } else {
+            inputRef.current.focus();
+        }
     };
 
     const handelDel = () => {
