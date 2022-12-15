@@ -157,22 +157,25 @@ const OrderDetail = ({ navigation, route }) => {
                             </TouchableOpacity>
                         </View>
 
-                        {orderDetail?.order_items?.map((product, index) => (
-                            <BoxProduct
-                                key={product?.id}
-                                id={product?.product?.product_id}
-                                image={product?.product?.product_medias_image?.media_path}
-                                title={product?.product?.name}
-                                price={product?.product?.price}
-                                priceSale={product?.price}
-                                isSale={
-                                    product?.price === product?.product?.price || typeof product?.price === 'undefined'
-                                        ? false
-                                        : true
-                                }
-                                quantity={product?.quantity}
-                            />
-                        ))}
+                        {orderDetail?.order_items?.map((product, index) => {
+                            return (
+                                <BoxProduct
+                                    key={product?.product?.id}
+                                    id={product?.product?.product_id}
+                                    image={product?.product?.product_medias_image?.media_path}
+                                    title={product?.product?.name}
+                                    price={product?.product?.price}
+                                    priceSale={product?.price}
+                                    isSale={
+                                        product?.price === product?.product?.price ||
+                                        typeof product?.price === 'undefined'
+                                            ? false
+                                            : true
+                                    }
+                                    quantity={product?.quantity}
+                                />
+                            );
+                        })}
                     </View>
                 </ScrollView>
             </ViewPsition>

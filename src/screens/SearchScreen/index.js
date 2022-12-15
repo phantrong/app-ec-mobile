@@ -20,7 +20,10 @@ const SearchScreen = ({ navigation }) => {
                 <Section direction={'row'}>
                     <BoxProduct navigation={navigation} isLike />
                     <BoxProduct navigation={navigation} sale={false} />
-                    <BoxProduct navigation={navigation} />
+                    <BoxProduct
+                        navigation={navigation}
+                        image="https://cf.shopee.vn/file/af21a72af277c6a11e1a35995e07b505"
+                    />
                     <BoxProduct navigation={navigation} isLike />
                     <BoxProduct navigation={navigation} sale={false} />
                     <BoxProduct navigation={navigation} />
