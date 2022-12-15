@@ -24,8 +24,8 @@ const SearchHeader = ({ navigation, closeSearch, isOpen }) => {
     };
 
     const handelClickSearch = () => {
-        if (valueSearch) {
-            navigation.navigate('SearchScreen');
+        if (valueSearch.length > 1) {
+            navigation.navigate('SearchScreen', { value: valueSearch });
             closeSearch(false);
         }
     };

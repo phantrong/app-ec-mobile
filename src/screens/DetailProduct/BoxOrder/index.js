@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet } from 'react-native';
 import React from 'react';
 
+import { formatPrice } from '../../../functions';
 import { BoxCheck, ImgProduct, Label, InputNumber } from '../../component';
 
 import { Colors } from '../../../assets';
@@ -17,6 +18,9 @@ const BoxOrder = ({
     sale = true,
     setQuanity,
 }) => {
+    const priceFm = formatPrice(price);
+    const priceSaleFm = formatPrice(priceSale);
+
     return (
         <View style={styles.wrapper}>
             <ImgProduct images={images} />
@@ -25,11 +29,11 @@ const BoxOrder = ({
             <Text style={styles.desProduct}>{desProduct}</Text>
             {sale ? (
                 <View style={styles.boxPriceSale}>
-                    <Text style={styles.sale}>${price}</Text>
-                    <Text style={styles.price}>${priceSale}</Text>
+                    <Text style={styles.sale}>${priceFm}</Text>
+                    <Text style={styles.price}>${priceSaleFm}</Text>
                 </View>
             ) : (
-                <Text style={styles.price}>${price}</Text>
+                <Text style={styles.price}>${priceFm}</Text>
             )}
             <Label name={'new'} backgroundColor={Colors.CS_ORANGE2} nameColor={Colors.CS_WHITE} />
             {colors ? <BoxCheck title={'color'} categorys={colors} /> : null}

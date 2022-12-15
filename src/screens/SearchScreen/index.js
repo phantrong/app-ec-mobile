@@ -1,6 +1,8 @@
 import { Text, View, ScrollView, StyleSheet } from 'react-native';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+
+import { useGetProductHomeQuery, useGetShopHomeQuery } from '../../store/userApi';
 
 import HeaderLayout from '../HeaderLayout';
 import BoxSearch from './BoxSearch';
@@ -9,28 +11,54 @@ import { BoxProduct, Footer } from '../component';
 
 import { Colors } from '../../assets';
 
-const SearchScreen = ({ navigation }) => {
-    const [listProductSearch, setListProductSearch] = useState([]);
+const SearchScreen = ({ route, navigation }) => {
+    const [valueSearch, setValueSearch] = useState(route.params.value);
+    const [filter, setFilter] = useState({ is_paginate: 1, page: 1, keyword: 'áo' });
+    const [filterShop, setFilterShop] = useState({
+        is_paginate: 0,
+    });
+
+    useEffect(() => {
+        setFilter({ is_paginate: 1, page: 1, keyword: valueSearch });
+    }, [valueSearch]);
+
+    const products = useGetProductHomeQuery(filter);
+    const productSearchs = products?.data?.data;
+
+    const shopsHome = useGetShopHomeQuery(filterShop);
+
+    const shops = shopsHome?.data?.data || [];
 
     return (
         <HeaderLayout navigation={navigation}>
-            <BoxSearch />
+            <BoxSearch valueChange={setValueSearch} />
             <ScrollView style={styles.wrapper}>
-                <Text style={styles.title}>Sản Phẩm</Text>
+                {productSearchs?.data.length === 0 ? (
+                    <Text style={styles.title}>Không có sản phẩm</Text>
+                ) : (
+                    <Text style={styles.title}>Sản Phẩm</Text>
+                )}
                 <Section direction={'row'}>
-                    <BoxProduct navigation={navigation} isLike />
-                    <BoxProduct navigation={navigation} sale={false} />
-                    <BoxProduct
-                        navigation={navigation}
-                        image="https://cf.shopee.vn/file/af21a72af277c6a11e1a35995e07b505"
-                    />
-                    <BoxProduct navigation={navigation} isLike />
-                    <BoxProduct navigation={navigation} sale={false} />
-                    <BoxProduct navigation={navigation} />
-                    <BoxProduct navigation={navigation} />
+                    {productSearchs?.data.map((product, index) => {
+                        const shop = shops?.filter((shop) => shop.id === product.store_id);
+                        return (
+                            <BoxProduct
+                                navigation={navigation}
+                                image={product.product_medias_image.media_path}
+                                category={product.description}
+                                name={product.name}
+                                price={product.price}
+                                priceSale={product.discount}
+                                sale={true}
+                                productId={product.id}
+                                storeInfo={shop}
+                                key={product.id}
+                            />
+                        );
+                    })}
                 </Section>
-                <Footer />
             </ScrollView>
+            <Footer />
         </HeaderLayout>
     );
 };
@@ -47,4 +75,5 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
 });
+
 export default SearchScreen;
