@@ -41,46 +41,50 @@ const ListOrder = ({ navigation }) => {
                 <Box>
                     <Text style={styles.title}>Danh sách đơn hàng</Text>
                 </Box>
-                <FlatList
-                    data={[1]}
-                    style={styles.contentBody}
-                    horizontal
-                    renderItem={() => {
-                        return (
-                            <View>
-                                <ItemOrder title />
-                                {listOrder?.length
-                                    ? listOrder.map((item, index) => (
-                                          <ItemOrder
-                                              key={index}
-                                              index={index + PER_PAGE_DEFAULT * (filter.page - 1)}
-                                              orderId={item?.id}
-                                              customerName={item?.receiver_name}
-                                              orderCode={item?.code}
-                                              quantity={item?.quantity}
-                                              totalPrice={item?.total_payment}
-                                              orderDate={item?.ordered_at}
-                                              status={item?.status}
-                                              filter={filter}
-                                          />
-                                      ))
-                                    : null}
-                            </View>
-                        );
-                    }}
-                />
-                <Pagination
-                    filter={filter}
-                    setFilter={setFilter}
-                    lastPage={listOrderResponse?.data?.data?.last_page || 1}
-                    activePage={listOrderResponse?.data?.data?.current_page || 1}
-                    notChecked
-                    styleCheck={styles.boxNumber}
-                    styleTextNotTick={styles.boxNumberText}
-                    styleBox={{ justifyContent: 'center', marginVertical: 20 }}
-                />
-
-                <Footer />
+                {listOrder?.length ? (
+                    <FlatList
+                        data={[1]}
+                        style={styles.contentBody}
+                        horizontal
+                        renderItem={() => {
+                            return (
+                                <View>
+                                    <ItemOrder title />
+                                    {listOrder?.length
+                                        ? listOrder.map((item, index) => (
+                                              <ItemOrder
+                                                  key={index}
+                                                  index={index + PER_PAGE_DEFAULT * (filter.page - 1)}
+                                                  orderId={item?.id}
+                                                  customerName={item?.receiver_name}
+                                                  orderCode={item?.code}
+                                                  quantity={item?.quantity}
+                                                  totalPrice={item?.total_payment}
+                                                  orderDate={item?.ordered_at}
+                                                  status={item?.status}
+                                                  filter={filter}
+                                              />
+                                          ))
+                                        : null}
+                                </View>
+                            );
+                        }}
+                    />
+                ) : (
+                    <Text style={styles.note}>Bạn chưa có đơn hàng nào.</Text>
+                )}
+                {listOrder?.length ? (
+                    <Pagination
+                        filter={filter}
+                        setFilter={setFilter}
+                        lastPage={listOrderResponse?.data?.data?.last_page || 1}
+                        activePage={listOrderResponse?.data?.data?.current_page || 1}
+                        notChecked
+                        styleCheck={styles.boxNumber}
+                        styleTextNotTick={styles.boxNumberText}
+                        styleBox={{ justifyContent: 'center', marginVertical: 20 }}
+                    />
+                ) : null}
             </ScrollView>
         </ViewPsition>
     );
@@ -96,6 +100,14 @@ const styles = StyleSheet.create({
 
     title: {
         fontSize: 24,
+        fontWeight: '700',
+        color: Colors.CS_TEXT,
+        marginHorizontal: 20,
+        marginTop: 20,
+    },
+
+    note: {
+        fontSize: 16,
         fontWeight: '700',
         color: Colors.CS_TEXT,
         marginHorizontal: 20,

@@ -56,45 +56,49 @@ const ListProduct = ({ navigation }) => {
                         />
                     </TouchableOpacity>
                 </Box>
-                <FlatList
-                    data={[1]}
-                    style={styles.contentBody}
-                    horizontal
-                    renderItem={() => {
-                        return (
-                            <View>
-                                <ItemProduct title />
-                                {listProduct?.length
-                                    ? listProduct.map((item, index) => (
-                                          <ItemProduct
-                                              key={index}
-                                              index={index + PER_PAGE_DEFAULT * (filter.page - 1)}
-                                              productId={item?.id}
-                                              imagePath={item?.product_medias[0]?.media_path}
-                                              nameProduct={item?.name}
-                                              price={item?.price}
-                                              discount={item?.discount}
-                                              status={item?.status}
-                                              filter={filter}
-                                          />
-                                      ))
-                                    : null}
-                            </View>
-                        );
-                    }}
-                />
-                <Pagination
-                    filter={filter}
-                    setFilter={setFilter}
-                    lastPage={listProductResponse?.data?.data?.products?.last_page || 1}
-                    activePage={listProductResponse?.data?.data?.products?.current_page || 1}
-                    notChecked
-                    styleCheck={styles.boxNumber}
-                    styleTextNotTick={styles.boxNumberText}
-                    styleBox={{ justifyContent: 'center', marginVertical: 20 }}
-                />
-
-                <Footer />
+                {listProduct?.length ? (
+                    <FlatList
+                        data={[1]}
+                        style={styles.contentBody}
+                        horizontal
+                        renderItem={() => {
+                            return (
+                                <View>
+                                    <ItemProduct title />
+                                    {listProduct?.length
+                                        ? listProduct.map((item, index) => (
+                                              <ItemProduct
+                                                  key={index}
+                                                  index={index + PER_PAGE_DEFAULT * (filter.page - 1)}
+                                                  productId={item?.id}
+                                                  imagePath={item?.product_medias[0]?.media_path}
+                                                  nameProduct={item?.name}
+                                                  price={item?.price}
+                                                  discount={item?.discount}
+                                                  status={item?.status}
+                                                  filter={filter}
+                                              />
+                                          ))
+                                        : null}
+                                </View>
+                            );
+                        }}
+                    />
+                ) : (
+                    <Text style={styles.note}>Bạn chưa có sản phẩm nào.</Text>
+                )}
+                {listProduct?.length ? (
+                    <Pagination
+                        filter={filter}
+                        setFilter={setFilter}
+                        lastPage={listProductResponse?.data?.data?.products?.last_page || 1}
+                        activePage={listProductResponse?.data?.data?.products?.current_page || 1}
+                        notChecked
+                        styleCheck={styles.boxNumber}
+                        styleTextNotTick={styles.boxNumberText}
+                        styleBox={{ justifyContent: 'center', marginVertical: 20 }}
+                    />
+                ) : null}
             </ScrollView>
         </ViewPsition>
     );
@@ -110,6 +114,14 @@ const styles = StyleSheet.create({
 
     title: {
         fontSize: 24,
+        fontWeight: '700',
+        color: Colors.CS_TEXT,
+        marginHorizontal: 20,
+        marginTop: 20,
+    },
+
+    note: {
+        fontSize: 16,
         fontWeight: '700',
         color: Colors.CS_TEXT,
         marginHorizontal: 20,
