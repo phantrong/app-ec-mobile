@@ -38,7 +38,7 @@ const BoxProduct = ({
 
     return (
         <TouchableOpacity style={styles.wrapper} onPress={() => navigation.navigate(navigateConfig)}>
-            <Image source={image} style={styles.image} />
+            <Image source={{ uri: image }} style={styles.image} />
             <View style={styles.content} onLayout={() => (onLayout ? onLayout(quantity, price) : null)}>
                 <Text style={styles.title} numberOfLines={5} ellipsizeMode={'tail'}>
                     {title}

@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
 
     title: {
         fontSize: 20,
+        marginBottom: 10,
         fontWeight: '700',
         color: Colors.CS_TEXT,
         textTransform: 'capitalize',

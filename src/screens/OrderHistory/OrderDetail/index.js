@@ -157,25 +157,26 @@ const OrderDetail = ({ navigation, route }) => {
                             </TouchableOpacity>
                         </View>
 
-                        {orderDetail?.order_items?.map((product, index) => {
-                            return (
-                                <BoxProduct
-                                    key={product?.product?.id}
-                                    id={product?.product?.product_id}
-                                    image={product?.product?.product_medias_image?.media_path}
-                                    title={product?.product?.name}
-                                    price={product?.product?.price}
-                                    priceSale={product?.price}
-                                    isSale={
-                                        product?.price === product?.product?.price ||
-                                        typeof product?.price === 'undefined'
-                                            ? false
-                                            : true
-                                    }
-                                    quantity={product?.quantity}
-                                />
-                            );
-                        })}
+                        {orderDetail?.order_items &&
+                            orderDetail?.order_items?.map((product, index) => {
+                                return (
+                                    <BoxProduct
+                                        key={product?.product?.id || 0}
+                                        id={product?.product?.product_id}
+                                        image={product?.product?.product_medias_image?.media_path}
+                                        title={product?.product?.name}
+                                        price={product?.product?.price}
+                                        priceSale={product?.price}
+                                        isSale={
+                                            product?.price === product?.product?.price ||
+                                            typeof product?.price === 'undefined'
+                                                ? false
+                                                : true
+                                        }
+                                        quantity={product?.quantity}
+                                    />
+                                );
+                            })}
                     </View>
                 </ScrollView>
             </ViewPsition>

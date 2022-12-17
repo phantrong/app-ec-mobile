@@ -34,9 +34,15 @@ const HomeShoppingCart = ({ navigation }) => {
     const [isConfirm, setIsConfirm] = useState(false);
     const profile = useSelector(selectUserProfile);
 
+    // console.log(profile);
+
     const dispathAddress = useDispatch();
 
     const addressShip = useSelector(selectUserShipmentDetail);
+
+    useEffect(() => {
+        dispathAddress(updateShipmentDetail({ name: profile?.name, phone: profile?.phone, address: profile?.address }));
+    }, [profile]);
 
     useEffect(() => {
         if (Object.getOwnPropertyNames(addressShip).length === 0) {
@@ -185,7 +191,7 @@ const HomeShoppingCart = ({ navigation }) => {
                             >
                                 <Check />
                             </TouchableOpacity>
-                            <Text>Check All</Text>
+                            <Text>Chọn hết</Text>
                         </View>
                     )}
                     {/* <Text>Total: {totalAmount}</Text> */}

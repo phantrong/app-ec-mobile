@@ -55,6 +55,7 @@ const Profile = () => {
             gender: '',
             birthday: '',
             phone: '',
+            address: '',
         },
     });
 
@@ -73,6 +74,7 @@ const Profile = () => {
             setValueGender(profileData?.gender);
             setValue('birthday', profileData?.birthday);
             setValue('phone', profileData?.phone);
+            setValue('address', profileData?.address);
         }
     }, [profileData]);
 
@@ -140,6 +142,14 @@ const Profile = () => {
                                 errors={errors?.phone}
                                 placeholder="Nhập số điện thoại ..."
                                 label="Số điện thoại"
+                                margin={[20, 0, 0, 0]}
+                            />
+                            <InputItem
+                                control={control}
+                                name="address"
+                                errors={errors?.address}
+                                placeholder="Nhập số địa chỉ ..."
+                                label="Địa chỉ"
                                 margin={[20, 0, 0, 0]}
                             />
                             <ButtonCustomize

@@ -1,5 +1,5 @@
 import { View, StyleSheet, ScrollView } from 'react-native';
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
@@ -11,10 +11,12 @@ import { InputItem, ButtonCustomize } from '../../../components';
 
 import { Colors } from '../../../assets';
 
-const EditAddress = ({ navigation }) => {
+const EditAddress = ({ route, navigation }) => {
+    const infoShip = route.params.info;
     const {
         control,
         handleSubmit,
+        setValue,
         formState: { errors },
     } = useForm({
         defaultValues: {
@@ -23,6 +25,12 @@ const EditAddress = ({ navigation }) => {
             address: '',
         },
     });
+
+    useEffect(() => {
+        setValue('name', infoShip.name);
+        setValue('phone', infoShip.phone);
+        setValue('address', infoShip.address);
+    }, []);
 
     const dispathAddress = useDispatch();
 

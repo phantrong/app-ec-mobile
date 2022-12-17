@@ -11,7 +11,9 @@ const SucressScreen = ({ navigation }) => {
         <View style={styles.wrapper}>
             <Image source={Images.SUCESS} style={styles.img} />
             <Text style={styles.title}>Mua hàng thành công</Text>
-            <Text style={styles.noti}>Một email xác nhận đơn hàng đã được gửi đến địa chỉ email liên hệ của bạn</Text>
+            <Text style={styles.noti}>
+                Đơn hàng của bạn đã được tạo. Hãy vào quản lý đơn hàng của bạn để theo dõi trạng thái đơn hàng.
+            </Text>
             <Buttom
                 iconColor={Colors.CS_TITLE}
                 backgroudColor={Colors.CS_TITLE}

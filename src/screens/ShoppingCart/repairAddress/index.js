@@ -33,13 +33,13 @@ const RepairAddress = ({ route, navigation }) => {
                                 size={30}
                                 tintColor={Colors.CS_TEXT}
                                 pressable
-                                onPress={() => navigation.navigate('EditAddress')}
+                                onPress={() => navigation.navigate('EditAddress', { info: address })}
                             />
                         )}
                     </View>
                     <ItemAddressInfo title={'tên'} detail={addressShip?.name} />
                     <ItemAddressInfo title={'số điện thoại'} detail={addressShip?.phone} />
-                    <ItemAddressInfo title={'địa chị'} detail={addressShip?.address} />
+                    <ItemAddressInfo title={'địa chỉ'} detail={addressShip?.address} />
                 </View>
             </ScrollView>
         </ViewPsition>
