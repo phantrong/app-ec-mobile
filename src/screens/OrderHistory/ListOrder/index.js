@@ -72,8 +72,8 @@ const ListOrder = ({ navigation }) => {
                 <Pagination
                     filter={filter}
                     setFilter={setFilter}
-                    lastPage={listOrderResponse?.data?.data?.last_page || 1}
-                    activePage={listOrderResponse?.data?.data?.current_page || 1}
+                    lastPage={listOrderResponse?.data?.data?.listOrder?.last_page || 1}
+                    activePage={listOrderResponse?.data?.data?.listOrder?.current_page || 1}
                     notChecked
                     styleCheck={styles.boxNumber}
                     styleTextNotTick={styles.boxNumberText}
