@@ -6,18 +6,7 @@ import { BoxCheck, ImgProduct, Label, InputNumber } from '../../component';
 
 import { Colors } from '../../../assets';
 
-const BoxOrder = ({
-    images,
-    sizes,
-    colors,
-    maxProduct,
-    price,
-    priceSale,
-    category,
-    desProduct,
-    sale = true,
-    setQuanity,
-}) => {
+const BoxOrder = ({ images, sizes, colors, price, priceSale, category, name, sale = true, setQuanity }) => {
     const priceFm = formatPrice(price);
     const priceSaleFm = formatPrice(priceSale);
 
@@ -25,23 +14,24 @@ const BoxOrder = ({
         <View style={styles.wrapper}>
             <ImgProduct images={images} />
 
-            <Text style={styles.category}>{category}</Text>
-            <Text style={styles.desProduct}>{desProduct}</Text>
-            {sale ? (
-                <View style={styles.boxPriceSale}>
-                    <Text style={styles.sale}>${priceFm}</Text>
-                    <Text style={styles.price}>${priceSaleFm}</Text>
-                </View>
-            ) : (
-                <Text style={styles.price}>${priceFm}</Text>
-            )}
-            <Label name={'new'} backgroundColor={Colors.CS_ORANGE2} nameColor={Colors.CS_WHITE} />
-            {colors ? <BoxCheck title={'color'} categorys={colors} /> : null}
-            {sizes ? <BoxCheck title={'size'} categorys={sizes} /> : null}
+            <View style={styles.body}>
+                <Text style={styles.category}>{category}</Text>
+                <Text style={styles.name}>{name}</Text>
+                {sale ? (
+                    <View style={styles.boxPriceSale}>
+                        <Text style={styles.sale}>${priceFm}</Text>
+                        <Text style={styles.price}>${priceSaleFm}</Text>
+                    </View>
+                ) : (
+                    <Text style={styles.price}>${priceFm}</Text>
+                )}
+                <Label name={'new'} backgroundColor={Colors.CS_ORANGE2} nameColor={Colors.CS_WHITE} />
+                {colors ? <BoxCheck title={'color'} categorys={colors} /> : null}
+                {sizes ? <BoxCheck title={'size'} categorys={sizes} /> : null}
 
-            <Text style={styles.amount}>amount</Text>
-            <InputNumber maxProduct={maxProduct} width={150} setQuanity={setQuanity} />
-            <Text style={styles.totalQuantity}>total amount left: {maxProduct}.</Text>
+                <Text style={styles.amount}>amount</Text>
+                <InputNumber maxProduct={100} width={150} setQuanity={setQuanity} />
+            </View>
         </View>
     );
 };
@@ -59,14 +49,19 @@ const styles = StyleSheet.create({
         padding: 8,
         alignSelf: 'center',
     },
+
+    body: {
+        margin: 15,
+    },
     category: {
         fontSize: 18,
         fontWeight: '700',
         color: Colors.CS_ORANGE2,
-        marginTop: 10,
     },
-    desProduct: {
-        marginTop: 15,
+
+    // desProduct: {
+    name: {
+        marginTop: 5,
         fontSize: 18,
         fontWeight: '700',
         color: Colors.CS_TEXT,

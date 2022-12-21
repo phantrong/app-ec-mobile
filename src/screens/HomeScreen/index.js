@@ -34,12 +34,12 @@ const HomeScreen = ({ navigation }) => {
 
     // lấy thông tin sản phẩm
     const productsHome = useGetProductHomeQuery(filter);
-    const products = productsHome?.data?.data || [];
+    const products = productsHome?.data?.data;
 
     // console.log(products);
     // Lấy thông tin shop
     const shopsHome = useGetShopHomeQuery(filterShop);
-    const shops = shopsHome?.data?.data || [];
+    const shops = shopsHome?.data?.data;
 
     const handelShowMoreProduct = () => {
         setAmountShow(amountShow + 3);
@@ -72,7 +72,7 @@ const HomeScreen = ({ navigation }) => {
                                 <BoxProduct
                                     navigation={navigation}
                                     image={product.product_medias_image.media_path}
-                                    category={product.description}
+                                    category={product.category.name}
                                     name={product.name}
                                     price={product.price}
                                     priceSale={product.discount}
@@ -136,6 +136,7 @@ const HomeScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
     wrapperButtom: {
+        marginTop: 20,
         width: '100%',
         flexDirection: 'row',
         justifyContent: 'center',

@@ -4,12 +4,10 @@ import { Colors } from '../../../assets';
 
 const styles = StyleSheet.create({
     wrapper: {
-        width: '44%',
-        marginHorizontal: 10,
+        width: '46%',
         marginVertical: 10,
-        marginTop: 20,
-        borderColor: 'black',
-        // borderWidth: 1,
+        marginHorizontal: 5,
+        backgroundColor: Colors.CS_WHITE,
     },
 
     image: {

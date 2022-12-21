@@ -39,29 +39,38 @@ const DetailProduct = ({ route, navigation }) => {
     const shopsHome = useGetShopHomeQuery(filterShop);
     const shops = shopsHome?.data?.data || [];
 
-    const store = route.params.storeInfo[0];
+    let store;
+    if (typeof route.params.storeInfo === 'object') {
+        store = route.params.storeInfo[0];
+    } else {
+        store = shops?.filter((item) => item.id === route.params.storeInfo)[0];
+    }
 
     //API POSH: thêm vào giỏ hàng
-    const productAddCart = { product_id: route.params.productId, quantity: quanityProduct };
+    let productAddCart = { product_id: route.params.productId, quantity: 1 };
+    useEffect(() => {
+        productAddCart = { product_id: route.params.productId, quantity: quanityProduct };
+    }, [quanityProduct]);
     const [userAdd, addRespone] = useUserAddtoCartMutation();
 
-    const handelAddCart = useCallback(() => {
+    const handelAddCart = () => {
         userAdd(productAddCart)
             .unwrap()
             .catch((error) => {
                 alert(error?.data?.message);
             });
-    }, []);
+    };
 
-    const handelBuyProduct = useCallback(() => {
+    const handelBuyProduct = () => {
         userAdd(productAddCart)
             .unwrap()
+            .then(() => {
+                navigation.navigate('ShoppingCart');
+            })
             .catch((error) => {
                 alert(error?.data?.message);
             });
-
-        navigation.navigate('ShoppingCart');
-    }, []);
+    };
 
     return (
         <HeaderLayout navigation={navigation}>
@@ -69,10 +78,9 @@ const DetailProduct = ({ route, navigation }) => {
             <ScrollView>
                 <BoxOrder
                     images={product?.product_medias}
-                    maxProduct={12}
                     price={product?.price}
                     priceSale={product?.discount}
-                    desProduct={product?.description}
+                    name={product?.name}
                     category={product?.category?.name}
                     setQuanity={setQuanityProduct}
                 />
@@ -81,26 +89,30 @@ const DetailProduct = ({ route, navigation }) => {
                     nameShop={store.name}
                     phone="0338204170"
                     address={store.address}
-                    dayWork="Mon, Tues, Wed, Thu, Fri, Sat"
+                    dayWork="Thứ 2 - thứ 7"
                     timeWork="8:00 - 17:30"
                     totalProduct="35"
                 />
-                <BoxProductDes category={product?.category?.name} long={110} color placeOfImport="quảng châu" />
+                <BoxProductDes
+                    category={product?.category?.name}
+                    name={product?.name}
+                    desProduct={product?.description}
+                />
 
-                <Text
-                    style={{
-                        width: '95%',
-                        marginLeft: 10,
-                        marginBottom: 5,
-                        fontSize: 20,
-                        fontWeight: '700',
-                        color: Colors.CS_TEXT,
-                        marginBottom: 5,
-                        textTransform: 'capitalize',
-                    }}
-                >
-                    Featured products
-                </Text>
+                {productRelates[0] ? (
+                    <Text
+                        style={{
+                            width: '95%',
+                            marginLeft: 10,
+                            fontSize: 20,
+                            fontWeight: '700',
+                            color: Colors.CS_TEXT,
+                            textTransform: 'capitalize',
+                        }}
+                    >
+                        Sản phẩm liên quan
+                    </Text>
+                ) : null}
                 <Section direction={'row'}>
                     {productRelates?.map((product, index) => {
                         const shop = shops?.filter((shop) => shop.id === product.store_id);
@@ -108,7 +120,7 @@ const DetailProduct = ({ route, navigation }) => {
                             <BoxProduct
                                 navigation={navigation}
                                 image={product.product_medias_image.media_path}
-                                category={product.description}
+                                category={product.category.name}
                                 name={product.name}
                                 price={product.price}
                                 priceSale={product.discount}

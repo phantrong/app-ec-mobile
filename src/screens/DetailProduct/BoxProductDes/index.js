@@ -3,14 +3,13 @@ import React, { memo } from 'react';
 
 import Item from './Item';
 import { Colors } from '../../../assets';
-const BoxProductDes = ({ category, long, color, placeOfImport }) => {
+const BoxProductDes = ({ category, name, desProduct }) => {
     return (
         <View style={styles.wrapper}>
-            <Text style={styles.title}>product description</Text>
-            <Item label="Category" des={category} />
-            <Item label="longs" des={long + ' cm'} />
-            <Item label="color" des={color ? 'đầy đủ' : 'một màu'} />
-            <Item label="place of import" des={placeOfImport} />
+            <Text style={styles.title}>Mô tả sản phẩm</Text>
+            <Item label="Thế loại" des={category} />
+            <Item label="Tên sản phẩm" des={name} />
+            <Item label="Mô tả sản phẩm" des={desProduct} />
         </View>
     );
 };

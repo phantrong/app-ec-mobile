@@ -10,6 +10,7 @@ import {
 } from '../../../store/userApi';
 import { selectUserProfile, selectUserShipmentDetail, updateShipmentDetail } from '../../../store/userSlice';
 
+import { formatPrice } from '../../../functions';
 import { Footer, Buttom, ViewPsition, BoxBottomScreen, GoBack } from '../../component';
 import { ImageIcon } from '../../../components';
 
@@ -23,18 +24,15 @@ import { Colors, Icons } from '../../../assets';
 
 const HomeShoppingCart = ({ navigation }) => {
     const [cart, setCart] = useState();
-    const [priceProduct, setPriceProduct] = useState([]);
+    const [totalProduct, setTotalProduct] = useState(0);
     const [totalAmount, setTotalAmount] = useState(0);
     const [isCheckAll, setIsCheckAll] = useState(false);
     const [isChecked, setIsChecked] = useState([]);
     const [listCartId, setListCartId] = useState([]);
-
-    // const addressShip =
+    console.log(cart);
     // xử lý chuyển thành xác nhận hàng mua.
     const [isConfirm, setIsConfirm] = useState(false);
     const profile = useSelector(selectUserProfile);
-
-    // console.log(profile);
 
     const dispathAddress = useDispatch();
 
@@ -68,19 +66,25 @@ const HomeShoppingCart = ({ navigation }) => {
                 .catch((error) => {
                     alert(error?.data?.message);
                 });
-            // console.log(addressShip, 'listCartId', listCartId);
         } else if (!addressShip.address) {
             alert('Địa chỉ đang thiếu, vui lòng kiểm tra lại');
         } else if (!isChecked[0]) {
             alert('Hãy chọn sản phẩm bạn muốn mua, bằng cách tích vào đấu tích bên cạnh sản phẩm');
         } else {
             setIsConfirm(true);
+            for (value1 of isChecked) {
+                for (value2 of cart) {
+                    const product = value2.products.find((item) => item.product_id === value1);
+                    if (product) {
+                        setTotalAmount((prev) => prev + product.price_discount * product.quantity);
+                    }
+                }
+            }
         }
     };
 
     useEffect(() => {
         if (createRespone?.data?.success) {
-            // console.log(createRespone?.data);
             navigation.navigate('SuccessPurScreen');
         }
     }, [createRespone]);
@@ -95,24 +99,24 @@ const HomeShoppingCart = ({ navigation }) => {
         }
         return isShow;
     };
+    let listProducts = useGetListProductMyCartQuery();
+    let myCarts = listProducts?.data?.data;
+
+    const prefetchListProductCart = usePrefetch('getListProductMyCart', { force: true });
+
+    const fetchProductCart = () => {
+        prefetchListProductCart();
+    };
 
     const [deleteProduct, delRespone] = useUseDelProductCartMutation();
-    const handelDel = useCallback((delProduct) => {
+    const handelDel = (delProduct) => {
         deleteProduct(delProduct)
             .unwrap()
             .then(() => fetchProductCart())
             .catch((error) => {
                 alert(error?.data?.message);
             });
-    }, []);
-
-    let listProducts = useGetListProductMyCartQuery();
-    let myCarts = listProducts?.data?.data;
-    const prefetchListProductCart = usePrefetch('getListProductMyCart', { force: true });
-
-    const fetchProductCart = useCallback(() => {
-        prefetchListProductCart();
-    }, []);
+    };
 
     useEffect(() => {
         fetchProductCart();
@@ -121,9 +125,16 @@ const HomeShoppingCart = ({ navigation }) => {
 
     useEffect(() => {
         setCart(myCarts);
+        if (cart) {
+            let sum = 0;
+            for (shop of cart) {
+                for (product of shop.products) {
+                    sum = sum + 1;
+                }
+            }
+            setTotalProduct(sum);
+        }
     }, [cart]);
-
-    // console.log(cart);
 
     const handleSelectAll = () => {
         setIsCheckAll(!isCheckAll);
@@ -149,19 +160,6 @@ const HomeShoppingCart = ({ navigation }) => {
         }
     };
 
-    // const calculatePrice = (id, totalProduct) => {
-    //     const isPrice = priceProduct.includes([priceProduct.id] === id);
-    //     const isCheck = isChecked.includes(id);
-
-    //     setPriceProduct([...priceProduct, { id: id, totalProduct: totalProduct }]);
-
-    //     if (isCheck) {
-    //         setTotalAmount(totalAmount + totalProduct);
-    //     } else {
-    //         setTotalAmount(totalAmount - totalProduct);
-    //     }
-    // };
-
     const handleClick = (id, cartId, checked) => {
         setIsChecked([...isChecked, id]);
         setListCartId([...listCartId, cartId]);
@@ -170,6 +168,10 @@ const HomeShoppingCart = ({ navigation }) => {
             setIsChecked(isChecked.filter((item) => item !== id));
             setListCartId(listCartId.filter((item) => item !== cartId));
         }
+    };
+    const handelBack = () => {
+        setIsConfirm(false);
+        setTotalAmount(0);
     };
 
     return (
@@ -194,7 +196,7 @@ const HomeShoppingCart = ({ navigation }) => {
                             <Text>Chọn hết</Text>
                         </View>
                     )}
-                    {/* <Text>Total: {totalAmount}</Text> */}
+                    {isConfirm ? <Text style={styles.priceTotal}>Total: {formatPrice(totalAmount)}</Text> : null}
                     <Buttom
                         iconColor={Colors.CS_ORANGE2}
                         backgroudColor={Colors.CS_ORANGE2}
@@ -216,13 +218,15 @@ const HomeShoppingCart = ({ navigation }) => {
                         sizeIcon={35}
                         colorIcon={Colors.CS_TEXT}
                         styleTitle={styles.goback}
-                        functionBack={() => setIsConfirm(false)}
+                        functionBack={handelBack}
                     />
                 ) : (
                     <View>
                         <Text style={{ color: Colors.CS_TEXT, fontSize: 18, fontWeight: '700' }}>Giỏ hàng của bạn</Text>
                         <Text style={{ color: Colors.CS_TEXT, fontSize: 14, fontWeight: '400', marginBottom: 10 }}>
-                            {cart ? `Số lượng hàng trong giỏ: ${5}` : 'Hiện tại bạn không có mặ hàng nào trong giỏ'}
+                            {totalProduct !== 0
+                                ? `Số lượng hàng trong giỏ: ${totalProduct}`
+                                : 'Hiện tại bạn không có mặ hàng nào trong giỏ'}
                         </Text>
                     </View>
                 )}
@@ -271,6 +275,7 @@ const HomeShoppingCart = ({ navigation }) => {
                                         isChecked.includes(product.product_id) ? (
                                             <BoxProduct
                                                 id={product.product_id}
+                                                storeId={shop.store_id}
                                                 image={product.product_image}
                                                 title={product.product_name}
                                                 price={product.price}
@@ -292,6 +297,7 @@ const HomeShoppingCart = ({ navigation }) => {
                                     ) : (
                                         <BoxProduct
                                             id={product.product_id}
+                                            storeId={shop.store_id}
                                             image={product.product_image}
                                             title={product.product_name}
                                             price={product.price}
@@ -416,6 +422,11 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: '700',
         color: Colors.CS_TEXT,
+    },
+
+    priceTotal: {
+        fontSize: 18,
+        color: Colors.CS_ORANGE2,
     },
 });
 

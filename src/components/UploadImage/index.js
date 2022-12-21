@@ -96,7 +96,13 @@ const UploadImage = ({ errors, label, margin, setValueForm, name, imagePath, ima
                 <Box style={styles.boxUpload}>
                     {singleFile != null || path ? (
                         <Image
-                            style={styles.image}
+                            style={[
+                                styles.image,
+                                {
+                                    width: 150,
+                                    height: 150,
+                                },
+                            ]}
                             source={
                                 path === imagePath
                                     ? {
@@ -161,6 +167,7 @@ const styles = StyleSheet.create({
     image: {
         width: 150,
         height: 150,
+        zIndex: 100,
     },
 });
 

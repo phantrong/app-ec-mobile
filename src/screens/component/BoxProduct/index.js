@@ -56,9 +56,9 @@ const BoxProduct = ({
             <Image style={styles.image} source={image ? { uri: image } : Images.IMAGEERROR} resizeMode="contain" />
 
             <View style={styles.content}>
-                <Text style={styles.title}>{name}</Text>
+                <Text style={styles.title}>{category}</Text>
                 <Text style={styles.text} numberOfLines={2} ellipsizeMode={'tail'}>
-                    {category}
+                    {name}
                 </Text>
 
                 <View style={styles.boxPrice}>
