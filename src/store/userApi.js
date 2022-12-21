@@ -34,11 +34,13 @@ export const userApi = createApi({
         }),
 
         userAddtoCart: builder.mutation({
-            query: (body) => ({
-                url: 'cart/add',
-                method: 'POST',
-                body: body,
-            }),
+            query: (credentials) => {
+                return {
+                    url: 'cart/add',
+                    method: 'POST',
+                    body: credentials,
+                };
+            },
         }),
 
         useDelProductCart: builder.mutation({

@@ -57,8 +57,8 @@ const SearchScreen = ({ route, navigation }) => {
                         );
                     })}
                 </Section>
+                <Footer />
             </ScrollView>
-            <Footer />
         </HeaderLayout>
     );
 };

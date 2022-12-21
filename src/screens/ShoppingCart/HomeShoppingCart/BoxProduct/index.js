@@ -9,6 +9,7 @@ import { Colors } from '../../../../assets';
 
 const BoxProduct = ({
     id,
+    storeId,
     image,
     title,
     price,
@@ -22,7 +23,9 @@ const BoxProduct = ({
     calculatePrice,
 }) => {
     const [totalPrice, setTotalPrice] = useState(() => (priceSale || priceSale === 0 ? priceSale : price));
-
+    console.log(storeId);
+    // console.log(title);
+    // console.log(quantity);
     const priceFm = formatPrice(price);
     const priceSaleFm = formatPrice(priceSale);
 
@@ -37,7 +40,10 @@ const BoxProduct = ({
     };
 
     return (
-        <TouchableOpacity style={styles.wrapper} onPress={() => navigation.navigate(navigateConfig)}>
+        <TouchableOpacity
+            style={styles.wrapper}
+            onPress={() => navigation.navigate(navigateConfig, { productId: id, storeInfo: storeId })}
+        >
             <Image source={{ uri: image }} style={styles.image} />
             <View style={styles.content} onLayout={() => (onLayout ? onLayout(quantity, price) : null)}>
                 <Text style={styles.title} numberOfLines={5} ellipsizeMode={'tail'}>

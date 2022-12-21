@@ -26,6 +26,12 @@ const styles = StyleSheet.create({
         textTransform: 'capitalize',
     },
 
-    des: { fontSize: 15, fontWeight: '700', color: Colors.CS_TEXT, textTransform: 'capitalize' },
+    des: {
+        width: '50%',
+        fontSize: 15,
+        fontWeight: '700',
+        color: Colors.CS_TEXT,
+        textAlign: 'left',
+    },
 });
 export default Item;

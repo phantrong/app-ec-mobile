@@ -1,5 +1,5 @@
 import { View, TextInput, StyleSheet } from 'react-native';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 
 import { ImageIcon } from '../../../components';
 
@@ -14,7 +14,6 @@ const InputNumber = ({ quantity, maxProduct, width, amountProduct, setQuanity })
         }, [value]);
     }
 
-    // console.log('call API: ' + value);
     if (amountProduct) {
         useEffect(() => {
             amountProduct(Number(value));
@@ -57,7 +56,7 @@ const InputNumber = ({ quantity, maxProduct, width, amountProduct, setQuanity })
             <ImageIcon name={Icons.REDUCED} pressable margin={[0, 10, 0, 0]} onPress={handleReducde} />
             <TextInput
                 keyboardType="numeric"
-                defaultValue={value}
+                // defaultValue={value}
                 value={value}
                 onChangeText={(text) => handelInput(text)}
                 style={[
@@ -91,4 +90,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default InputNumber;
+export default memo(InputNumber);
