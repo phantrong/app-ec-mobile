@@ -9,7 +9,7 @@ import { Images, Colors } from '../../assets';
 import HeaderLayout from '../HeaderLayout';
 import { selectUserAuth, selectUserProfile, updateShipmentDetail } from '../../store/userSlice';
 import { useSelector, useDispatch } from 'react-redux';
-import { useGetProductHomeQuery, useGetShopHomeQuery, useGetUserProfileQuery } from '../../store/userApi';
+import { useGetProductHomeQuery, useGetShopHomeQuery, useGetUserProfileQuery, usePrefetch } from '../../store/userApi';
 
 const defaultFilter = {
     is_paginate: 0,
@@ -22,6 +22,12 @@ const defaultFilterShop = {
 const HomeScreen = ({ navigation }) => {
     const [filter, setFilter] = useState(defaultFilter);
     const [filterShop, setFilterShop] = useState(defaultFilterShop);
+    const prefetchGetProductHome = usePrefetch('getProductHome', {
+        ifOlderThan: 1,
+    });
+    const prefetchGetShopHome = usePrefetch('getShopHome', {
+        ifOlderThan: 1,
+    });
 
     const auth = useSelector(selectUserAuth);
     useGetUserProfileQuery();
@@ -51,10 +57,12 @@ const HomeScreen = ({ navigation }) => {
 
     // Navigate to login page if is not authenticated
     useEffect(() => {
+        prefetchGetProductHome();
+        prefetchGetShopHome();
         if (!auth?.token_customer) {
             navigation.navigate('LoginScreen');
         }
-    }, []);
+    });
 
     return (
         <HeaderLayout navigation={navigation}>

@@ -72,11 +72,14 @@ const UploadImage = ({ errors, label, margin, setValueForm, name, imagePath, ima
     });
 
     useEffect(() => {
-        console.log(errors);
+        if (errors) {
+            console.log(errors);
+        }
     }, [errors]);
 
     useEffect(() => {
         setPath(imagePath || imageDefault);
+        setValueForm(name, imagePath || '');
     }, [imagePath, imageDefault]);
 
     useEffect(() => {

@@ -20,7 +20,7 @@ const ShopProfile = () => {
     const profile = useGetShopProfileQuery();
     const profileData = profile?.data?.data;
     const prefetchShopProfile = usePrefetch('getShopProfile', {
-        force: true,
+        ifOlderThan: 1,
     });
     const [updateProfile, updateProfileResponse] = useUpdateShopProfileMutation();
 
@@ -44,7 +44,7 @@ const ShopProfile = () => {
         if (!auth?.token_staff || profile?.error?.originalStatus === 401) {
             navigation.navigate('ShopLoginScreen');
         }
-    }, []);
+    });
 
     useEffect(() => {
         if (profileData) {

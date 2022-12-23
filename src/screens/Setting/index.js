@@ -17,7 +17,7 @@ const Setting = () => {
     // Select data from store
     const userProfile = useSelector(selectUserProfile);
     const prefetchUserProfile = usePrefetch('getUserProfile', {
-        force: true,
+        ifOlderThan: 1,
     });
     const [changePassword, changePasswordResponse] = useUserChangePasswordMutation();
 
@@ -47,7 +47,7 @@ const Setting = () => {
         if (userProfile?.error?.originalStatus === 401) {
             navigation.navigate('LoginScreen');
         }
-    }, []);
+    });
 
     const onSubmit = useCallback((body) => {
         changePassword(body)

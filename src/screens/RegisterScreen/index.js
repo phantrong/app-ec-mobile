@@ -44,7 +44,7 @@ const RegisterScreen = ({ navigation }) => {
                 ]);
             })
             .catch((error) => {
-                console.log(error);
+                // console.log(error);
                 alert(error?.data?.messages || error?.data?.message);
             });
     }, []);

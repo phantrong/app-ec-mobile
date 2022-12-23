@@ -25,7 +25,7 @@ const productDefault = {
 
 const AddProduct = ({ navigation }) => {
     const prefetchListProduct = usePrefetch('getShopListProduct', {
-        force: true,
+        ifOlderThan: 1,
     });
 
     const listCategory = useGetCategoryListQuery();
@@ -49,7 +49,7 @@ const AddProduct = ({ navigation }) => {
     }, [listCategory]);
 
     const onSubmit = useCallback((body) => {
-        console.log('body', body);
+        // console.log('body', body);
         addProduct(body)
             .unwrap()
             .then((data) => {
@@ -61,6 +61,14 @@ const AddProduct = ({ navigation }) => {
                 alert(error?.data?.messages);
             });
     }, []);
+
+    const fetchListProduct = useCallback(() => {
+        prefetchListProduct(defaultFilter);
+    }, [defaultFilter]);
+
+    useEffect(() => {
+        fetchListProduct();
+    });
 
     return (
         <ViewPsition style={{ paddingHorizontal: 10, paddingTop: 20 }}>
