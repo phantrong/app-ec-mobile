@@ -23,7 +23,7 @@ const BoxProduct = ({
     calculatePrice,
 }) => {
     const [totalPrice, setTotalPrice] = useState(() => (priceSale || priceSale === 0 ? priceSale : price));
-    console.log(storeId);
+    // console.log(storeId);
     // console.log(title);
     // console.log(quantity);
     const priceFm = formatPrice(price);

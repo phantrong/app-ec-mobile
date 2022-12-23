@@ -19,7 +19,7 @@ const ListOrder = ({ navigation }) => {
     const [filter, setFilter] = useState(defaultFilter);
     const listOrderResponse = useGetListUserSubOrderQuery(filter);
     const prefetchListOrder = usePrefetch('getListUserSubOrder', {
-        force: true,
+        ifOlderThan: 1,
     });
     const listOrder = listOrderResponse?.data?.data?.listOrder?.data || [];
 
@@ -32,8 +32,9 @@ const ListOrder = ({ navigation }) => {
         if (listOrder?.error?.originalStatus === 401) {
             navigation.navigate('LoginScreen');
         }
+        console.log('fetchListOrder');
         fetchListOrder();
-    }, []);
+    });
 
     return (
         <ViewPsition>

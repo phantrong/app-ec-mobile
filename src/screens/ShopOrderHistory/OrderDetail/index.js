@@ -18,10 +18,10 @@ const OrderDetail = ({ navigation, route }) => {
     const orderDetailResponse = useGetShopSubOrderDetailQuery(orderId);
     const [changeStatus, changeStatusResponse] = useChangeOrderStatusMutation();
     const prefetchOrderDetail = usePrefetch('getShopSubOrderDetail', {
-        force: true,
+        ifOlderThan: 1,
     });
     const prefetchListOrder = usePrefetch('getShopListSubOrder', {
-        force: true,
+        ifOlderThan: 1,
     });
     const orderDetail = orderDetailResponse?.data?.data;
 
@@ -30,7 +30,9 @@ const OrderDetail = ({ navigation, route }) => {
         if (orderDetailResponse?.error?.originalStatus === 401) {
             navigation.navigate('ShopLoginScreen');
         }
-    }, []);
+        fetchListOrder();
+        fetchOrderDetail();
+    });
 
     const fetchOrderDetail = useCallback(() => {
         prefetchOrderDetail(orderId);

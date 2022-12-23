@@ -36,7 +36,7 @@ const Profile = () => {
     const profile = useGetUserProfileQuery();
     const profileData = profile?.data?.data;
     const prefetchUserProfile = usePrefetch('getUserProfile', {
-        force: true,
+        ifOlderThan: 1,
     });
     const [updateProfile, updateProfileResponse] = useUpdateUserProfileMutation();
 
@@ -65,7 +65,7 @@ const Profile = () => {
         if (!auth?.token_customer || profile?.error?.originalStatus === 401) {
             navigation.navigate('LoginScreen');
         }
-    }, []);
+    });
 
     useEffect(() => {
         if (profileData) {

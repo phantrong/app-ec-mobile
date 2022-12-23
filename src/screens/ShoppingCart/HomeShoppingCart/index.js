@@ -29,7 +29,7 @@ const HomeShoppingCart = ({ navigation }) => {
     const [isCheckAll, setIsCheckAll] = useState(false);
     const [isChecked, setIsChecked] = useState([]);
     const [listCartId, setListCartId] = useState([]);
-    console.log(cart);
+    // console.log(cart);
     // xử lý chuyển thành xác nhận hàng mua.
     const [isConfirm, setIsConfirm] = useState(false);
     const profile = useSelector(selectUserProfile);

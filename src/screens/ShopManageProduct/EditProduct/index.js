@@ -19,10 +19,10 @@ const EditProduct = ({ navigation, route }) => {
     const filter = route?.params?.filter;
     const productDetail = useGetShopDetailProductQuery(productId);
     const prefetchProductDetail = usePrefetch('getShopDetailProduct', {
-        force: true,
+        ifOlderThan: 1,
     });
     const prefetchListProduct = usePrefetch('getShopListProduct', {
-        force: true,
+        ifOlderThan: 1,
     });
     const [productDetailData, setProductDetailData] = useState();
 
@@ -59,7 +59,9 @@ const EditProduct = ({ navigation, route }) => {
         if (!productId) {
             navigation.navigate('ListProduct');
         }
-    }, []);
+        fetchDetailProduct();
+        fetchListProduct();
+    });
 
     useEffect(() => {
         if (listCategory?.data?.data) {

@@ -20,7 +20,7 @@ const ListProduct = ({ navigation }) => {
     const [filter, setFilter] = useState(defaultFilter);
     const listProductResponse = useGetShopListProductQuery(filter);
     const prefetchListProduct = usePrefetch('getShopListProduct', {
-        force: true,
+        ifOlderThan: 1,
     });
     const listProduct = listProductResponse?.data?.data?.products?.data || [];
 
@@ -34,7 +34,7 @@ const ListProduct = ({ navigation }) => {
             navigation.navigate('ShopLoginScreen');
         }
         fetchListProduct();
-    }, []);
+    });
 
     return (
         <ViewPsition>

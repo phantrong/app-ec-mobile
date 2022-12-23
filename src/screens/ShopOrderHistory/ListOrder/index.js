@@ -19,7 +19,7 @@ const ListOrder = ({ navigation }) => {
     const [filter, setFilter] = useState(defaultFilter);
     const listOrderResponse = useGetShopListSubOrderQuery(filter);
     const prefetchListOrder = usePrefetch('getShopListSubOrder', {
-        force: true,
+        ifOlderThan: 1,
     });
     const listOrder = listOrderResponse?.data?.data?.data || [];
 
@@ -33,7 +33,7 @@ const ListOrder = ({ navigation }) => {
             navigation.navigate('ShopLoginScreen');
         }
         fetchListOrder();
-    }, []);
+    });
 
     return (
         <ViewPsition>
