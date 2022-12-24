@@ -19,6 +19,7 @@ const BoxProduct = ({
     navigation,
     productId,
     storeInfo,
+    handelScrollTop,
 }) => {
     const [isLikePr, setIsLikePr] = useState(isLike);
 
@@ -50,6 +51,11 @@ const BoxProduct = ({
         <TouchableOpacity
             style={styles.wrapper}
             onPress={() => {
+                if (handelScrollTop) {
+                    setTimeout(() => {
+                        handelScrollTop();
+                    }, 1000);
+                }
                 navigation.navigate('DetailProduct', { productId: productId, storeInfo: storeInfo });
             }}
         >

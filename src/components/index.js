@@ -12,6 +12,7 @@ import InputCustomize from './InputCustomize';
 import InputItem from './InputItem';
 import Section from './Section';
 import Avatar from './Avatar';
+import AleftCustomize from './AleftCustomize';
 
 export {
     Box,
@@ -28,6 +29,7 @@ export {
     InputItem,
     Section,
     Avatar,
+    AleftCustomize,
 };
 
 export default {
@@ -45,4 +47,5 @@ export default {
     InputItem,
     Section,
     Avatar,
+    AleftCustomize,
 };

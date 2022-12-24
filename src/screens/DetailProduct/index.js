@@ -1,5 +1,5 @@
 import { Text, ScrollView } from 'react-native';
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
 
 import {
     useUserAddtoCartMutation,
@@ -15,7 +15,7 @@ import BoxProductDes from './BoxProductDes';
 
 import HeaderLayout from '../HeaderLayout';
 import { Footer, BoxProduct } from '../component';
-import { Section } from '../../components';
+import { Section, AleftCustomize } from '../../components';
 
 import { Colors } from '../../assets';
 
@@ -24,6 +24,8 @@ const defaultFilterShop = {
 };
 
 const DetailProduct = ({ route, navigation }) => {
+    const [modalVisible, setModalVisible] = useState(false);
+
     const [quanityProduct, setQuanityProduct] = useState(1);
     const [filterShop, setFilterShop] = useState(defaultFilterShop);
 
@@ -56,6 +58,9 @@ const DetailProduct = ({ route, navigation }) => {
     const handelAddCart = () => {
         userAdd(productAddCart)
             .unwrap()
+            .then(() => {
+                setModalVisible(true);
+            })
             .catch((error) => {
                 alert(error?.data?.message);
             });
@@ -72,10 +77,27 @@ const DetailProduct = ({ route, navigation }) => {
             });
     };
 
+    const scroRef = useRef();
+
     return (
         <HeaderLayout navigation={navigation}>
             <BoxBuying isLike handelClick={handelAddCart} handelBuyProduct={handelBuyProduct} />
-            <ScrollView>
+            <ScrollView ref={scroRef}>
+                <AleftCustomize
+                    title={{
+                        name: 'Sản phẩm đã được thêm vào giỏ hàng',
+                        style: { color: Colors.CS_WHITE, fontSize: 18 },
+                    }}
+                    imgSucsess
+                    autoClose
+                    styleBody={{
+                        width: '80%',
+                        borderRadius: 10,
+                        backgroundColor: Colors.CS_BACK_GROUND_OPACITY,
+                    }}
+                    modalVisible={modalVisible}
+                    hadelModalVisible={setModalVisible}
+                />
                 <BoxOrder
                     images={product?.product_medias}
                     price={product?.price}
@@ -87,7 +109,7 @@ const DetailProduct = ({ route, navigation }) => {
                 <BoxShopInfo
                     avatarShop={store.avatar}
                     nameShop={store.name}
-                    phone="0338204170"
+                    phone={store.phone || '0338204170'}
                     address={store.address}
                     dayWork="Thứ 2 - thứ 7"
                     timeWork="8:00 - 17:30"
@@ -128,6 +150,13 @@ const DetailProduct = ({ route, navigation }) => {
                                 productId={product.id}
                                 storeInfo={shop}
                                 key={product.id}
+                                handelScrollTop={() =>
+                                    scroRef.current.scrollTo({
+                                        x: 0,
+                                        y: 0,
+                                        animated: true,
+                                    })
+                                }
                             />
                         );
                     })}

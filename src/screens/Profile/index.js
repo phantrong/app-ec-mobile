@@ -6,7 +6,7 @@ import HeaderLayout from '../HeaderLayout';
 import { useForm } from 'react-hook-form';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Colors } from '../../assets';
-import { Box, ButtonCustomize, InputItem, Text } from '../../components';
+import { Box, ButtonCustomize, InputItem, Text, AleftCustomize } from '../../components';
 import colors from '../../assets/colors';
 import { selectUserAuth } from '../../store/userSlice';
 import { useGetUserProfileQuery, usePrefetch, useUpdateUserProfileMutation } from '../../store/userApi';
@@ -43,7 +43,7 @@ const Profile = () => {
     const [open, setOpen] = useState(false);
     const [valueGender, setValueGender] = useState(GENDER_MALE);
     const [items, setItems] = useState(GENDER_ARRAY);
-
+    const [modalVisible, setModalVisible] = useState(false);
     const {
         control,
         handleSubmit,
@@ -81,8 +81,8 @@ const Profile = () => {
     const onSubmit = useCallback((body) => {
         updateProfile(body)
             .unwrap()
-            .then((data) => {
-                alert(data?.message);
+            .then(() => {
+                setModalVisible(true);
                 prefetchUserProfile();
             })
             .catch((error) => {
@@ -93,6 +93,21 @@ const Profile = () => {
     return (
         <HeaderLayout navigation={navigation}>
             <Box background={Colors.CS_WHITE} width="100%" height="100%" flex={1}>
+                <AleftCustomize
+                    title={{
+                        name: 'Thay đổi thông tin thành công',
+                        style: { color: Colors.CS_WHITE, fontSize: 18 },
+                    }}
+                    imgSucsess
+                    autoClose
+                    styleBody={{
+                        width: '80%',
+                        borderRadius: 10,
+                        backgroundColor: Colors.CS_BACK_GROUND_OPACITY,
+                    }}
+                    modalVisible={modalVisible}
+                    hadelModalVisible={setModalVisible}
+                />
                 <KeyboardAwareScrollView
                     enableOnAndroid
                     bounces={false}
