@@ -29,7 +29,7 @@ const BoxOrder = ({ images, sizes, colors, price, priceSale, category, name, sal
                 {colors ? <BoxCheck title={'color'} categorys={colors} /> : null}
                 {sizes ? <BoxCheck title={'size'} categorys={sizes} /> : null}
 
-                <Text style={styles.amount}>amount</Text>
+                <Text style={styles.amount}>Số lượng</Text>
                 <InputNumber maxProduct={100} width={150} setQuanity={setQuanity} />
             </View>
         </View>

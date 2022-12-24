@@ -1,7 +1,7 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Colors } from '../../assets';
-import { Box } from '../../components';
+import { Box, AleftCustomize } from '../../components';
 import { useForm } from 'react-hook-form';
 import styles from './styles';
 import ContentLogin from './ContentLogin';
@@ -12,6 +12,7 @@ import { useSelector } from 'react-redux';
 import { selectUserAuth } from '../../store/userSlice';
 
 const LoginScreen = () => {
+    const [modalVisible, setModalVisible] = useState(false);
     const navigation = useNavigation();
     // Select data from store
     const auth = useSelector(selectUserAuth);
@@ -45,14 +46,27 @@ const LoginScreen = () => {
     const onSubmit = useCallback((body) => {
         userLogin(body)
             .unwrap()
-            .catch((error) => {
-                alert(error?.data?.messages || error?.data?.message);
+            .catch(() => {
+                setModalVisible(true);
             });
     }, []);
 
     return (
         <Box background={Colors.CS_WHITE} width="100%" height="100%" flex={1}>
             {/* <NavBar leftIcon label="Back to Home" border={true} /> */}
+            <AleftCustomize
+                title={{
+                    name: 'Thông tin đăng nhập sai',
+                    style: { fontSize: 18 },
+                }}
+                styleBody={{
+                    width: '80%',
+                    borderRadius: 10,
+                }}
+                btnSuc={{ title: 'Ok' }}
+                modalVisible={modalVisible}
+                hadelModalVisible={setModalVisible}
+            />
             <KeyboardAwareScrollView
                 enableOnAndroid
                 bounces={false}

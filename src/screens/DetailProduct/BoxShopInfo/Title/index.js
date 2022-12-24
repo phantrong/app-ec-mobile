@@ -23,16 +23,6 @@ const TitleShop = ({ avatarShop, nameShop }) => {
                         heightButtom={35}
                         style={{ marginRight: 10 }}
                     />
-                    <Buttom
-                        icon={Icons.CALENDAR_EDIT}
-                        iconColor={Colors.CS_WHITE}
-                        backgroudColor={Colors.CS_TITLE}
-                        borderColor={Colors.CS_TITLE}
-                        label={'reserve'}
-                        colorLabel={Colors.CS_WHITE}
-                        widthButtom={120}
-                        heightButtom={35}
-                    />
                 </View>
             </View>
         </View>

@@ -11,4 +11,5 @@ export default {
     ERROR: require('./Error.png'),
     SUCESS: require('./Sucess.png'),
     IMAGEERROR: require('./imageError.png'),
+    BACKGROUNDINTRO: require('./backgroundIntro.jpg'),
 };

@@ -1,5 +1,5 @@
 import { View, StyleSheet } from 'react-native';
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import { selectStaffAuth } from '../../store/shopSlice';
@@ -9,11 +9,13 @@ import { useForm } from 'react-hook-form';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Colors, Images } from '../../assets';
 import TextArea from '../../components/TextArea';
-import { Box, ButtonCustomize, InputItem, Text } from '../../components';
+import { Box, ButtonCustomize, InputItem, Text, AleftCustomize } from '../../components';
 import colors from '../../assets/colors';
 import UploadImage from '../../components/UploadImage';
 
 const ShopProfile = () => {
+    const [modalVisible, setModalVisible] = useState(false);
+    const [mes, setMes] = useState('');
     const navigation = useNavigation();
     // Select data from store
     const auth = useSelector(selectStaffAuth);
@@ -59,17 +61,32 @@ const ShopProfile = () => {
         updateProfile(body)
             .unwrap()
             .then((data) => {
-                alert(data?.message);
+                setMes(data?.message);
+                setModalVisible(true);
                 prefetchShopProfile();
             })
             .catch((error) => {
-                alert(error?.data?.messages || error?.data?.message);
+                setMes(error?.data?.messages || error?.data?.message);
+                setModalVisible(true);
             });
     }, []);
 
     return (
         <HeaderLayout navigation={navigation} type={'shop'}>
             <Box background={Colors.CS_WHITE} width="100%" height="100%" flex={1}>
+                <AleftCustomize
+                    title={{
+                        name: mes,
+                        style: { fontSize: 18 },
+                    }}
+                    styleBody={{
+                        width: '80%',
+                        borderRadius: 10,
+                    }}
+                    btnSuc={{ title: 'Ok' }}
+                    modalVisible={modalVisible}
+                    hadelModalVisible={setModalVisible}
+                />
                 <KeyboardAwareScrollView
                     enableOnAndroid
                     bounces={false}
