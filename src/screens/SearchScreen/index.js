@@ -24,14 +24,14 @@ const SearchScreen = ({ route, navigation }) => {
 
     const products = useGetProductHomeQuery(filter);
     const productSearchs = products?.data?.data;
-
+    console.log(productSearchs);
     const shopsHome = useGetShopHomeQuery(filterShop);
 
     const shops = shopsHome?.data?.data || [];
 
     return (
         <HeaderLayout navigation={navigation}>
-            <BoxSearch valueChange={setValueSearch} />
+            <BoxSearch valueChange={setValueSearch} value={valueSearch} />
             <ScrollView style={styles.wrapper}>
                 {productSearchs?.data.length === 0 ? (
                     <Text style={styles.title}>Không có sản phẩm</Text>
@@ -45,7 +45,7 @@ const SearchScreen = ({ route, navigation }) => {
                             <BoxProduct
                                 navigation={navigation}
                                 image={product.product_medias_image.media_path}
-                                category={product.description}
+                                category={product.category.name}
                                 name={product.name}
                                 price={product.price}
                                 priceSale={product.discount}

@@ -30,6 +30,9 @@ const GENDER_ARRAY = [
 ];
 
 const Profile = () => {
+    const [modalVisible, setModalVisible] = useState(false);
+    const [errMes, setErrMes] = useState('');
+
     const navigation = useNavigation();
     // Select data from store
     const auth = useSelector(selectUserAuth);
@@ -43,7 +46,6 @@ const Profile = () => {
     const [open, setOpen] = useState(false);
     const [valueGender, setValueGender] = useState(GENDER_MALE);
     const [items, setItems] = useState(GENDER_ARRAY);
-    const [modalVisible, setModalVisible] = useState(false);
     const {
         control,
         handleSubmit,
@@ -86,7 +88,8 @@ const Profile = () => {
                 prefetchUserProfile();
             })
             .catch((error) => {
-                alert(error?.data?.messages || error?.data?.message);
+                setErrMes(error?.data?.messages || error?.data?.message);
+                setModalVisible(true);
             });
     }, []);
 
@@ -95,10 +98,10 @@ const Profile = () => {
             <Box background={Colors.CS_WHITE} width="100%" height="100%" flex={1}>
                 <AleftCustomize
                     title={{
-                        name: 'Thay đổi thông tin thành công',
+                        name: errMes || 'Thay đổi thông tin thành công',
                         style: { color: Colors.CS_WHITE, fontSize: 18 },
                     }}
-                    imgSucsess
+                    imgSucsess={setErrMes ? true : false}
                     autoClose
                     styleBody={{
                         width: '80%',

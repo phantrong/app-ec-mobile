@@ -66,8 +66,6 @@ const HomeScreen = ({ navigation }) => {
 
     return (
         <HeaderLayout navigation={navigation}>
-            <NavBarHome items={['new products', 'popular item', 'store list']} />
-
             <ScrollView>
                 <TitleSection titleName={'Sản phẩm'} />
                 <Section direction={'row'}>

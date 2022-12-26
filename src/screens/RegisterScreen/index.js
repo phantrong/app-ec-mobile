@@ -1,9 +1,11 @@
+// import { useState } from 'react';
+
 import { Alert, Text, TouchableOpacity } from 'react-native';
 import React, { useCallback } from 'react';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import { Colors, Icons } from '../../assets';
-import { Box, NavBar, ImageIcon } from '../../components';
+import { Box, NavBar, ImageIcon, AleftCustomize } from '../../components';
 import { useForm } from 'react-hook-form';
 import ContentRegister from './ContentRegister';
 
@@ -12,6 +14,9 @@ import { GENDER_MALE } from '../../configs/constants';
 import { useRegisterUserMutation } from '../../store/userApi';
 
 const RegisterScreen = ({ navigation }) => {
+    // const [modalVisible, setModalVisible] = useState(false);
+    // const [errorMes, setErrorMes] = useState('');
+
     const [registerUser, registerUserResponse] = useRegisterUserMutation();
 
     const {
@@ -30,6 +35,9 @@ const RegisterScreen = ({ navigation }) => {
             password_confirm: '',
         },
     });
+
+    console.log(body);
+
     const onSubmit = useCallback((body) => {
         registerUser(body)
             .unwrap()
@@ -44,7 +52,6 @@ const RegisterScreen = ({ navigation }) => {
                 ]);
             })
             .catch((error) => {
-                // console.log(error);
                 alert(error?.data?.messages || error?.data?.message);
             });
     }, []);

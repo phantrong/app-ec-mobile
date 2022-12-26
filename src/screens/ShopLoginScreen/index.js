@@ -52,7 +52,6 @@ const ShopLoginScreen = () => {
 
     return (
         <Box background={Colors.CS_WHITE} width="100%" height="100%" flex={1}>
-            {/* <NavBar leftIcon label="Back to Home" border={true} /> */}
             <AleftCustomize
                 title={{
                     name: 'Thông tin đăng nhập sai',

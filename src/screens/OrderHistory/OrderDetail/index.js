@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity, Alert } from 'react-native';
 import React, { useEffect } from 'react';
+
 import { Buttom, GoBack, ViewPsition } from '../../component';
 import { Colors } from '../../../assets';
 import { useCallback } from 'react';
@@ -63,7 +64,6 @@ const OrderDetail = ({ navigation, route }) => {
                                     fetchListOrder();
                                 })
                                 .catch((error) => {
-                                    // console.log(error);
                                     alert(error?.error?.data?.message);
                                 });
                         }
@@ -89,6 +89,7 @@ const OrderDetail = ({ navigation, route }) => {
                 styleTitle={styles.goback}
                 navigation={navigation}
             />
+
             <ViewPsition>
                 <BoxInfoCustomer
                     customer={orderDetail?.order?.shipping}

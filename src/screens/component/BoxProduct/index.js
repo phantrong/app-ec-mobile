@@ -3,7 +3,7 @@ import React, { useState, memo, useCallback } from 'react';
 
 import { useUserAddtoCartMutation } from '../../../store/userApi';
 import { formatPrice } from '../../../functions';
-import { ImageIcon } from '../../../components';
+import { ImageIcon, AleftCustomize } from '../../../components';
 
 import { Images, Icons } from '../../../assets';
 
@@ -21,6 +21,7 @@ const BoxProduct = ({
     storeInfo,
     handelScrollTop,
 }) => {
+    const [modalVisible, setModalVisible] = useState(false);
     const [isLikePr, setIsLikePr] = useState(isLike);
 
     const productAddCart = { product_id: productId, quantity: 1 };
@@ -29,17 +30,13 @@ const BoxProduct = ({
     const handelAddCart = useCallback(() => {
         userAdd(productAddCart)
             .unwrap()
-            // .then(() => {
-            //     alert('sản phẩm của bạn đã có trong vào giỏ hảng');
-            // })
-            .catch((error) => {
-                alert(error?.data?.message);
+            .catch(() => {
+                setModalVisible(true);
             });
     }, []);
     const priceFm = formatPrice(price);
     const priceSaleFm = formatPrice(priceSale);
 
-    // console.log(isLikePr);
     if (price) {
         price = Math.floor(price);
     }
@@ -59,6 +56,19 @@ const BoxProduct = ({
                 navigation.navigate('DetailProduct', { productId: productId, storeInfo: storeInfo });
             }}
         >
+            <AleftCustomize
+                title={{
+                    name: 'Không thể thêm vào giỏ hàng, vui lòng thử lại',
+                    style: { fontSize: 18 },
+                }}
+                styleBody={{
+                    width: '80%',
+                    borderRadius: 10,
+                }}
+                btnSuc={{ title: 'Ok' }}
+                modalVisible={modalVisible}
+                hadelModalVisible={setModalVisible}
+            />
             <Image style={styles.image} source={image ? { uri: image } : Images.IMAGEERROR} resizeMode="contain" />
 
             <View style={styles.content}>

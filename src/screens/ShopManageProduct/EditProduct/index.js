@@ -9,12 +9,15 @@ import {
     useGetShopDetailProductQuery,
     usePrefetch,
 } from '../../../store/shopApi';
-import { Box } from '../../../components';
+import { Box, AleftCustomize } from '../../../components';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import ProductForm from '../../component/ProductForm';
 import { convertPriceToString } from '../../../functions';
 
 const EditProduct = ({ navigation, route }) => {
+    const [modalVisible, setModalVisible] = useState(false);
+    const [mesAleft, setMesAleft] = useState('');
+
     const productId = route?.params?.productId;
     const filter = route?.params?.filter;
     const productDetail = useGetShopDetailProductQuery(productId);
@@ -89,13 +92,15 @@ const EditProduct = ({ navigation, route }) => {
             })
                 .unwrap()
                 .then((data) => {
-                    alert(data?.message);
+                    setMesAleft(data?.message);
+                    setModalVisible(true);
                     fetchDetailProduct();
                     fetchListProduct();
                     // navigation.navigate('ListProduct');
                 })
                 .catch((error) => {
-                    alert(error?.data?.messages || error?.data?.message);
+                    setMesAleft(error?.data?.messages || error?.data?.message);
+                    setModalVisible(true);
                 });
         },
         [productId],
@@ -110,6 +115,19 @@ const EditProduct = ({ navigation, route }) => {
                 colorIcon={Colors.CS_TEXT}
                 styleTitle={styles.goback}
                 navigation={navigation}
+            />
+            <AleftCustomize
+                title={{
+                    name: mesAleft,
+                    style: { fontSize: 18 },
+                }}
+                styleBody={{
+                    width: '80%',
+                    borderRadius: 10,
+                }}
+                btnSuc={{ title: 'Ok' }}
+                modalVisible={modalVisible}
+                hadelModalVisible={setModalVisible}
             />
             <Box background={Colors.CS_WHITE} width="100%" height="100%" flex={1}>
                 <KeyboardAwareScrollView

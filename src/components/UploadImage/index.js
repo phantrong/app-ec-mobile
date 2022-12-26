@@ -8,9 +8,13 @@ import Box from '../Box';
 import ButtonCustomize from '../ButtonCustomize';
 import ImageIcon from '../ImageIcon';
 import Text from '../Text';
+import AleftCustomize from '../AleftCustomize';
 import DocumentPicker from 'react-native-document-picker';
 
 const UploadImage = ({ errors, label, margin, setValueForm, name, imagePath, imageDefault }) => {
+    const [modalVisible, setModalVisible] = useState(false);
+    const [errorMes, setErrorMes] = useState('');
+
     const [error, setError] = useState();
     const [path, setPath] = useState(imagePath || imageDefault);
     const [singleFile, setSingleFile] = useState();
@@ -30,16 +34,19 @@ const UploadImage = ({ errors, label, margin, setValueForm, name, imagePath, ima
                     if (response?.success) {
                         setValueForm(name, response?.data);
                         setPath(response?.data);
-                        alert(response?.message);
+                        setErrorMes(response?.message);
                     }
                 })
                 .catch((error) => {
-                    alert(error?.data?.messages || error?.data?.message);
+                    setErrorMes(error?.data?.messages || error?.data?.message);
                 });
         } else {
             // If no file selected the show alert
-            alert('Vui lòng chọn ảnh.');
+            setErrorMes('Vui lòng chọn ảnh.');
         }
+        setTimeout(() => {
+            setModalVisible(true);
+        }, 1000);
     };
 
     const selectImg = async () => {
@@ -54,14 +61,18 @@ const UploadImage = ({ errors, label, margin, setValueForm, name, imagePath, ima
         } catch (err) {
             setSingleFile(null);
             // Handling any exception (If any)
+
             if (DocumentPicker.isCancel(err)) {
                 // If user canceled the document selection
-                alert('Đã hủy');
+                setErrorMes('đã huỷ');
             } else {
                 // For Unknown Error
-                alert('Lỗi chưa xác định: ' + JSON.stringify(err));
+                setErrorMes('Lỗi chưa xác định: ' + JSON.stringify(err));
                 throw err;
             }
+            setTimeout(() => {
+                setModalVisible(true);
+            }, 1000);
         }
     };
 
@@ -90,6 +101,19 @@ const UploadImage = ({ errors, label, margin, setValueForm, name, imagePath, ima
 
     return (
         <Box margin={margin ?? [30, 0, 0, 0]}>
+            <AleftCustomize
+                title={{
+                    name: errorMes,
+                    style: { fontSize: 18 },
+                }}
+                styleBody={{
+                    width: '80%',
+                    borderRadius: 10,
+                }}
+                btnSuc={{ title: 'Ok' }}
+                modalVisible={modalVisible}
+                hadelModalVisible={setModalVisible}
+            />
             {label ? (
                 <Text size={16} fontWeight={500} margin={[0, 0, 10, 0]}>
                     {label}
