@@ -1,5 +1,5 @@
 import { Text, ScrollView } from 'react-native';
-import React, { useState, useCallback, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import {
     useUserAddtoCartMutation,
@@ -25,6 +25,8 @@ const defaultFilterShop = {
 
 const DetailProduct = ({ route, navigation }) => {
     const [modalVisible, setModalVisible] = useState(false);
+    const [mesAleft, setMesAleft] = useState('');
+    const [error, setError] = useState(false);
 
     const [quanityProduct, setQuanityProduct] = useState(1);
     const [filterShop, setFilterShop] = useState(defaultFilterShop);
@@ -59,10 +61,14 @@ const DetailProduct = ({ route, navigation }) => {
         userAdd(productAddCart)
             .unwrap()
             .then(() => {
+                setError(false);
+                setMesAleft('Thêm vào giỏ hàng thành công');
                 setModalVisible(true);
             })
             .catch((error) => {
-                alert(error?.data?.message);
+                setError(true);
+                setMesAleft(error?.data?.message);
+                setModalVisible(true);
             });
     };
 
@@ -70,10 +76,13 @@ const DetailProduct = ({ route, navigation }) => {
         userAdd(productAddCart)
             .unwrap()
             .then(() => {
+                setError(false);
                 navigation.navigate('ShoppingCart');
             })
             .catch((error) => {
-                alert(error?.data?.message);
+                setError(true);
+                setMesAleft(error?.data?.message);
+                setModalVisible(true);
             });
     };
 
@@ -83,21 +92,37 @@ const DetailProduct = ({ route, navigation }) => {
         <HeaderLayout navigation={navigation}>
             <BoxBuying isLike handelClick={handelAddCart} handelBuyProduct={handelBuyProduct} />
             <ScrollView ref={scroRef}>
-                <AleftCustomize
-                    title={{
-                        name: 'Sản phẩm đã được thêm vào giỏ hàng',
-                        style: { color: Colors.CS_WHITE, fontSize: 18 },
-                    }}
-                    imgSucsess
-                    autoClose
-                    styleBody={{
-                        width: '80%',
-                        borderRadius: 10,
-                        backgroundColor: Colors.CS_BACK_GROUND_OPACITY,
-                    }}
-                    modalVisible={modalVisible}
-                    hadelModalVisible={setModalVisible}
-                />
+                {error ? (
+                    <AleftCustomize
+                        title={{
+                            name: mesAleft,
+                            style: { fontSize: 18 },
+                        }}
+                        styleBody={{
+                            width: '80%',
+                            borderRadius: 10,
+                        }}
+                        btnSuc={{ title: 'Ok' }}
+                        modalVisible={modalVisible}
+                        hadelModalVisible={setModalVisible}
+                    />
+                ) : (
+                    <AleftCustomize
+                        title={{
+                            name: mesAleft,
+                            style: { color: Colors.CS_WHITE, fontSize: 18 },
+                        }}
+                        imgSucsess
+                        autoClose
+                        styleBody={{
+                            width: '80%',
+                            borderRadius: 10,
+                            backgroundColor: Colors.CS_BACK_GROUND_OPACITY,
+                        }}
+                        modalVisible={modalVisible}
+                        hadelModalVisible={setModalVisible}
+                    />
+                )}
                 <BoxOrder
                     images={product?.product_medias}
                     price={product?.price}

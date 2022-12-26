@@ -43,22 +43,6 @@ const ConfirmPayInfo = ({ route, navigation }) => {
     const calculatePrice = (quantity, price) => {
         setTotalPrice(totalPrice + quantity * price);
     };
-    // console.log(route.params.cart, route.params.checked);
-
-    // useEffect(() => {
-    //     let newCartCheck = cartCheck;
-    //     console.log('TRUOC', newCartCheck);
-    //     for (let shop of newCartCheck) {
-    //         shop.products.filter((item) => !route.params.checked.includes(item.product_id));
-    //     }
-
-    //     console.log('SAU', newCartCheck);
-
-    //     // console.log('lan1', cartCheck[0]);
-    //     // console.log(route.params.checked.filter((item) => arr.includes(item)));
-    //     // cartCheck.filter
-    // }, [route.params.checked]);
-    // // const arr = [10, 17, 18];
 
     return (
         <ViewPsition>

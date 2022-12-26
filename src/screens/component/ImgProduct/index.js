@@ -1,5 +1,5 @@
 import { View, Image, Text, StyleSheet, ScrollView } from 'react-native';
-import React, { useState, memo } from 'react';
+import React, { useState, memo, useRef, useEffect } from 'react';
 
 import { Colors } from '../../../assets';
 
@@ -10,15 +10,27 @@ const ImgProduct = ({ images }) => {
     onchange = (nativeEvent) => {
         if (nativeEvent) {
             const slide = Math.ceil(nativeEvent.contentOffset.x / nativeEvent.layoutMeasurement.width);
+
             if (slide != imgActive) {
                 setImgActive(slide);
             }
         }
     };
 
+    useEffect(() => {
+        scroRef.current.scrollTo({
+            x: 0,
+            y: 0,
+            animated: true,
+        });
+    }, [images]);
+
+    const scroRef = useRef();
+
     return (
         <View style={styles.wrapper}>
             <ScrollView
+                ref={scroRef}
                 onScroll={({ nativeEvent }) => onchange(nativeEvent)}
                 showsHorizontalScrollIndicator={false}
                 pagingEnabled

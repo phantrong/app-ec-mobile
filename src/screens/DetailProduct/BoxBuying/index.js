@@ -16,9 +16,9 @@ const BoxBuying = ({ navigation, isLike, handelClick, handelBuyProduct }) => {
                 iconColor={Colors.CS_ORANGE2}
                 backgroudColor={Colors.CS_WHITE}
                 borderColor={Colors.CS_ORANGE2}
-                label={'add to cart'}
+                label={'Thêm vào giỏ'}
                 colorLabel={Colors.CS_ORANGE2}
-                widthButtom={150}
+                widthButtom={180}
                 heightButtom={40}
                 onPress={handelClick}
             />
@@ -26,9 +26,9 @@ const BoxBuying = ({ navigation, isLike, handelClick, handelBuyProduct }) => {
                 iconColor={Colors.CS_ORANGE2}
                 backgroudColor={Colors.CS_ORANGE2}
                 borderColor={Colors.CS_ORANGE2}
-                label={'buy now'}
+                label={'mua ngay'}
                 colorLabel={Colors.CS_WHITE}
-                widthButtom={150}
+                widthButtom={140}
                 heightButtom={40}
                 onPress={handelBuyProduct}
             />

@@ -5,8 +5,9 @@ import React, { useState, useRef } from 'react';
 import { ImageIcon } from '../../../components';
 import { Colors, Icons } from '../../../assets';
 
-const BoxSearch = ({ valueChange }) => {
-    const [valueSearch, setValueSearch] = useState('');
+const BoxSearch = ({ valueChange, value }) => {
+    console.log(value);
+    const [valueSearch, setValueSearch] = useState(value);
 
     const inputRef = useRef();
 
@@ -16,7 +17,6 @@ const BoxSearch = ({ valueChange }) => {
 
     const handelSearch = () => {
         if (valueSearch.length > 1) {
-            setValueSearch('');
             inputRef.current.blur();
             valueChange(valueSearch);
         } else {

@@ -25,7 +25,7 @@ const BoxOrder = ({ images, sizes, colors, price, priceSale, category, name, sal
                 ) : (
                     <Text style={styles.price}>${priceFm}</Text>
                 )}
-                <Label name={'new'} backgroundColor={Colors.CS_ORANGE2} nameColor={Colors.CS_WHITE} />
+                <Label name={'mới'} backgroundColor={Colors.CS_ORANGE2} nameColor={Colors.CS_WHITE} />
                 {colors ? <BoxCheck title={'color'} categorys={colors} /> : null}
                 {sizes ? <BoxCheck title={'size'} categorys={sizes} /> : null}
 

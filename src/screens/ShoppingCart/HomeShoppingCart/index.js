@@ -9,10 +9,11 @@ import {
     useUseCreateOrderMutation,
 } from '../../../store/userApi';
 import { selectUserProfile, selectUserShipmentDetail, updateShipmentDetail } from '../../../store/userSlice';
+import { useGetUserProfileQuery } from '../../../store/userApi';
 
 import { formatPrice } from '../../../functions';
 import { Footer, Buttom, ViewPsition, BoxBottomScreen, GoBack } from '../../component';
-import { ImageIcon } from '../../../components';
+import { ImageIcon, AleftCustomize } from '../../../components';
 
 import Check from './Check';
 import BoxShop from './BoxShop';
@@ -23,16 +24,25 @@ import { Colors, Icons } from '../../../assets';
 // const myCart = Data.myCart;
 
 const HomeShoppingCart = ({ navigation }) => {
+    const [modalVisible, setModalVisible] = useState(false);
+    const [mesAleft, setMesAleft] = useState('');
+
     const [cart, setCart] = useState();
     const [totalProduct, setTotalProduct] = useState(0);
     const [totalAmount, setTotalAmount] = useState(0);
     const [isCheckAll, setIsCheckAll] = useState(false);
     const [isChecked, setIsChecked] = useState([]);
     const [listCartId, setListCartId] = useState([]);
-    // console.log(cart);
+
     // xử lý chuyển thành xác nhận hàng mua.
     const [isConfirm, setIsConfirm] = useState(false);
-    const profile = useSelector(selectUserProfile);
+
+    let profile = useSelector(selectUserProfile);
+    if (Object.values(profile).length === 0) {
+        console.log(1);
+        const profileData = useGetUserProfileQuery();
+        profile = profileData?.data?.data;
+    }
 
     const dispathAddress = useDispatch();
 
@@ -64,12 +74,15 @@ const HomeShoppingCart = ({ navigation }) => {
             createOrder(orderInfo)
                 .unwrap()
                 .catch((error) => {
-                    alert(error?.data?.message);
+                    setMesAleft(error?.data?.message);
+                    setModalVisible(true);
                 });
         } else if (!addressShip.address) {
-            alert('Địa chỉ đang thiếu, vui lòng kiểm tra lại');
+            setMesAleft('Địa chỉ đang thiếu, vui lòng kiểm tra lại');
+            setModalVisible(true);
         } else if (!isChecked[0]) {
-            alert('Hãy chọn sản phẩm bạn muốn mua, bằng cách tích vào đấu tích bên cạnh sản phẩm');
+            setMesAleft('Hãy chọn sản phẩm bạn muốn mua, bằng cách tích vào đấu tích bên cạnh sản phẩm');
+            setModalVisible(true);
         } else {
             setIsConfirm(true);
             for (value1 of isChecked) {
@@ -114,7 +127,8 @@ const HomeShoppingCart = ({ navigation }) => {
             .unwrap()
             .then(() => fetchProductCart())
             .catch((error) => {
-                alert(error?.data?.message);
+                setMesAleft(error?.data?.message);
+                setModalVisible(true);
             });
     };
 
@@ -175,104 +189,146 @@ const HomeShoppingCart = ({ navigation }) => {
     };
 
     return (
-        <ViewPsition>
-            {cart ? (
-                <BoxBottomScreen
-                    addressBox
-                    navigation={navigation}
-                    configBoxAddress={'RepairAddress'}
-                    isConfirm={isConfirm}
-                    addressShip={addressShip}
-                >
-                    {isConfirm || (
-                        <View style={styles.checkAll}>
-                            <TouchableOpacity
-                                style={[styles.boxCheck, isCheckAll && styles.checked]}
-                                onPress={handleSelectAll}
-                                activeOpacity={0.9}
-                            >
-                                <Check />
-                            </TouchableOpacity>
-                            <Text>Chọn hết</Text>
+        <>
+            <AleftCustomize
+                title={{
+                    name: mesAleft,
+                    style: { fontSize: 18 },
+                }}
+                styleBody={{
+                    width: '80%',
+                    borderRadius: 10,
+                }}
+                btnSuc={{ title: 'Ok' }}
+                modalVisible={modalVisible}
+                hadelModalVisible={setModalVisible}
+            />
+            <ViewPsition>
+                {cart ? (
+                    <BoxBottomScreen
+                        addressBox
+                        navigation={navigation}
+                        configBoxAddress={'RepairAddress'}
+                        isConfirm={isConfirm}
+                        addressShip={addressShip}
+                    >
+                        {isConfirm || (
+                            <View style={styles.checkAll}>
+                                <TouchableOpacity
+                                    style={[styles.boxCheck, isCheckAll && styles.checked]}
+                                    onPress={handleSelectAll}
+                                    activeOpacity={0.9}
+                                >
+                                    <Check />
+                                </TouchableOpacity>
+                                <Text>Chọn hết</Text>
+                            </View>
+                        )}
+                        {isConfirm ? (
+                            <Text style={styles.priceTotal}>Tổng tiền: {formatPrice(totalAmount)}</Text>
+                        ) : null}
+                        <Buttom
+                            iconColor={Colors.CS_ORANGE2}
+                            backgroudColor={Colors.CS_ORANGE2}
+                            borderColor={Colors.CS_ORANGE2}
+                            label={isConfirm ? 'xác nhận' : 'mua ngay'}
+                            colorLabel={Colors.CS_WHITE}
+                            style={isConfirm ? styles.buttomIsCon : null}
+                            widthButtom={150}
+                            heightButtom={40}
+                            onPress={handelConfirm}
+                        />
+                    </BoxBottomScreen>
+                ) : null}
+                <ScrollView style={{ paddingHorizontal: 10, paddingTop: 20 }}>
+                    {isConfirm ? (
+                        <GoBack
+                            title={'Quay lại'}
+                            iconLeft
+                            sizeIcon={35}
+                            colorIcon={Colors.CS_TEXT}
+                            styleTitle={styles.goback}
+                            functionBack={handelBack}
+                        />
+                    ) : (
+                        <View>
+                            <Text style={{ color: Colors.CS_TEXT, fontSize: 18, fontWeight: '700' }}>
+                                Giỏ hàng của bạn
+                            </Text>
+                            <Text style={{ color: Colors.CS_TEXT, fontSize: 14, fontWeight: '400', marginBottom: 10 }}>
+                                {totalProduct !== 0
+                                    ? `Số lượng hàng trong giỏ: ${totalProduct}`
+                                    : 'Hiện tại bạn không có mặ hàng nào trong giỏ'}
+                            </Text>
                         </View>
                     )}
-                    {isConfirm ? <Text style={styles.priceTotal}>Total: {formatPrice(totalAmount)}</Text> : null}
-                    <Buttom
-                        iconColor={Colors.CS_ORANGE2}
-                        backgroudColor={Colors.CS_ORANGE2}
-                        borderColor={Colors.CS_ORANGE2}
-                        label={isConfirm ? 'xác nhận' : 'mua ngay'}
-                        colorLabel={Colors.CS_WHITE}
-                        style={isConfirm ? styles.buttomIsCon : null}
-                        widthButtom={150}
-                        heightButtom={40}
-                        onPress={handelConfirm}
-                    />
-                </BoxBottomScreen>
-            ) : null}
-            <ScrollView style={{ paddingHorizontal: 10, paddingTop: 20 }}>
-                {isConfirm ? (
-                    <GoBack
-                        title={'Quay lại'}
-                        iconLeft
-                        sizeIcon={35}
-                        colorIcon={Colors.CS_TEXT}
-                        styleTitle={styles.goback}
-                        functionBack={handelBack}
-                    />
-                ) : (
-                    <View>
-                        <Text style={{ color: Colors.CS_TEXT, fontSize: 18, fontWeight: '700' }}>Giỏ hàng của bạn</Text>
-                        <Text style={{ color: Colors.CS_TEXT, fontSize: 14, fontWeight: '400', marginBottom: 10 }}>
-                            {totalProduct !== 0
-                                ? `Số lượng hàng trong giỏ: ${totalProduct}`
-                                : 'Hiện tại bạn không có mặ hàng nào trong giỏ'}
-                        </Text>
-                    </View>
-                )}
 
-                {cart ? (
-                    cart.map((shop, indexShop) => (
-                        <View
-                            style={
-                                isConfirm ? (handelDelShop(indexShop) ? styles.bodyContent : null) : styles.bodyContent
-                            }
-                            key={indexShop}
-                        >
-                            {isConfirm ? (
-                                handelDelShop(indexShop) ? (
+                    {cart ? (
+                        cart.map((shop, indexShop) => (
+                            <View
+                                style={
+                                    isConfirm
+                                        ? handelDelShop(indexShop)
+                                            ? styles.bodyContent
+                                            : null
+                                        : styles.bodyContent
+                                }
+                                key={indexShop}
+                            >
+                                {isConfirm ? (
+                                    handelDelShop(indexShop) ? (
+                                        <View style={styles.shopBody}>
+                                            <BoxShop avatar={shop.store_image} nameShop={shop.store_name} />
+                                        </View>
+                                    ) : null
+                                ) : (
                                     <View style={styles.shopBody}>
                                         <BoxShop avatar={shop.store_image} nameShop={shop.store_name} />
                                     </View>
-                                ) : null
-                            ) : (
-                                <View style={styles.shopBody}>
-                                    <BoxShop avatar={shop.store_image} nameShop={shop.store_name} />
-                                </View>
-                            )}
+                                )}
 
-                            {shop.products.map((product, index) => (
-                                <View style={styles.productBody} key={index}>
-                                    {isConfirm ? null : (
-                                        <TouchableOpacity
-                                            style={[
-                                                styles.boxCheck,
-                                                isChecked.includes(product.product_id) && styles.checked,
-                                            ]}
-                                            onPress={() =>
-                                                handleClick(
-                                                    product.product_id,
-                                                    product.cart_item_id,
-                                                    isChecked.includes(product.product_id),
-                                                )
-                                            }
-                                            activeOpacity={0.9}
-                                        >
-                                            <Check />
-                                        </TouchableOpacity>
-                                    )}
-                                    {isConfirm ? (
-                                        isChecked.includes(product.product_id) ? (
+                                {shop.products.map((product, index) => (
+                                    <View style={styles.productBody} key={index}>
+                                        {isConfirm ? null : (
+                                            <TouchableOpacity
+                                                style={[
+                                                    styles.boxCheck,
+                                                    isChecked.includes(product.product_id) && styles.checked,
+                                                ]}
+                                                onPress={() =>
+                                                    handleClick(
+                                                        product.product_id,
+                                                        product.cart_item_id,
+                                                        isChecked.includes(product.product_id),
+                                                    )
+                                                }
+                                                activeOpacity={0.9}
+                                            >
+                                                <Check />
+                                            </TouchableOpacity>
+                                        )}
+                                        {isConfirm ? (
+                                            isChecked.includes(product.product_id) ? (
+                                                <BoxProduct
+                                                    id={product.product_id}
+                                                    storeId={shop.store_id}
+                                                    image={product.product_image}
+                                                    title={product.product_name}
+                                                    price={product.price}
+                                                    priceSale={product.price_discount}
+                                                    quantity={product.quantity}
+                                                    isSale={
+                                                        product.price_discount === product.price ||
+                                                        typeof product.price_discount === 'undefined'
+                                                            ? false
+                                                            : true
+                                                    }
+                                                    navigation={navigation}
+                                                    navigateConfig={'DetailProduct'}
+                                                    notInputQuantity
+                                                />
+                                            ) : null
+                                        ) : (
                                             <BoxProduct
                                                 id={product.product_id}
                                                 storeId={shop.store_id}
@@ -289,67 +345,45 @@ const HomeShoppingCart = ({ navigation }) => {
                                                 }
                                                 navigation={navigation}
                                                 navigateConfig={'DetailProduct'}
-                                                notInputQuantity
-
-                                                // calculatePrice={calculatePrice}
                                             />
-                                        ) : null
-                                    ) : (
-                                        <BoxProduct
-                                            id={product.product_id}
-                                            storeId={shop.store_id}
-                                            image={product.product_image}
-                                            title={product.product_name}
-                                            price={product.price}
-                                            priceSale={product.price_discount}
-                                            quantity={product.quantity}
-                                            isSale={
-                                                product.price_discount === product.price ||
-                                                typeof product.price_discount === 'undefined'
-                                                    ? false
-                                                    : true
-                                            }
-                                            navigation={navigation}
-                                            navigateConfig={'DetailProduct'}
-                                            // calculatePrice={calculatePrice}
-                                        />
-                                    )}
+                                        )}
 
-                                    {isConfirm ? null : (
-                                        <TouchableOpacity
-                                            style={[
-                                                styles.delete,
-                                                {
-                                                    transform: [{ translateY: -12 }],
-                                                },
-                                            ]}
-                                            onPress={() => handelDel(product.product_id)}
-                                            activeOpacity={0.8}
-                                        >
-                                            <ImageIcon name={Icons.TRASHCAN} size={24} />
-                                        </TouchableOpacity>
-                                    )}
-                                </View>
-                            ))}
+                                        {isConfirm ? null : (
+                                            <TouchableOpacity
+                                                style={[
+                                                    styles.delete,
+                                                    {
+                                                        transform: [{ translateY: -12 }],
+                                                    },
+                                                ]}
+                                                onPress={() => handelDel(product.product_id)}
+                                                activeOpacity={0.8}
+                                            >
+                                                <ImageIcon name={Icons.TRASHCAN} size={24} />
+                                            </TouchableOpacity>
+                                        )}
+                                    </View>
+                                ))}
+                            </View>
+                        ))
+                    ) : (
+                        <View style={styles.notCart}>
+                            <Buttom
+                                iconColor={Colors.CS_TITLE}
+                                backgroudColor={Colors.CS_TITLE}
+                                borderColor={Colors.CS_TITLE}
+                                label={'Mua hàng ngay'}
+                                colorLabel={Colors.CS_WHITE}
+                                widthButtom={300}
+                                heightButtom={50}
+                                onPress={() => navigation.navigate('Home')}
+                            />
                         </View>
-                    ))
-                ) : (
-                    <View style={styles.notCart}>
-                        <Buttom
-                            iconColor={Colors.CS_TITLE}
-                            backgroudColor={Colors.CS_TITLE}
-                            borderColor={Colors.CS_TITLE}
-                            label={'Mua hàng ngay'}
-                            colorLabel={Colors.CS_WHITE}
-                            widthButtom={300}
-                            heightButtom={50}
-                            onPress={() => navigation.navigate('Home')}
-                        />
-                    </View>
-                )}
-            </ScrollView>
-            <Footer />
-        </ViewPsition>
+                    )}
+                </ScrollView>
+                <Footer />
+            </ViewPsition>
+        </>
     );
 };
 

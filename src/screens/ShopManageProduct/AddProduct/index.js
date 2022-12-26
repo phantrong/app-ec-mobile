@@ -24,6 +24,9 @@ const productDefault = {
 };
 
 const AddProduct = ({ navigation }) => {
+    const [modalVisible, setModalVisible] = useState(false);
+    const [mesAleft, setMesAleft] = useState('');
+
     const prefetchListProduct = usePrefetch('getShopListProduct', {
         ifOlderThan: 1,
     });
@@ -53,12 +56,14 @@ const AddProduct = ({ navigation }) => {
         addProduct(body)
             .unwrap()
             .then((data) => {
-                alert(data?.message);
+                setMesAleft(data?.message);
+                setModalVisible(true);
                 prefetchListProduct(defaultFilter);
                 navigation.navigate('ListProduct');
             })
             .catch((error) => {
-                alert(error?.data?.messages);
+                setMesAleft(error?.data?.messages);
+                setModalVisible(true);
             });
     }, []);
 
@@ -79,6 +84,19 @@ const AddProduct = ({ navigation }) => {
                 colorIcon={Colors.CS_TEXT}
                 styleTitle={styles.goback}
                 navigation={navigation}
+            />
+            <AleftCustomize
+                title={{
+                    name: mesAleft,
+                    style: { fontSize: 18 },
+                }}
+                styleBody={{
+                    width: '80%',
+                    borderRadius: 10,
+                }}
+                btnSuc={{ title: 'Ok' }}
+                modalVisible={modalVisible}
+                hadelModalVisible={setModalVisible}
             />
             <Box background={Colors.CS_WHITE} width="100%" height="100%" flex={1}>
                 <KeyboardAwareScrollView
