@@ -4,7 +4,7 @@ import { GoBack, ViewPsition } from '../../component';
 import { Colors } from '../../../assets';
 import { useForm } from 'react-hook-form';
 import { useAddProductMutation, useGetCategoryListQuery, usePrefetch } from '../../../store/shopApi';
-import { Box } from '../../../components';
+import { Box, AleftCustomize } from '../../../components';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import ProductForm from '../../component/ProductForm';
 
@@ -56,12 +56,15 @@ const AddProduct = ({ navigation }) => {
         addProduct(body)
             .unwrap()
             .then((data) => {
-                setMesAleft(data?.message);
+                console.log(1);
+                setMesAleft('Thêm sản phẩm thành công');
                 setModalVisible(true);
                 prefetchListProduct(defaultFilter);
                 navigation.navigate('ListProduct');
             })
             .catch((error) => {
+                console.log(2);
+
                 setMesAleft(error?.data?.messages);
                 setModalVisible(true);
             });
@@ -85,20 +88,20 @@ const AddProduct = ({ navigation }) => {
                 styleTitle={styles.goback}
                 navigation={navigation}
             />
-            <AleftCustomize
-                title={{
-                    name: mesAleft,
-                    style: { fontSize: 18 },
-                }}
-                styleBody={{
-                    width: '80%',
-                    borderRadius: 10,
-                }}
-                btnSuc={{ title: 'Ok' }}
-                modalVisible={modalVisible}
-                hadelModalVisible={setModalVisible}
-            />
             <Box background={Colors.CS_WHITE} width="100%" height="100%" flex={1}>
+                <AleftCustomize
+                    title={{
+                        name: mesAleft,
+                        style: { fontSize: 18 },
+                    }}
+                    styleBody={{
+                        width: '80%',
+                        borderRadius: 10,
+                    }}
+                    btnSuc={{ title: 'Ok' }}
+                    modalVisible={modalVisible}
+                    hadelModalVisible={setModalVisible}
+                />
                 <KeyboardAwareScrollView
                     enableOnAndroid
                     bounces={false}

@@ -116,20 +116,20 @@ const EditProduct = ({ navigation, route }) => {
                 styleTitle={styles.goback}
                 navigation={navigation}
             />
-            <AleftCustomize
-                title={{
-                    name: mesAleft,
-                    style: { fontSize: 18 },
-                }}
-                styleBody={{
-                    width: '80%',
-                    borderRadius: 10,
-                }}
-                btnSuc={{ title: 'Ok' }}
-                modalVisible={modalVisible}
-                hadelModalVisible={setModalVisible}
-            />
             <Box background={Colors.CS_WHITE} width="100%" height="100%" flex={1}>
+                <AleftCustomize
+                    title={{
+                        name: mesAleft,
+                        style: { fontSize: 18 },
+                    }}
+                    styleBody={{
+                        width: '80%',
+                        borderRadius: 10,
+                    }}
+                    btnSuc={{ title: 'Ok' }}
+                    modalVisible={modalVisible}
+                    hadelModalVisible={setModalVisible}
+                />
                 <KeyboardAwareScrollView
                     enableOnAndroid
                     bounces={false}
