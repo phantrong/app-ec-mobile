@@ -1,4 +1,4 @@
-// import { useState } from 'react';
+import { useState } from 'react';
 
 import { Alert, Text, TouchableOpacity } from 'react-native';
 import React, { useCallback } from 'react';
@@ -14,10 +14,11 @@ import { GENDER_MALE } from '../../configs/constants';
 import { useRegisterUserMutation } from '../../store/userApi';
 
 const RegisterScreen = ({ navigation }) => {
-    // const [modalVisible, setModalVisible] = useState(false);
-    // const [errorMes, setErrorMes] = useState('');
-
     const [registerUser, registerUserResponse] = useRegisterUserMutation();
+
+    const [modalVisible, setModalVisible] = useState(false);
+    const [mesAlert, setMesAlert] = useState('');
+    const [error, setError] = useState(false);
 
     const {
         control,
@@ -36,23 +37,18 @@ const RegisterScreen = ({ navigation }) => {
         },
     });
 
-    console.log(body);
-
     const onSubmit = useCallback((body) => {
         registerUser(body)
             .unwrap()
             .then((data) => {
-                Alert.alert('Thông báo', data?.message || data?.messages, [
-                    {
-                        text: 'OK',
-                        onPress: () => {
-                            navigation.navigate('LoginScreen');
-                        },
-                    },
-                ]);
+                setError(false);
+                setMesAlert(data?.message || data?.messages);
+                setModalVisible(true);
             })
             .catch((error) => {
-                alert(error?.data?.messages || error?.data?.message);
+                setError(true);
+                setModalVisible(true);
+                setMesAlert(error?.data?.messages || error?.data?.message);
             });
     }, []);
 
@@ -68,6 +64,21 @@ const RegisterScreen = ({ navigation }) => {
     return (
         <Box background={Colors.CS_WHITE} width="100%" height="100%" flex={1}>
             <NavBar componentLeft={componentLeft} heightBoxCus={60} border={true} />
+            <AleftCustomize
+                navigation={error ? null : navigation}
+                config={error ? null : 'LoginScreen'}
+                title={{
+                    name: mesAlert,
+                    style: { fontSize: 18 },
+                }}
+                styleBody={{
+                    width: '80%',
+                    borderRadius: 10,
+                }}
+                btnSuc={{ title: 'Ok' }}
+                modalVisible={modalVisible}
+                hadelModalVisible={setModalVisible}
+            />
             <KeyboardAwareScrollView
                 enableOnAndroid
                 showsVerticalScrollIndicator={false}

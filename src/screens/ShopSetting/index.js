@@ -60,7 +60,6 @@ const ShopSetting = () => {
                 ]);
             })
             .catch((error) => {
-                // console.log(error);
                 alert(error?.data?.messages || error?.data?.message);
             });
     }, []);
