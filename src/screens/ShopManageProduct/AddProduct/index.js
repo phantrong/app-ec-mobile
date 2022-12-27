@@ -88,6 +88,7 @@ const AddProduct = ({ navigation }) => {
                 styleTitle={styles.goback}
                 navigation={navigation}
             />
+
             <Box background={Colors.CS_WHITE} width="100%" height="100%" flex={1}>
                 <AleftCustomize
                     title={{
