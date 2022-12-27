@@ -101,19 +101,21 @@ const UploadImage = ({ errors, label, margin, setValueForm, name, imagePath, ima
 
     return (
         <Box margin={margin ?? [30, 0, 0, 0]}>
-            <AleftCustomize
-                title={{
-                    name: errorMes,
-                    style: { fontSize: 18 },
-                }}
-                styleBody={{
-                    width: '80%',
-                    borderRadius: 10,
-                }}
-                btnSuc={{ title: 'Ok' }}
-                modalVisible={modalVisible}
-                hadelModalVisible={setModalVisible}
-            />
+            {modalVisible ? (
+                <AleftCustomize
+                    title={{
+                        name: errorMes,
+                        style: { fontSize: 18 },
+                    }}
+                    styleBody={{
+                        width: '80%',
+                        borderRadius: 10,
+                    }}
+                    btnSuc={{ title: 'Ok' }}
+                    modalVisible={modalVisible}
+                    hadelModalVisible={setModalVisible}
+                />
+            ) : null}
             {label ? (
                 <Text size={16} fontWeight={500} margin={[0, 0, 10, 0]}>
                     {label}
