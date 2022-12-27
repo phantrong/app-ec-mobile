@@ -4,7 +4,7 @@ import { GoBack, ViewPsition } from '../../component';
 import { Colors } from '../../../assets';
 import { useForm } from 'react-hook-form';
 import { useAddProductMutation, useGetCategoryListQuery, usePrefetch } from '../../../store/shopApi';
-import { Box } from '../../../components';
+import { Box, AleftCustomize } from '../../../components';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import ProductForm from '../../component/ProductForm';
 
@@ -76,16 +76,8 @@ const AddProduct = ({ navigation }) => {
     });
 
     return (
-        <ViewPsition style={{ paddingHorizontal: 10, paddingTop: 20 }}>
-            <GoBack
-                title={'Danh sách sản phẩm'}
-                iconLeft
-                sizeIcon={35}
-                colorIcon={Colors.CS_TEXT}
-                styleTitle={styles.goback}
-                navigation={navigation}
-            />
-            <AleftCustomize
+        <>
+            {/* <AleftCustomize
                 title={{
                     name: mesAleft,
                     style: { fontSize: 18 },
@@ -97,31 +89,42 @@ const AddProduct = ({ navigation }) => {
                 btnSuc={{ title: 'Ok' }}
                 modalVisible={modalVisible}
                 hadelModalVisible={setModalVisible}
-            />
-            <Box background={Colors.CS_WHITE} width="100%" height="100%" flex={1}>
-                <KeyboardAwareScrollView
-                    enableOnAndroid
-                    bounces={false}
-                    showsVerticalScrollIndicator={false}
-                    keyboardShouldPersistTaps={'handled'}
-                    contentContainerStyle={styles.container}
-                >
-                    {listCategoryData ? (
-                        <ProductForm
-                            control={control}
-                            setValueForm={setValue}
-                            onSubmit={onSubmit}
-                            handleSubmit={handleSubmit}
-                            errors={errors}
-                            loadingButtonSubmit={addProductResponse?.isLoading}
-                            categories={listCategoryData}
-                            defaultValues={productDefault}
-                            labelButtonSubmit={'Thêm sản phẩm'}
-                        />
-                    ) : null}
-                </KeyboardAwareScrollView>
-            </Box>
-        </ViewPsition>
+            /> */}
+
+            <ViewPsition style={{ paddingHorizontal: 10, paddingTop: 20 }}>
+                <GoBack
+                    title={'Danh sách sản phẩm'}
+                    iconLeft
+                    sizeIcon={35}
+                    colorIcon={Colors.CS_TEXT}
+                    styleTitle={styles.goback}
+                    navigation={navigation}
+                />
+                <Box background={Colors.CS_WHITE} width="100%" height="100%" flex={1}>
+                    <KeyboardAwareScrollView
+                        enableOnAndroid
+                        bounces={false}
+                        showsVerticalScrollIndicator={false}
+                        keyboardShouldPersistTaps={'handled'}
+                        contentContainerStyle={styles.container}
+                    >
+                        {listCategoryData ? (
+                            <ProductForm
+                                control={control}
+                                setValueForm={setValue}
+                                onSubmit={onSubmit}
+                                handleSubmit={handleSubmit}
+                                errors={errors}
+                                loadingButtonSubmit={addProductResponse?.isLoading}
+                                categories={listCategoryData}
+                                defaultValues={productDefault}
+                                labelButtonSubmit={'Thêm sản phẩm'}
+                            />
+                        ) : null}
+                    </KeyboardAwareScrollView>
+                </Box>
+            </ViewPsition>
+        </>
     );
 };
 
