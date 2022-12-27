@@ -5,6 +5,8 @@ import { Colors, Images } from '../../assets';
 import propTypes from 'prop-types';
 
 function AleftCustomize({
+    navigation,
+    config,
     title,
     imgSucsess,
     styleBody,
@@ -22,8 +24,8 @@ function AleftCustomize({
 
     const handelSuc = () => {
         hadelModalVisible(!modalVisible);
-        if (btnSuc.handelSuc) {
-            btnSuc.handelSuc();
+        if (navigation) {
+            navigation.navigate(config);
         }
     };
 

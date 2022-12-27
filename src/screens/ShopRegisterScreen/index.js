@@ -1,9 +1,10 @@
-import { Alert, Text, TouchableOpacity } from 'react-native';
+import { useState } from 'react';
+import { Text, TouchableOpacity } from 'react-native';
 import React, { useCallback } from 'react';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import { Colors, Icons } from '../../assets';
-import { Box, NavBar, ImageIcon } from '../../components';
+import { Box, NavBar, ImageIcon, AleftCustomize } from '../../components';
 import { useForm } from 'react-hook-form';
 import ContentRegister from './ContentRegister';
 
@@ -12,6 +13,10 @@ import { useRegisterShopMutation } from '../../store/shopApi';
 
 const ShopRegisterScreen = ({ navigation }) => {
     const [regiserShop, registerShopResponse] = useRegisterShopMutation();
+
+    const [modalVisible, setModalVisible] = useState(false);
+    const [mesAlert, setMesAlert] = useState('');
+    const [error, setError] = useState(false);
 
     const {
         control,
@@ -39,21 +44,16 @@ const ShopRegisterScreen = ({ navigation }) => {
                 regiserShop(data)
                     .unwrap()
                     .then(() => {
-                        Alert.alert(
-                            'Thông báo',
-                            `Chúc mừng bạn đã đăng kí thàng công. Chúng tôi sẽ xem xét và gửi thông báo cho bạn. Vui lòng theo dõi email của bạn.`,
-                            [
-                                {
-                                    text: 'OK',
-                                    onPress: () => {
-                                        navigation.navigate('ShopLoginScreen');
-                                    },
-                                },
-                            ],
+                        setError(false);
+                        setMesAlert(
+                            'Chúc mừng bạn đã đăng kí thành công. Chúng tôi sẽ xem xét và gửi thông báo cho bạn. Vui lòng theo dõi email của bạn.',
                         );
+                        setModalVisible(true);
                     })
                     .catch((error) => {
-                        alert(error?.data?.messages || error?.data?.message);
+                        setError(true);
+                        setModalVisible(true);
+                        setMesAlert(error?.data?.messages || error?.data?.message);
                     });
             }
         },
@@ -72,6 +72,21 @@ const ShopRegisterScreen = ({ navigation }) => {
     return (
         <Box background={Colors.CS_WHITE} width="100%" height="100%" flex={1}>
             <NavBar componentLeft={componentLeft} heightBoxCus={60} border={true} />
+            <AleftCustomize
+                navigation={error ? null : navigation}
+                config={error ? null : 'ShopLoginScreen'}
+                title={{
+                    name: mesAlert,
+                    style: { fontSize: 18 },
+                }}
+                styleBody={{
+                    width: '80%',
+                    borderRadius: 10,
+                }}
+                btnSuc={{ title: 'Ok' }}
+                modalVisible={modalVisible}
+                hadelModalVisible={setModalVisible}
+            />
             <KeyboardAwareScrollView
                 enableOnAndroid
                 showsVerticalScrollIndicator={false}
